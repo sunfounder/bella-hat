@@ -1,12 +1,6 @@
 #!/usr/bin/env python3
 from .basic import _Basic_class
 from .pwm import PWM
-import os
-
-# user and User home directory
-username = os.popen('echo ${SUDO_USER:-$LOGNAME}').readline().strip()
-userHome = os.popen(f'getent passwd {username} | cut -d: -f 6').readline().strip()
-
 
 class Motor():
     """Motor"""
@@ -95,8 +89,6 @@ class Motor():
 class Motors(_Basic_class):
     """Motors"""
 
-    CONFIG = f'{userHome}/.config/bl100-hat/motors.conf'
-
     LEFT_MOTOR_PWMA = 18
     LEFT_MOTOR_PWMB = 19
     RIGHT_MOTOR_PWMA = 16
@@ -105,7 +97,6 @@ class Motors(_Basic_class):
     RIGHT_REVERSE = False
 
     def __init__(self,
-                # db=CONFIG,
                 left_motor_pwma=LEFT_MOTOR_PWMA,
                 left_motor_pwmb=LEFT_MOTOR_PWMB,
                 right_motor_pwma=RIGHT_MOTOR_PWMA,
@@ -120,11 +111,6 @@ class Motors(_Basic_class):
         :type db: str
         """
         super().__init__(*args, **kwargs)
-
-        # self.db = fileDB(db=db, mode='774', owner=username)
-
-        # left_reversed = bool(self.db.get("left_reverse", default_value=False))
-        # right_reversed = bool(self.db.get("right_reverse", default_value=False))
 
         self.left_motor = Motor(left_motor_pwma, left_motor_pwmb, left_reversed)
         self.right_motor = Motor(right_motor_pwma, right_motor_pwmb, right_reversed)
