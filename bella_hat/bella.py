@@ -32,7 +32,7 @@ class Bella(_Basic_class):
     FAN_PIN = 16
     FAN_ACTIVE = HIGH
 
-    BTN = 25
+    BTN_PIN = 25
     BTN_ACTIVE = LOW
 
     def __init__(self, *args, **kwargs):
@@ -141,7 +141,7 @@ class Bella(_Basic_class):
         
         return: list - [acc_x, acc_y, acc_z].
         '''
-        return self.lsm6dsox.acc()
+        return self.lsm6dsox.acc
 
     def get_gyro(self):
         '''
@@ -149,7 +149,7 @@ class Bella(_Basic_class):
         
         return: list - [gyro_x, gyro_y, gyro_z].
         '''
-        return self.lsm6dsox.gyro()
+        return self.lsm6dsox.gyro
 
     def fan_on(self):
         self.fan_state = True
