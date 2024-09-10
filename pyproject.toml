@@ -28,7 +28,6 @@ dependencies = [
   'adafruit-circuitpython-dht',
   'Adafruit-Blinka',
   'adafruit-circuitpython-lsm6ds',
-  'readchar',
 ]
 
 #'pyaudio',
