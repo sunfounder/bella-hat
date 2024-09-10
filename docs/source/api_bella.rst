@@ -1,0 +1,49 @@
+class ``Bella``
+========================================
+
+The class ``Bella`` encapsulates the usage functions of all physical interfaces on the Bella HAT and presets the corresponding pin numbers.
+For a more detailed example, you can refer to the :ref:`examples/basic_test.py <basic_test>` file.
+
+
+**Example**
+
+.. code-block:: python
+
+    from bella_hat.bella import Bella
+
+    bella = Bella()
+
+    bella.set_eyes_led(80, 80)
+    bella.set_motors(20, 20)
+    bella.fan_on()
+
+    batVolt = bella.get_battery_voltage()
+    batPerc = bella.get_battery_percentage()
+    distance = bella.get_ultrasonic_distance()
+    temp = bella.get_temperature()
+    hum = bella.get_humidity()
+    grayscale = bella.get_grayscales()
+    acc = bella.get_acc()
+    gyro = bella.get_gyro()
+    btn_state = bella.read_btn()
+    print(f'''
+    Battery:      {batPerc:.1f}  {batVolt:.2f} V
+    Ultrasonic:   {distance} cm
+    DHT11:        temperature: {temp}'C   humidity: {hum}%
+    LSM6DSOX:     acc: X:{acc[0]:.2f},    Y: {acc[1]:.2f},    Z: {acc[2]:.2f} m/s^2
+                  gyro X:{gyro[0]:.2f},    Y: {gyro[1]:.2f},    Z: {gyro[2]:.2f} radians/s
+    Grayscale:    {grayscale}
+    Fan:          {"on" if bella.fan_state else "off"}
+    Btn:          {"pressed" if btn_state else "released"}
+    ''')
+
+
+
+**API**
+
+.. currentmodule:: bella_hat.bella
+
+.. autoclass:: Bella
+    :show-inheritance:
+    :special-members: __init__
+    :members:
