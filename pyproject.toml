@@ -1,0 +1,54 @@
+[build-system]
+requires = ["setuptools>=61.0.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "bella_hat"
+authors = [
+  {name="SunFounder", email="service@sunfounder.com" },
+]
+description = "Python library for Bella Hat on Rasb"
+readme = "README.md"
+requires-python = ">=3.7"
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: GNU General Public License v3 (GPLv3)",
+    "Operating System :: POSIX :: Linux",
+]
+keywords = ["bella", "bella_hat", "sunfounder"]
+dynamic = ["version"]
+
+dependencies = [
+  'smbus2',
+  'gpiozero',
+  'spidev',
+  'pyserial',
+  'pillow',
+  'pygame>=2.1.2',
+  'adafruit-circuitpython-dht',
+  'Adafruit-Blinka',
+  'adafruit-circuitpython-lsm6ds',
+  'readchar',
+]
+
+#'pyaudio',
+
+
+[tool.setuptools]
+packages = ["bella_hat"]
+
+[project.scripts]
+bella_hat = "bella_hat.utils:__main__"
+
+[project.urls]
+"Homepage" = "https://github.com/sunfounder/bella_hat"
+"Bug Tracker" = "https://github.com/sunfounder/bella_hat/issues"
+
+#[tool.setuptools.packages.find]
+#include = ["bella_hat"]
+#exclude = ["setup.py", "docs", 'tests*', 'examples', 'workspace']
+
+[tool.setuptools.dynamic]
+version = {attr = "bella_hat.__version__"}
+
+
