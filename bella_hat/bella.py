@@ -2,8 +2,8 @@ from .basic import _Basic_class
 from .modules import Ultrasonic, DHT11, Grayscale_Module, LSM6DSOX
 from .adc import ADC
 from .pin import Pin
+from .pwm import PWM
 from .motor import Motors
-
 
 class Bella(_Basic_class):
     LOW = False
@@ -35,6 +35,9 @@ class Bella(_Basic_class):
     BTN_PIN = 25
     BTN_ACTIVE = LOW
 
+    L_EYE_LED_PIN = 14
+    R_EYE_LED_PIN = 15
+
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
 
@@ -60,7 +63,10 @@ class Bella(_Basic_class):
         self.fan = Pin(self.FAN_PIN, mode=Pin.OUT)
         self.fan_off()
         self.btn = Pin(self.BTN_PIN, mode=Pin.IN)
-
+        self.eye_l =  PWM(14)
+        self.eye_r =  PWM(15)
+        self.eye_l.freq(100)
+        self.eye_r.freq(100)
 
     def get_battery_voltage(self):
         ''''
@@ -152,17 +158,44 @@ class Bella(_Basic_class):
         return self.lsm6dsox.gyro
 
     def fan_on(self):
+        '''
+        Open the fan on Bella HAT.
+        '''
         self.fan_state = True
         self.fan.value(self.FAN_ACTIVE)
  
 
     def fan_off(self):
+        '''
+        Close the fan on Bella HAT.
+        '''
         self.fan_state = False
         self.fan.value(not self.FAN_ACTIVE)
 
     def read_btn(self):
+        '''
+        Read the state of btn on Bella HAT.
+        '''
         if self.BTN_ACTIVE:
             return self.btn.value()
         else:
             return not self.btn.value()
+
+    def set_eyes_led(self, left_brightness, right_brightness):
+        '''
+        Set the front board LEDs brightness.
+
+        left_brightness: int - brightness for left LEDs, 0 to 100
+        right_brightness: int - brightness for right LEDs, 0 to 100
+        '''
+        if left_brightness > 100:
+            left_brightness = 100
+        elif left_brightness < 0:
+            left_brightness = 0
+        if right_brightness > 100:
+            right_brightness = 100
+        elif right_brightness < 0:
+            right_brightness = 0
+        self.eye_l.pulse_width_percent(left_brightness)
+        self.eye_r.pulse_width_percent(right_brightness)
 

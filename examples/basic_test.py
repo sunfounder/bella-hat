@@ -20,6 +20,7 @@ left_str = f'\033[1;30m{"←"}\033[0m'
 right_str = f'\033[1;30m{"→"}\033[0m'
 power = 0
 dir = "stop" 
+eyes_brightness =  0
 
 music = Music()
 
@@ -90,16 +91,19 @@ def getKey():
 
 
 def main():
-    global dir, power
+    global dir, power, eyes_brightness
 
     st = 0
     while True:
         if time.time() - st > 0.8:
             update_print()
             st = time.time()
+            eyes_brightness += 2
+            if eyes_brightness > 100:
+                eyes_brightness = 0
+            bella.set_eyes_led(eyes_brightness, eyes_brightness)
 
         _key = getKey().lower()
-        # print(f'_key: {_key}')
 
         if _key != '':
             if _key in ('wasdx'):
@@ -111,7 +115,7 @@ def main():
                         power += 10
                     if power > 100:
                         power = 100
-                    bella.motors.speed([power, power])
+                    bella.set_motors(power, power)
                 elif _key == 's':
                     dir = 'backward'
                     if power >= 0:
@@ -120,17 +124,17 @@ def main():
                         power -= 10
                     if power < -100:
                         power = -100
-                    bella.motors.speed([power, power])
+                    bella.set_motors(power, power)
                 elif _key == 'a':
                     dir = 'left'
-                    bella.motors.speed([-power, power])
+                    bella.set_motors(-power, power)
                 elif _key == 'd':
                     dir = 'right'
-                    bella.motors.speed([power, power])
+                    bella.set_motors(power, power)
                 elif _key == 'x':
                     dir = 'stop'
                     power = 0
-                    bella.motors.speed([power, -power])
+                    bella.set_motors(power, -power)
                 update_print()
                 st = time.time()
             elif _key == 'q':
@@ -150,3 +154,4 @@ if __name__ == "__main__":
         main()
     finally:
         bella.motors.stop()
+        bella.set_eyes_led(0, 0)
