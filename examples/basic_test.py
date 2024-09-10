@@ -1,84 +1,44 @@
 import time
-import board
-from adafruit_lsm6ds.lsm6dsox import LSM6DSOX
-from bella_hat.pin import Pin
+import tty
+import termios
+import select
+import os
+import sys
+
 from bella_hat.music import Music
 from bella_hat.bella import Bella
-import readchar
-import threading
-# from vilib import Vilib, utils
-import os
+from bella_hat.utils import run_command
 
-# Vilib.camera_start(vflip=True, hflip=False)
-# Vilib.show_fps()
-# Vilib.display(local=False, web=True)
-# Vilib.color_detect(color="red")
-
-# wlan0, eth0 = utils.getIP()
-# camera_address = ""
-# if wlan0 != None:
-#     camera_address += f"http://{wlan0}:9000/mjpg\n"
-# if eth0 != None:
-#     camera_address += f"http://{eth0}:9000/mjpg\n"
+script_dir = os.path.dirname(os.path.abspath(__file__))
+os.chdir(script_dir)
 
 bella = Bella()
-try:
-    i2c = board.I2C()
-    imu = LSM6DSOX(i2c)
-except:
-    print("LSM6DSOX Error")
 
-fan = Pin(16, mode=Pin.OUT)
-fan.off()
-btn = Pin(25, mode=Pin.IN)
-
-
-batVolt = 0.00
-batPerc = 0.0
-bat_str = "|"*0+" "*10
-distance = 0
-temp = 0.0
-hum = 0
-grayscale = [0, 0, 0]
-acc = [0.00, 0.00, 0.00]
-gyro = [0.00, 0.00, 0.00]
 forward_str = f'\033[1;30m{"↑"}\033[0m'
 backward_str = f'\033[1;30m{"↓"}\033[0m'
 left_str = f'\033[1;30m{"←"}\033[0m'
 right_str = f'\033[1;30m{"→"}\033[0m'
-power_l = 0
-power_r = 0
-power_t = 0
 power = 0
 dir = "stop" 
-fan_state = False
 
 music = Music()
-User = os.popen('echo ${SUDO_USER:-$LOGNAME}').readline().strip()
-UserHome = os.popen('getent passwd %s | cut -d: -f 6' %User).readline().strip()
 
 def horn(): 
-    _status, _result = utils.run_command('sudo killall pulseaudio')
-    music.sound_play_threading(f'{UserHome}/bella-hat/examples/car-double-horn.wav')
+    _status, _result = run_command('sudo killall pulseaudio')
+    music.sound_play_threading(f'./car-double-horn.wav')
 
 def update_print():
-    global batVolt, batPerc, bat_str, acc, gyro, fan_state
-    batVolt = bella.getBatteryVoltage()
-    batPerc = bella.getBatteryPercentage()
+    batVolt = bella.get_battery_voltage()
+    batPerc = bella.get_battery_percentage()
     batstrlen = int(batPerc / 10)
     bat_str = bat_str = "|"*batstrlen+" "*(10-batstrlen)
-    distance = bella.getUltrasonicDistance()
-    # temp,hum = bella.dht11.read_data()
-    temp = bella.getTemperature()
-    hum = bella.getHumidity()
-    grayscale = bella.getGrayscales()
-    btn_state = btn.value()
-
-    try:
-        acc = imu.acceleration
-        gyro = imu.gyro
-    except:
-        pass
+    distance = bella.get_ultrasonic_distance()
+    temp = bella.get_temperature()
+    hum = bella.get_humidity()
+    grayscale = bella.get_grayscales()
+    btn_state = bella.read_btn()
+    acc = bella.get_acc()
+    gyro = bella.get_gyro()
     power_l, power_r = bella.motors.speed()
 
     forward_str = f'\033[1;30m{"↑"}\033[0m'
@@ -94,10 +54,7 @@ def update_print():
     elif dir == "right":
         right_str = f'\033[1;33m{"→"}\033[0m'
 
-# camera_address: {#camera_address}
-
     info = f'''
-
     {forward_str}                Left   Right   Total
  {left_str}     {right_str}     power:  {power_l:03d}    {power_r:03d}      {power:03d}
     {backward_str}
@@ -105,52 +62,47 @@ def update_print():
 Battery:      |{bat_str}|  {batPerc:.1f}  {batVolt:.2f} V
 Ultrasonic:   {distance} cm
 DHT11:        temperature: {temp}'C   humidity: {hum}%
-LSM^DSOX:     acc: X:{acc[0]:.2f},    Y: {acc[1]:.2f},    Z: {acc[2]:.2f} m/s^2
+LSM6DSOX:     acc: X:{acc[0]:.2f},    Y: {acc[1]:.2f},    Z: {acc[2]:.2f} m/s^2
               gyro X:{gyro[0]:.2f},    Y: {gyro[1]:.2f},    Z: {gyro[2]:.2f} radians/s
 Grayscale:    {grayscale}
-Fan:          {"on" if fan_state else "off"}
-Btn:          {btn_state}
+Fan:          {"on" if bella.fan_state else "off"}
+Btn:          {"pressed" if btn_state else "released"}
 
-STOP: [X]   Honk: [Q]   Fan: [E]    Rec: [R]    Play: [P]
+Move: [W,A,S,D]    STOP: [X]   Honk: [Q]   Fan: [E]
 
     '''
     print('\033[H\033[J')
     print(info)
 
+settings = termios.tcgetattr(sys.stdin)
+def getKey():
+    tty.setraw(sys.stdin.fileno())
 
-key = ''
-key_thread_lock = threading.Lock()
-def key_handler():
-    global key
-    while True:
-        _key = readchar.readkey().lower()
-        with key_thread_lock:
-            key = _key
-        time.sleep(.1)
+    rlist, _, _ = select.select([sys.stdin], [], [], 0.1) 
+    if rlist:
+        key = sys.stdin.read(1) 
+    else:
+        key = ''
 
-key_thread = threading.Thread(target=key_handler)
-key_thread.daemon = True
+    termios.tcsetattr(sys.stdin, termios.TCSADRAIN, settings) 
+
+    return key
+
 
 def main():
-    global key, dir, power, fan_state
+    global dir, power
 
-    key_thread.start()
-    
     st = 0
     while True:
         if time.time() - st > 0.8:
             update_print()
             st = time.time()
 
-        _key = ''
-        with key_thread_lock:
-            _key = key
-            if _key != '':
-                key = ''
-        # print(_key)
+        _key = getKey().lower()
+        # print(f'_key: {_key}')
+
         if _key != '':
             if _key in ('wasdx'):
-                # print('wasdx')
                 if _key == 'w':
                     dir = 'forward'
                     if power <= 0:
@@ -184,14 +136,17 @@ def main():
             elif _key == 'q':
                 horn()
             elif _key == 'e':
-                if fan_state:
-                    fan_state = False
-                    fan.off()
+                if bella.fan_state:
+                    bella.fan_off()
                 else:
-                    fan.on()
-                    fan_state = True
+                    bella.fan_on()
+                update_print()
+                st = time.time()
 
         time.sleep(.1)
 
 if __name__ == "__main__":
-    main()
+    try:
+        main()
+    finally:
+        bella.motors.stop()
