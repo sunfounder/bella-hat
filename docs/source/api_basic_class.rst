@@ -9,7 +9,7 @@ logs of a class, just add a debug argument to it.
 .. code-block:: python
 
     # See PWM log
-    from bella_hat import PWM
+    from bella_hat.pwm import PWM
 
     # init the class with a debug argument
     pwm = PWM(0, debug_level="debug")

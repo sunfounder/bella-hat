@@ -15,40 +15,32 @@ Initilize
 
     # Create Motor object
     motors = Motors()
+    # Create Motor object with setting motors direction
+    # motors = Motors(left_reversed=True, right_reversed=False)
 
-Directly control a motor. Motor 1/2 is according to PCB mark
+
+Control motors power.
 
 .. code-block:: python
 
-    # Motor 1 clockwise at 100% speed
-    motors[1].speed(100)
-    # Motor 2 counter-clockwise at 100% speed
-    motors[2].speed(-100)
-    # Stop all motors
+    #
+    motors.speed([50, 50])
+    # stop
     motors.stop()
 
-Setup for high level control, high level control provides functions
-from simple forword, backward, left, right, stop to more complex
-like joystick control, motor directions calibration, etc.
-
-.. note:: 
-    All these setup only need to run once, and will save in a config file. Next time you load Motors class, it will load from config file.
+Setup motor direction.
 
 .. code-block:: python
 
-    # Setup left and right motors
-    motors.set_left_id(1)
-    motors.set_right_id(2)
     # Go forward and see if both motor directions are correct
     motors.forward(100)
     # if you found a motor is running in the wrong direction
     # Use these function to correct it
-    motors.set_left_reverse()
-    motors.set_right_reverse()
+    motors.reverse(True, True) # [left_reverse, right_reverse]
     # Run forward again and see if both motor directions are correct
     motors.forward(100)
 
-Now control the robot
+Move functions
 
 .. code-block:: python
 
@@ -84,7 +76,7 @@ class ``Motor``
     from bella_hat.motor import Motor, PWM, Pin
 
     # Create Motor object
-    motor = Motor(PWM("P13"), Pin("D4"))
+    motor = Motor(18, 19) # pwma, pwmb
 
     # Motor clockwise at 100% speed
     motor.speed(100)
@@ -92,7 +84,7 @@ class ``Motor``
     motor.speed(-100)
 
     # If you like to reverse the motor direction
-    motor.set_is_reverse(True)
+    motor.reverse(True)
 
 **API**
 

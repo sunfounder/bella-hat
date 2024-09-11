@@ -1,10 +1,6 @@
 class ``Music``
 ========================================
 
-.. warning::
-    * You need to add ``sudo`` when running this script, in case the speaker doesn't work.
-    * :ref:`faq_speaker`.
-
 **Example**
 
 Initialize
@@ -12,118 +8,10 @@ Initialize
 .. code-block:: python
 
     # Import Music class
-    from bella.music import Music
+    from bella_hat.music import Music
 
     # Create a new Music object
     music = Music()
-
-Play tones
-
-.. code-block:: python
-
-    # You can directly play a frequency for specific duration in seconds
-    music.play_tone_for(400, 1)
-
-    # Or use note to get the frequency
-    music.play_tone_for(music.note("Middle C"), 0.5)
-    # and set tempo and use beat to get the duration in seconds
-    # Which make's it easy to code a song according to a sheet!
-    music.tempo(120)
-    music.play_tone_for(music.note("Middle C"), music.beat(1))
-    
-    # Here's an example playing Greensleeves
-    set_volume(80)
-    music.tempo(60, 1/4)
-
-    print("Measure 1")
-    music.play_tone_for(music.note("G4"), music.beat(1/8))
-    print("Measure 2")
-    music.play_tone_for(music.note("A#4"), music.beat(1/4))
-    music.play_tone_for(music.note("C5"), music.beat(1/8))
-    music.play_tone_for(music.note("D5"), music.beat(1/8 + 1/16))
-    music.play_tone_for(music.note("D#5"), music.beat(1/16))
-    music.play_tone_for(music.note("D5"), music.beat(1/8))
-    print("Measure 3")
-    music.play_tone_for(music.note("C5"), music.beat(1/4))
-    music.play_tone_for(music.note("A4"), music.beat(1/8))
-    music.play_tone_for(music.note("F4"), music.beat(1/8 + 1/16))
-    music.play_tone_for(music.note("G4"), music.beat(1/16))
-    music.play_tone_for(music.note("A4"), music.beat(1/8))
-    print("Measure 4")
-    music.play_tone_for(music.note("A#4"), music.beat(1/4))
-    music.play_tone_for(music.note("G4"), music.beat(1/8))
-    music.play_tone_for(music.note("G4"), music.beat(1/8 + 1/16))
-    music.play_tone_for(music.note("F#4"), music.beat(1/16))
-    music.play_tone_for(music.note("G4"), music.beat(1/8))
-    print("Measure 5")
-    music.play_tone_for(music.note("A4"), music.beat(1/4))
-    music.play_tone_for(music.note("F#4"), music.beat(1/8))
-    music.play_tone_for(music.note("D4"), music.beat(1/4))
-    music.play_tone_for(music.note("G4"), music.beat(1/8))
-    print("Measure 6")
-    music.play_tone_for(music.note("A#4"), music.beat(1/4))
-    music.play_tone_for(music.note("C5"), music.beat(1/8))
-    music.play_tone_for(music.note("D5"), music.beat(1/8 + 1/16))
-    music.play_tone_for(music.note("D#5"), music.beat(1/16))
-    music.play_tone_for(music.note("D5"), music.beat(1/8))
-    print("Measure 7")
-    music.play_tone_for(music.note("C5"), music.beat(1/4))
-    music.play_tone_for(music.note("A4"), music.beat(1/8))
-    music.play_tone_for(music.note("F4"), music.beat(1/8 + 1/16))
-    music.play_tone_for(music.note("G4"), music.beat(1/16))
-    music.play_tone_for(music.note("A4"), music.beat(1/8))
-    print("Measure 8")
-    music.play_tone_for(music.note("A#4"), music.beat(1/8 + 1/16))
-    music.play_tone_for(music.note("A4"), music.beat(1/16))
-    music.play_tone_for(music.note("G4"), music.beat(1/8))
-    music.play_tone_for(music.note("F#4"), music.beat(1/8 + 1/16))
-    music.play_tone_for(music.note("E4"), music.beat(1/16))
-    music.play_tone_for(music.note("F#4"), music.beat(1/8))
-    print("Measure 9")
-    music.play_tone_for(music.note("G4"), music.beat(1/4 + 1/8))
-    music.play_tone_for(music.note("G4"), music.beat(1/4 + 1/8))
-    print("Measure 10")
-    music.play_tone_for(music.note("F5"), music.beat(1/4 + 1/8))
-    music.play_tone_for(music.note("F5"), music.beat(1/8))
-    music.play_tone_for(music.note("E5"), music.beat(1/16))
-    music.play_tone_for(music.note("D5"), music.beat(1/8))
-    print("Measure 11")
-    music.play_tone_for(music.note("C5"), music.beat(1/4))
-    music.play_tone_for(music.note("A4"), music.beat(1/8))
-    music.play_tone_for(music.note("F4"), music.beat(1/8 + 1/16))
-    music.play_tone_for(music.note("G4"), music.beat(1/16))
-    music.play_tone_for(music.note("A4"), music.beat(1/8))
-    print("Measure 12")
-    music.play_tone_for(music.note("A#4"), music.beat(1/4))
-    music.play_tone_for(music.note("G4"), music.beat(1/8))
-    music.play_tone_for(music.note("G4"), music.beat(1/8 + 1/16))
-    music.play_tone_for(music.note("F#4"), music.beat(1/16))
-    music.play_tone_for(music.note("G4"), music.beat(1/8))
-    print("Measure 13")
-    music.play_tone_for(music.note("A4"), music.beat(1/4))
-    music.play_tone_for(music.note("F#4"), music.beat(1/8))
-    music.play_tone_for(music.note("D4"), music.beat(1/4 + 1/8))
-    print("Measure 14")
-    music.play_tone_for(music.note("F5"), music.beat(1/4 + 1/8))
-    music.play_tone_for(music.note("F5"), music.beat(1/8))
-    music.play_tone_for(music.note("E5"), music.beat(1/16))
-    music.play_tone_for(music.note("D5"), music.beat(1/8))
-    print("Measure 15")
-    music.play_tone_for(music.note("C5"), music.beat(1/4))
-    music.play_tone_for(music.note("A4"), music.beat(1/8))
-    music.play_tone_for(music.note("F4"), music.beat(1/8 + 1/16))
-    music.play_tone_for(music.note("G4"), music.beat(1/16))
-    music.play_tone_for(music.note("A4"), music.beat(1/8))
-    print("Measure 16")
-    music.play_tone_for(music.note("A#4"), music.beat(1/8 + 1/16))
-    music.play_tone_for(music.note("A4"), music.beat(1/16))
-    music.play_tone_for(music.note("G4"), music.beat(1/8))
-    music.play_tone_for(music.note("F#4"), music.beat(1/8 + 1/16))
-    music.play_tone_for(music.note("E4"), music.beat(1/16))
-    music.play_tone_for(music.note("F#4"), music.beat(1/8))
-    print("Measure 17")
-    music.play_tone_for(music.note("G4"), music.beat(1/4 + 1/8))
-    music.play_tone_for(music.note("G4"), music.beat(1/4 + 1/8))
 
 Play sound
 
@@ -159,9 +47,9 @@ Play Music
 
 **API**
 
-.. currentmodule:: bella.music
+.. currentmodule:: bella_hat.music
 
 .. autoclass:: Music
     :show-inheritance:
     :special-members: __init__
-    :members
+    :members:

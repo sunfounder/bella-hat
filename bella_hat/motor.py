@@ -12,7 +12,7 @@ class Motor():
         Initialize a motor
 
         :param pwma: Motor speed control pwm input A pin
-        :type pwm: pin number
+        :type pwma: pin number
         :param pwmb: Motor speed control pwm input B pin
         :type pwmb: pin number
         :reversed: Whether to reverse the direction of motor rotation
@@ -78,10 +78,16 @@ class Motor():
         self._reversed = reverse
 
     def brake(self):
+        '''
+        brake
+        '''
         self.pwma.pulse_width_percent(100)
         self.pwmb.pulse_width_percent(100)
 
     def stop(self):
+        '''
+        stop
+        '''
         self.pwma.pulse_width_percent(0)
         self.pwmb.pulse_width_percent(0)
 
@@ -107,8 +113,18 @@ class Motors(_Basic_class):
         """
         Initialize motors with bella_hat.motor.Motor
 
-        :param db: config file path
-        :type db: str
+        :param left_motor_pwma: pwma input for left motor
+        :type left_motor_pwma: int, pin number
+        :param left_motor_pwmb: pwmb input for left motor
+        :type left_motor_pwmb: int, pin number
+        :param right_motor_pwma: pwma input for right motor
+        :type right_motor_pwma: int, pin number
+        :param right_motor_pwmb: pwmb input for right motor
+        :type right_motor_pwmb: int, pin number
+        :param left_reversed: whether to reverse left motor
+        :type left_reversed: bool
+        :param right_reversed: whether to reverse right motor
+        :type right_reversed: bool
         """
         super().__init__(*args, **kwargs)
 
@@ -121,6 +137,7 @@ class Motors(_Basic_class):
         self.right_motor.stop()
 
     def brake(self):
+        '''Brake'''
         self.left_motor.brake()
         self.right_motor.brake()
 

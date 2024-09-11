@@ -56,6 +56,9 @@ class Music(_Basic_class):
     """Notes name, MIDI compatible"""
 
     def __init__(self):
+        '''
+        Initialize music
+        '''
         import warnings
         warnings_bk = warnings.filters
         warnings.filterwarnings("ignore")
@@ -63,7 +66,7 @@ class Music(_Basic_class):
         os.environ['PYGAME_HIDE_SUPPORT_PROMPT'] = "1" 
         import pygame
         warnings.filters = warnings_bk
-        """Initialize music"""
+    
         self.pygame = pygame
         self.pygame.mixer.init()
         self.time_signature(4, 4)

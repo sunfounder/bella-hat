@@ -12,6 +12,17 @@ class Ultrasonic():
     SOUND_SPEED = 343.3 # ms
 
     def __init__(self, trig, echo, timeout=0.02):
+        '''
+        Initialize an ultrasonic distance sensor
+
+        :param trig: tring pin
+        :type trig: pin number
+        :param echo: echo pin
+        :type echo: pin number
+        :param timeout: set the timeout for detecting the return of sound waves
+        :type timeout: float, seconds
+        
+        '''
         if not isinstance(trig, Pin):
             raise TypeError("trig must be bella_hat.Pin object")
         if not isinstance(echo, Pin):
@@ -25,6 +36,13 @@ class Ultrasonic():
         self.echo = Pin(echo._pin_num, mode=Pin.IN, pull=Pin.PULL_DOWN)
 
     def _read(self):
+        '''
+        Read the distance
+
+        returns: float, distance in centimeter
+                   -1, timeout
+                   -2, error
+        '''
         self.trig.off()
         time.sleep(0.001)
         self.trig.on()
@@ -51,205 +69,19 @@ class Ultrasonic():
         return cm
 
     def read(self, times=10):
-        for i in range(times):
+        '''
+        Read the distance
+
+        :param times: retry times
+        :type times: int
+        returns: float, distance in centimeter
+                   -1, timeout or error
+        '''
+        for _ in range(times):
             a = self._read()
             if a != -1:
                 return a
         return -1
-
-class ADXL345(I2C):
-    """ADXL345 modules"""
-
-    X = 0
-    """X"""
-    Y = 1
-    """Y"""
-    Z = 2
-    """Z"""
-    ADDR =  0x53
-    _REG_DATA_X = 0x32  # X-axis data 0 (6 bytes for X/Y/Z)
-    _REG_DATA_Y = 0x34  # Y-axis data 0 (6 bytes for X/Y/Z)
-    _REG_DATA_Z = 0x36  # Z-axis data 0 (6 bytes for X/Y/Z)
-    _REG_POWER_CTL = 0x2D  # Power-saving features control
-    _AXISES = [_REG_DATA_X, _REG_DATA_Y, _REG_DATA_Z]
-
-    def __init__(self, *args, address: int = ADDR, bus: int = 1, **kwargs):
-        """
-        Initialize ADXL345
-
-        :param address: address of the ADXL345
-        :type address: int
-        """
-        super().__init__(address=address, bus=bus, *args, **kwargs)
-        self.address = address
-
-    def read(self, axis: int = None) -> Union[float, List[float]]:
-        """
-        Read an axis from ADXL345
-
-        :param axis: read value(g) of an axis, ADXL345.X, ADXL345.Y or ADXL345.Z, None for all axis
-        :type axis: int
-        :return: value of the axis, or list of all axis
-        :rtype: float/list
-        """
-        if axis is None:
-            return [self._read(i) for i in range(3)]
-        else:
-            return self._read(axis)
-
-    def _read(self, axis: int) -> float:
-        raw_2 = 0
-        result = super().read()
-        data = (0x08 << 8) + self._REG_POWER_CTL
-        if result:
-            self.write(data)
-        self.mem_write(0, 0x31)
-        self.mem_write(8, 0x2D)
-        raw = self.mem_read(2, self._AXISES[axis])
-
-        # the first value is always 0, so read it once more
-        self.mem_write(0, 0x31)
-        self.mem_write(8, 0x2D)
-        raw = self.mem_read(2, self._AXISES[axis])
-        if raw[1] >> 7 == 1:
-            raw_1 = raw[1] ^ 128 ^ 127
-            raw_2 = (raw_1 + 1) * -1
-        else:
-            raw_2 = raw[1]
-        g = raw_2 << 8 | raw[0]
-        value = g / 256.0
-        return value
-
-
-class RGB_LED():
-    """Simple 3 pin RGB LED"""
-
-    ANODE = 1
-    """Common anode"""
-    CATHODE = 0
-    """Common cathode"""
-
-    def __init__(self, r_pin: PWM, g_pin: PWM, b_pin: PWM, common: int = 1):
-        """
-        Initialize RGB LED
-
-        :param r_pin: PWM object for red
-        :type r_pin: bella_hat.PWM
-        :param g_pin: PWM object for green
-        :type g_pin: bella_hat.PWM
-        :param b_pin: PWM object for blue
-        :type b_pin: bella_hat.PWM
-        :param common: RGB_LED.ANODE or RGB_LED.CATHODE, default is ANODE
-        :type common: int
-        :raise ValueError: if common is not ANODE or CATHODE
-        :raise TypeError: if r_pin, g_pin or b_pin is not PWM object
-        """
-        if not isinstance(r_pin, PWM):
-            raise TypeError("r_pin must be bella_hat.PWM object")
-        if not isinstance(g_pin, PWM):
-            raise TypeError("g_pin must be bella_hat.PWM object")
-        if not isinstance(b_pin, PWM):
-            raise TypeError("b_pin must be bella_hat.PWM object")
-        if common not in (self.ANODE, self.CATHODE):
-            raise ValueError("common must be RGB_LED.ANODE or RGB_LED.CATHODE")
-        self.r_pin = r_pin
-        self.g_pin = g_pin
-        self.b_pin = b_pin
-        self.common = common
-
-    def color(self, color: Union[str, Tuple[int, int, int], List[int], int]):
-        """
-        Write color to RGB LED
-
-        :param color: color to write, hex string starts with "#", 24-bit int or tuple of (red, green, blue)
-        :type color: str/int/tuple/list
-        """
-        if not isinstance(color, (str, int, tuple, list)):
-            raise TypeError("color must be str, int, tuple or list")
-        if isinstance(color, str):
-            color = color.strip("#")
-            color = int(color, 16)
-        if isinstance(color, (tuple, list)):
-            r, g, b = color
-        if isinstance(color, int):
-            r = (color & 0xff0000) >> 16
-            g = (color & 0x00ff00) >> 8
-            b = (color & 0x0000ff) >> 0
-
-        if self.common == self.ANODE:
-            r = 255-r
-            g = 255-g
-            b = 255-b
-
-        r = r / 255.0 * 100.0
-        g = g / 255.0 * 100.0
-        b = b / 255.0 * 100.0
-
-        self.r_pin.pulse_width_percent(r)
-        self.g_pin.pulse_width_percent(g)
-        self.b_pin.pulse_width_percent(b)
-
-
-class Buzzer():
-    """Buzzer"""
-
-    def __init__(self, buzzer: Union[PWM, Pin]):
-        """
-        Initialize buzzer
-
-        :param pwm: PWM object for passive buzzer or Pin object for active buzzer
-        :type pwm: bella_hat.PWM/bella_hat.Pin
-        """
-        if not isinstance(buzzer, (PWM, Pin)):
-            raise TypeError(
-                "buzzer must be bella_hat.PWM or bella_hat.Pin object")
-        self.buzzer = buzzer
-        self.buzzer.off()
-
-    def on(self):
-        """Turn on buzzer"""
-        if isinstance(self.buzzer, PWM):
-            self.buzzer.pulse_width_percent(50)
-        elif isinstance(self.buzzer, Pin):
-            self.buzzer.on()
-
-    def off(self):
-        """Turn off buzzer"""
-        if isinstance(self.buzzer, PWM):
-            self.buzzer.pulse_width_percent(0)
-        elif isinstance(self.buzzer, Pin):
-            self.buzzer.off()
-
-    def freq(self, freq: float):
-        """Set frequency of passive buzzer
-
-        :param freq: frequency of buzzer, use Music.NOTES to get frequency of note
-        :type freq: int/float
-        :raise TypeError: if set to active buzzer
-        """
-        if isinstance(self.buzzer, Pin):
-            raise TypeError("freq is not supported for active buzzer")
-        self.buzzer.freq(freq)
-
-    def play(self, freq: float, duration: float = None):
-        """
-        Play freq
-
-        :param freq: freq to play, you can use Music.note() to get frequency of note
-        :type freq: float
-        :param duration: duration of each note, in seconds, None means play continuously
-        :type duration: float
-        :raise TypeError: if set to active buzzer
-        """
-        if isinstance(self.buzzer, Pin):
-            raise TypeError("play is not supported for active buzzer")
-        self.freq(freq)
-        self.on()
-        if duration is not None:
-            time.sleep(duration/2)
-            self.off()
-            time.sleep(duration/2)
-
 
 class Grayscale_Module(object):
     """3 channel Grayscale Module"""
@@ -330,6 +162,12 @@ class Grayscale_Module(object):
 class DHT11():
 
     def __init__(self, pin):
+        '''
+        Initialize DHT11 Module
+
+        :param pin: DHT11 data pin
+        :type pin: pin number
+        '''
         import board
         import adafruit_dht
 
@@ -338,6 +176,7 @@ class DHT11():
 
     @property
     def temperature(self):
+        '''Temperature'''
         try:
             return self.dht11.temperature
         except:
@@ -345,6 +184,7 @@ class DHT11():
 
     @property
     def humidity(self):
+        '''Humidity'''
         try:
             return self.dht11.humidity
         except:
@@ -353,6 +193,9 @@ class DHT11():
 class LSM6DSOX():
 
     def __init__(self):
+        '''
+        Initialize LSM6DSOX Module
+        '''
         import board
         from adafruit_lsm6ds.lsm6dsox import LSM6DSOX
 
@@ -361,9 +204,11 @@ class LSM6DSOX():
 
     @property
     def acc(self):
+        '''Acceleration'''
         return self.lsm6dsox.acceleration
 
     @property
     def gyro(self):
+        '''Gyro'''
         return self.lsm6dsox.gyro
 

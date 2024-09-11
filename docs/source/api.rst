@@ -10,7 +10,6 @@ Reference
    api_pin
    api_adc
    api_pwm
-   api_servo
    api_motor
    api_i2c
    api_modules
