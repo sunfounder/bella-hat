@@ -9,11 +9,46 @@ from bella_hat.music import Music
 from bella_hat.bella import Bella
 from bella_hat.utils import run_command
 
+# start the web camera  
+#----------------------------------------------------------------
+webcam_address = ""
+webcam_done = False
+try:
+    from vilib import Vilib, utils
+
+    Vilib.camera_start(vflip=True, hflip=False)
+    Vilib.show_fps()
+    Vilib.display(local=False, web=True)
+
+    wlan0, eth0 = utils.getIP()
+    if wlan0 != None:
+        webcam_address += f"http://{wlan0}:9000/mjpg\n"
+    if eth0 != None:
+        webcam_address += f"http://{eth0}:9000/mjpg\n"
+
+    webcam_done = True
+except:
+    webcam_address = ""
+    webcam_done = False
+
+# init bella 
+#----------------------------------------------------------------
+bella = Bella()
+
+
+# init music and sound effect files
+#----------------------------------------------------------------
+music = Music()
+
 script_dir = os.path.dirname(os.path.abspath(__file__))
 os.chdir(script_dir)
 
-bella = Bella()
+def horn(): 
+    _status, _result = run_command('sudo killall pulseaudio')
+    music.sound_play_threading(f'./car-double-horn.wav')
 
+# global vars and print function
+#----------------------------------------------------------------
 forward_str = f'\033[1;30m{"↑"}\033[0m'
 backward_str = f'\033[1;30m{"↓"}\033[0m'
 left_str = f'\033[1;30m{"←"}\033[0m'
@@ -21,12 +56,6 @@ right_str = f'\033[1;30m{"→"}\033[0m'
 power = 0
 dir = "stop" 
 eyes_brightness =  0
-
-music = Music()
-
-def horn(): 
-    _status, _result = run_command('sudo killall pulseaudio')
-    music.sound_play_threading(f'./car-double-horn.wav')
 
 def update_print():
     batVolt = bella.get_battery_voltage()
@@ -56,6 +85,8 @@ def update_print():
         right_str = f'\033[1;33m{"→"}\033[0m'
 
     info = f'''
+webcam_address: {webcam_address}
+
     {forward_str}                Left   Right   Total
  {left_str}     {right_str}     power:  {power_l:03d}    {power_r:03d}      {power:03d}
     {backward_str}
@@ -75,6 +106,9 @@ Move: [W,A,S,D]    STOP: [X]   Honk: [Q]   Fan: [E]
     print('\033[H\033[J')
     print(info)
 
+
+# keyboard detection
+#----------------------------------------------------------------
 settings = termios.tcgetattr(sys.stdin)
 def getKey():
     tty.setraw(sys.stdin.fileno())
@@ -90,12 +124,15 @@ def getKey():
     return key
 
 
+
+# main
+#----------------------------------------------------------------
 def main():
     global dir, power, eyes_brightness
 
     st = 0
     while True:
-        if time.time() - st > 0.8:
+        if time.time() - st > 1:
             update_print()
             st = time.time()
             eyes_brightness += 2
@@ -147,7 +184,7 @@ def main():
                 update_print()
                 st = time.time()
 
-        time.sleep(.1)
+        time.sleep(.01)
 
 if __name__ == "__main__":
     try:
@@ -155,3 +192,5 @@ if __name__ == "__main__":
     finally:
         bella.motors.stop()
         bella.set_eyes_led(0, 0)
+        if webcam_done:
+            Vilib.camera_close()
