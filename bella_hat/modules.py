@@ -39,9 +39,11 @@ class Ultrasonic():
         '''
         Read the distance
 
-        returns: float, distance in centimeter
-                   -1, timeout
-                   -2, error
+        returns: 
+            - float, distance in centimeter
+            - 1, timeout
+            - 2, error
+
         '''
         self.trig.off()
         time.sleep(0.001)
@@ -74,8 +76,10 @@ class Ultrasonic():
 
         :param times: retry times
         :type times: int
-        returns: float, distance in centimeter
-                   -1, timeout or error
+
+        returns: 
+            - float, distance in centimeter
+            - 1, timeout or error
         '''
         for _ in range(times):
             a = self._read()
