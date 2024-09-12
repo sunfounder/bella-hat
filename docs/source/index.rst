@@ -10,8 +10,6 @@ Bella Hat documentation
 .. toctree::
    :maxdepth: 3
 
-   .. About this HAT<self>
-   .. hardware_introduction
    bella-hat_library
 
 
