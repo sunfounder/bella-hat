@@ -4,8 +4,7 @@ from .pwm import PWM
 
 class Motor():
     """Motor"""
-    PERIOD = 4095
-    PRESCALER = 10
+    DEFAULT_FREQ = 100 # Hz
 
     def __init__(self, pwma, pwmb, reversed=False):
         """
@@ -19,13 +18,11 @@ class Motor():
         :type reversed: boolean
         """
         self.pwma = PWM(pwma)
-        self.pwma.period(self.PERIOD)
-        self.pwma.prescaler(self.PRESCALER)
+        self.pwma.freq(self.DEFAULT_FREQ)
         self.pwma.pulse_width_percent(0)
 
         self.pwmb = PWM(pwmb)
-        self.pwmb.period(self.PERIOD)
-        self.pwmb.prescaler(self.PRESCALER)
+        self.pwmb.freq(self.DEFAULT_FREQ)
         self.pwmb.pulse_width_percent(0)
 
         self._speed = 0
