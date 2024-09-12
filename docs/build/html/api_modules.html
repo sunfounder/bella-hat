@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>module modules &mdash; Bella Hat 0.0.1 documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="_static/documentation_options.js?v=d45e8c67"></script>
+        <script src="_static/doctools.js?v=9a2dae69"></script>
+        <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+        <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+        <script src="_static/copybutton.js?v=f281be69"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="class Music" href="api_music.html" />
+    <link rel="prev" title="class I2C" href="api_i2c.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            Bella Hat
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="index.html">About this HAT</a></li>
+<li class="toctree-l1"><a class="reference internal" href="hardware_introduction.html">Hardware Introduction</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="bella-hat_library.html">Bella Hat Library</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="installation.html">Install</a></li>
+<li class="toctree-l2"><a class="reference internal" href="examples.html">Examples</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="api.html">Reference</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="api_bella.html">class <code class="docutils literal notranslate"><span class="pre">Bella</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="api_pin.html">class <code class="docutils literal notranslate"><span class="pre">Pin</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="api_adc.html">class <code class="docutils literal notranslate"><span class="pre">ADC</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="api_pwm.html">class <code class="docutils literal notranslate"><span class="pre">PWM</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="api_motor.html">module <code class="docutils literal notranslate"><span class="pre">motor</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="api_i2c.html">class <code class="docutils literal notranslate"><span class="pre">I2C</span></code></a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">module <code class="docutils literal notranslate"><span class="pre">modules</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#class-ultrasonic">class <code class="docutils literal notranslate"><span class="pre">Ultrasonic</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#class-grayscale-module">class <code class="docutils literal notranslate"><span class="pre">Grayscale_Module</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#class-dht11">class <code class="docutils literal notranslate"><span class="pre">DHT11</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#class-lsm6dsox">class <code class="docutils literal notranslate"><span class="pre">LSM6DSOX</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="api_music.html">class <code class="docutils literal notranslate"><span class="pre">Music</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="api_utils.html">module <code class="docutils literal notranslate"><span class="pre">utils</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="api_basic_class.html">class <code class="docutils literal notranslate"><span class="pre">_Basic_class</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Bella Hat</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="bella-hat_library.html">Bella Hat Library</a></li>
+          <li class="breadcrumb-item"><a href="api.html">Reference</a></li>
+      <li class="breadcrumb-item active">module <code class="docutils literal notranslate"><span class="pre">modules</span></code></li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/api_modules.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="module-modules">
+<h1>module <code class="docutils literal notranslate"><span class="pre">modules</span></code><a class="headerlink" href="#module-modules" title="Link to this heading">¶</a></h1>
+<section id="class-ultrasonic">
+<h2>class <code class="docutils literal notranslate"><span class="pre">Ultrasonic</span></code><a class="headerlink" href="#class-ultrasonic" title="Link to this heading">¶</a></h2>
+<blockquote>
+<div><p><strong>Example</strong></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Import Ultrasonic and Pin class</span>
+<span class="kn">from</span> <span class="nn">bella_hat.modules</span> <span class="kn">import</span> <span class="n">Ultrasonic</span><span class="p">,</span> <span class="n">Pin</span>
+
+<span class="c1"># Create Motor object</span>
+<span class="n">us</span> <span class="o">=</span> <span class="n">Ultrasonic</span><span class="p">(</span><span class="n">Pin</span><span class="p">(</span><span class="mi">20</span><span class="p">),</span> <span class="n">Pin</span><span class="p">(</span><span class="mi">21</span><span class="p">))</span>
+
+<span class="c1"># Read distance</span>
+<span class="n">distance</span> <span class="o">=</span> <span class="n">us</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Distance: </span><span class="si">{</span><span class="n">distance</span><span class="si">}</span><span class="s2">cm&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><strong>API</strong></p>
+<dl class="py class">
+<dt class="sig sig-object py" id="bella_hat.modules.Ultrasonic">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">bella_hat.modules.</span></span><span class="sig-name descname"><span class="pre">Ultrasonic</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">trig</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">echo</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">timeout</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.02</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#bella_hat.modules.Ultrasonic" title="Link to this definition">¶</a></dt>
+<dd><dl class="py method">
+<dt class="sig sig-object py" id="bella_hat.modules.Ultrasonic.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">trig</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">echo</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">timeout</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.02</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#bella_hat.modules.Ultrasonic.__init__" title="Link to this definition">¶</a></dt>
+<dd><p>Initialize an ultrasonic distance sensor</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>trig</strong> (<em>pin number</em>) – tring pin</p></li>
+<li><p><strong>echo</strong> (<em>pin number</em>) – echo pin</p></li>
+<li><p><strong>timeout</strong> (<em>float</em><em>, </em><em>seconds</em>) – set the timeout for detecting the return of sound waves</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="bella_hat.modules.Ultrasonic.read">
+<span class="sig-name descname"><span class="pre">read</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">times</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">10</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#bella_hat.modules.Ultrasonic.read" title="Link to this definition">¶</a></dt>
+<dd><p>Read the distance</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>times</strong> (<em>int</em>) – retry times</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p>float, distance in centimeter</p></li>
+<li><p>1, timeout or error</p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</div></blockquote>
+</section>
+<section id="class-grayscale-module">
+<h2>class <code class="docutils literal notranslate"><span class="pre">Grayscale_Module</span></code><a class="headerlink" href="#class-grayscale-module" title="Link to this heading">¶</a></h2>
+<blockquote>
+<div><p><strong>Example</strong></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Import Grayscale_Module and ADC class</span>
+<span class="kn">from</span> <span class="nn">bella_hat.modules</span> <span class="kn">import</span> <span class="n">Grayscale_Module</span><span class="p">,</span> <span class="n">ADC</span>
+
+<span class="c1"># Create Grayscale_Module object, reference should be calculate from the value reads on white</span>
+<span class="c1"># and black ground, then take the middle as reference</span>
+<span class="n">gs</span> <span class="o">=</span> <span class="n">Grayscale_Module</span><span class="p">(</span><span class="n">ADC</span><span class="p">(</span><span class="mi">0</span><span class="p">),</span> <span class="n">ADC</span><span class="p">(</span><span class="mi">1</span><span class="p">),</span> <span class="n">ADC</span><span class="p">(</span><span class="mi">2</span><span class="p">),</span> <span class="n">reference</span><span class="o">=</span><span class="p">[</span><span class="mi">1000</span><span class="p">,</span> <span class="mi">900</span><span class="p">,</span> <span class="mi">1000</span><span class="p">])</span>
+
+<span class="c1"># Read Grayscale_Module datas</span>
+<span class="n">datas</span> <span class="o">=</span> <span class="n">gs</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Grayscale Module datas: </span><span class="si">{</span><span class="n">datas</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="c1"># or read a specific channel</span>
+<span class="n">l</span> <span class="o">=</span> <span class="n">gs</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="n">gs</span><span class="o">.</span><span class="n">LEFT</span><span class="p">)</span>
+<span class="n">m</span> <span class="o">=</span> <span class="n">gs</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="n">gs</span><span class="o">.</span><span class="n">MIDDLE</span><span class="p">)</span>
+<span class="n">r</span> <span class="o">=</span> <span class="n">gs</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="n">gs</span><span class="o">.</span><span class="n">RIGHT</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Grayscale Module left channel: </span><span class="si">{</span><span class="n">l</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Grayscale Module middle channel: </span><span class="si">{</span><span class="n">m</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Grayscale Module right channel: </span><span class="si">{</span><span class="n">r</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="c1"># Read Grayscale_Module simple states</span>
+<span class="n">state</span> <span class="o">=</span> <span class="n">gs</span><span class="o">.</span><span class="n">read_status</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Grayscale_Module state: </span><span class="si">{</span><span class="n">state</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><strong>API</strong></p>
+<dl class="py class">
+<dt class="sig sig-object py" id="bella_hat.modules.Grayscale_Module">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">bella_hat.modules.</span></span><span class="sig-name descname"><span class="pre">Grayscale_Module</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">pin0</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="api_adc.html#bella_hat.adc.ADC" title="bella_hat.adc.ADC"><span class="pre">ADC</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">pin1</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="api_adc.html#bella_hat.adc.ADC" title="bella_hat.adc.ADC"><span class="pre">ADC</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">pin2</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="api_adc.html#bella_hat.adc.ADC" title="bella_hat.adc.ADC"><span class="pre">ADC</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">reference</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#bella_hat.modules.Grayscale_Module" title="Link to this definition">¶</a></dt>
+<dd><p>3 channel Grayscale Module</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="bella_hat.modules.Grayscale_Module.LEFT">
+<span class="sig-name descname"><span class="pre">LEFT</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">2</span></em><a class="headerlink" href="#bella_hat.modules.Grayscale_Module.LEFT" title="Link to this definition">¶</a></dt>
+<dd><p>Left Channel</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="bella_hat.modules.Grayscale_Module.MIDDLE">
+<span class="sig-name descname"><span class="pre">MIDDLE</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">1</span></em><a class="headerlink" href="#bella_hat.modules.Grayscale_Module.MIDDLE" title="Link to this definition">¶</a></dt>
+<dd><p>Middle Channel</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="bella_hat.modules.Grayscale_Module.RIGHT">
+<span class="sig-name descname"><span class="pre">RIGHT</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">1</span></em><a class="headerlink" href="#bella_hat.modules.Grayscale_Module.RIGHT" title="Link to this definition">¶</a></dt>
+<dd><p>Right Channel</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="bella_hat.modules.Grayscale_Module.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">pin0</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="api_adc.html#bella_hat.adc.ADC" title="bella_hat.adc.ADC"><span class="pre">ADC</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">pin1</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="api_adc.html#bella_hat.adc.ADC" title="bella_hat.adc.ADC"><span class="pre">ADC</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">pin2</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="api_adc.html#bella_hat.adc.ADC" title="bella_hat.adc.ADC"><span class="pre">ADC</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">reference</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#bella_hat.modules.Grayscale_Module.__init__" title="Link to this definition">¶</a></dt>
+<dd><p>Initialize Grayscale Module</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>pin0</strong> (<em>bella_hat.ADC/int</em>) – ADC object or int for channel 0</p></li>
+<li><p><strong>pin1</strong> (<em>bella_hat.ADC/int</em>) – ADC object or int for channel 1</p></li>
+<li><p><strong>pin2</strong> (<em>bella_hat.ADC/int</em>) – ADC object or int for channel 2</p></li>
+<li><p><strong>reference</strong> (<em>1*3 list</em><em>, </em><em>[</em><em>int</em><em>, </em><em>int</em><em>, </em><em>int</em><em>]</em>) – reference voltage</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="bella_hat.modules.Grayscale_Module.reference">
+<span class="sig-name descname"><span class="pre">reference</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ref</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">list</span></span></span><a class="headerlink" href="#bella_hat.modules.Grayscale_Module.reference" title="Link to this definition">¶</a></dt>
+<dd><p>Get Set reference value</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>ref</strong> (<em>list</em>) – reference value, None to get reference value</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>reference value</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>list</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="bella_hat.modules.Grayscale_Module.read_status">
+<span class="sig-name descname"><span class="pre">read_status</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">datas</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">list</span></span></span><a class="headerlink" href="#bella_hat.modules.Grayscale_Module.read_status" title="Link to this definition">¶</a></dt>
+<dd><p>Read line status</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>datas</strong> (<em>list</em>) – list of grayscale datas, if None, read from sensor</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>list of line status, 0 for white, 1 for black</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>list</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="bella_hat.modules.Grayscale_Module.read">
+<span class="sig-name descname"><span class="pre">read</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">channel</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">list</span></span></span><a class="headerlink" href="#bella_hat.modules.Grayscale_Module.read" title="Link to this definition">¶</a></dt>
+<dd><p>read a channel or all datas</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>channel</strong> (<em>int/None</em>) – channel to read, leave empty to read all. 0, 1, 2 or Grayscale_Module.LEFT, Grayscale_Module.CENTER, Grayscale_Module.RIGHT</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>list of grayscale data</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>list</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</div></blockquote>
+</section>
+<section id="class-dht11">
+<h2>class <code class="docutils literal notranslate"><span class="pre">DHT11</span></code><a class="headerlink" href="#class-dht11" title="Link to this heading">¶</a></h2>
+<blockquote>
+<div><p><strong>Example</strong></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Import DHT11 class</span>
+<span class="kn">from</span> <span class="nn">bella_hat.modules</span> <span class="kn">import</span> <span class="n">DHT11</span>
+
+<span class="c1"># Create DHT11 object</span>
+<span class="n">dht11</span> <span class="o">=</span> <span class="n">DHT11</span><span class="p">(</span><span class="mi">19</span><span class="p">)</span>
+
+<span class="c1"># Read DHT11 datas</span>
+<span class="n">temperature</span> <span class="o">=</span> <span class="n">dht11</span><span class="o">.</span><span class="n">temperature</span>
+<span class="n">humidity</span> <span class="o">=</span> <span class="n">dht11</span><span class="o">.</span><span class="n">humidity</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Temperature: </span><span class="si">{</span><span class="n">temperature</span><span class="si">}</span><span class="s2">&#39;C, Humidity: </span><span class="si">{</span><span class="n">humidity</span><span class="si">}</span><span class="s2">%&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><strong>API</strong></p>
+<dl class="py class">
+<dt class="sig sig-object py" id="bella_hat.modules.DHT11">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">bella_hat.modules.</span></span><span class="sig-name descname"><span class="pre">DHT11</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">pin</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#bella_hat.modules.DHT11" title="Link to this definition">¶</a></dt>
+<dd><dl class="py method">
+<dt class="sig sig-object py" id="bella_hat.modules.DHT11.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">pin</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#bella_hat.modules.DHT11.__init__" title="Link to this definition">¶</a></dt>
+<dd><p>Initialize DHT11 Module</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>pin</strong> (<em>pin number</em>) – DHT11 data pin</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="bella_hat.modules.DHT11.temperature">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">temperature</span></span><a class="headerlink" href="#bella_hat.modules.DHT11.temperature" title="Link to this definition">¶</a></dt>
+<dd><p>Temperature</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="bella_hat.modules.DHT11.humidity">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">humidity</span></span><a class="headerlink" href="#bella_hat.modules.DHT11.humidity" title="Link to this definition">¶</a></dt>
+<dd><p>Humidity</p>
+</dd></dl>
+
+</dd></dl>
+
+</div></blockquote>
+</section>
+<section id="class-lsm6dsox">
+<h2>class <code class="docutils literal notranslate"><span class="pre">LSM6DSOX</span></code><a class="headerlink" href="#class-lsm6dsox" title="Link to this heading">¶</a></h2>
+<blockquote>
+<div><p><strong>Example</strong></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Import LSM6DSOX class</span>
+<span class="kn">from</span> <span class="nn">bella_hat.modules</span> <span class="kn">import</span> <span class="n">LSM6DSOX</span>
+
+<span class="c1"># Create LSM6DSOX object</span>
+<span class="n">lsm6dsox</span> <span class="o">=</span> <span class="n">LSM6DSOX</span><span class="p">()</span>
+
+<span class="c1"># Read LSM6DSOX datas</span>
+<span class="n">acc</span> <span class="o">=</span> <span class="n">lsm6dsox</span><span class="o">.</span><span class="n">acc</span>
+<span class="n">gyro</span> <span class="o">=</span> <span class="n">lsm6dsox</span><span class="o">.</span><span class="n">gyro</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;acc: X:</span><span class="si">{</span><span class="n">acc</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">,    Y: </span><span class="si">{</span><span class="n">acc</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">,    Z: </span><span class="si">{</span><span class="n">acc</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2"> m/s^2&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;gyro X:</span><span class="si">{</span><span class="n">gyro</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">,    Y: </span><span class="si">{</span><span class="n">gyro</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">,    Z: </span><span class="si">{</span><span class="n">gyro</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2"> radians/s&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><strong>API</strong></p>
+<dl class="py class">
+<dt class="sig sig-object py" id="bella_hat.modules.LSM6DSOX">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">bella_hat.modules.</span></span><span class="sig-name descname"><span class="pre">LSM6DSOX</span></span><a class="headerlink" href="#bella_hat.modules.LSM6DSOX" title="Link to this definition">¶</a></dt>
+<dd><dl class="py method">
+<dt class="sig sig-object py" id="bella_hat.modules.LSM6DSOX.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#bella_hat.modules.LSM6DSOX.__init__" title="Link to this definition">¶</a></dt>
+<dd><p>Initialize LSM6DSOX Module</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="bella_hat.modules.LSM6DSOX.acc">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">acc</span></span><a class="headerlink" href="#bella_hat.modules.LSM6DSOX.acc" title="Link to this definition">¶</a></dt>
+<dd><p>Acceleration</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="bella_hat.modules.LSM6DSOX.gyro">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">gyro</span></span><a class="headerlink" href="#bella_hat.modules.LSM6DSOX.gyro" title="Link to this definition">¶</a></dt>
+<dd><p>Gyro</p>
+</dd></dl>
+
+</dd></dl>
+
+</div></blockquote>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="api_i2c.html" class="btn btn-neutral float-left" title="class I2C" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="api_music.html" class="btn btn-neutral float-right" title="class Music" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, Sunfounder.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

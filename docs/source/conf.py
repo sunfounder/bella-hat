@@ -30,6 +30,7 @@ extensions = [
     'sphinx.ext.autosummary',
     'sphinx.ext.napoleon',
     'sphinx_copybutton',
+    'rst2pdf.pdfbuilder',
 ]
 
 templates_path = ['_templates']

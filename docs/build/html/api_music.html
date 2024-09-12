@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>class Music &mdash; Bella Hat 0.0.1 documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="_static/documentation_options.js?v=d45e8c67"></script>
+        <script src="_static/doctools.js?v=9a2dae69"></script>
+        <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+        <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+        <script src="_static/copybutton.js?v=f281be69"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="module utils" href="api_utils.html" />
+    <link rel="prev" title="module modules" href="api_modules.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            Bella Hat
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="index.html">About this HAT</a></li>
+<li class="toctree-l1"><a class="reference internal" href="hardware_introduction.html">Hardware Introduction</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="bella-hat_library.html">Bella Hat Library</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="installation.html">Install</a></li>
+<li class="toctree-l2"><a class="reference internal" href="examples.html">Examples</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="api.html">Reference</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="api_bella.html">class <code class="docutils literal notranslate"><span class="pre">Bella</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="api_pin.html">class <code class="docutils literal notranslate"><span class="pre">Pin</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="api_adc.html">class <code class="docutils literal notranslate"><span class="pre">ADC</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="api_pwm.html">class <code class="docutils literal notranslate"><span class="pre">PWM</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="api_motor.html">module <code class="docutils literal notranslate"><span class="pre">motor</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="api_i2c.html">class <code class="docutils literal notranslate"><span class="pre">I2C</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="api_modules.html">module <code class="docutils literal notranslate"><span class="pre">modules</span></code></a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">class <code class="docutils literal notranslate"><span class="pre">Music</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#bella_hat.music.Music"><code class="docutils literal notranslate"><span class="pre">Music</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="api_utils.html">module <code class="docutils literal notranslate"><span class="pre">utils</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="api_basic_class.html">class <code class="docutils literal notranslate"><span class="pre">_Basic_class</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Bella Hat</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="bella-hat_library.html">Bella Hat Library</a></li>
+          <li class="breadcrumb-item"><a href="api.html">Reference</a></li>
+      <li class="breadcrumb-item active">class <code class="docutils literal notranslate"><span class="pre">Music</span></code></li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/api_music.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="class-music">
+<h1>class <code class="docutils literal notranslate"><span class="pre">Music</span></code><a class="headerlink" href="#class-music" title="Link to this heading">¶</a></h1>
+<p><strong>Example</strong></p>
+<p>Initialize</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Import Music class</span>
+<span class="kn">from</span> <span class="nn">bella_hat.music</span> <span class="kn">import</span> <span class="n">Music</span>
+
+<span class="c1"># Create a new Music object</span>
+<span class="n">music</span> <span class="o">=</span> <span class="n">Music</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>Play sound</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Play a sound</span>
+<span class="n">music</span><span class="o">.</span><span class="n">sound_play</span><span class="p">(</span><span class="s2">&quot;file.wav&quot;</span><span class="p">,</span> <span class="n">volume</span><span class="o">=</span><span class="mi">50</span><span class="p">)</span>
+<span class="c1"># Play a sound in the background</span>
+<span class="n">music</span><span class="o">.</span><span class="n">sound_play_threading</span><span class="p">(</span><span class="s2">&quot;file.wav&quot;</span><span class="p">,</span> <span class="n">volume</span><span class="o">=</span><span class="mi">80</span><span class="p">)</span>
+<span class="c1"># Get sound length</span>
+<span class="n">music</span><span class="o">.</span><span class="n">sound_length</span><span class="p">(</span><span class="s2">&quot;file.wav&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Play Music</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Play music</span>
+<span class="n">music</span><span class="o">.</span><span class="n">music_play</span><span class="p">(</span><span class="s2">&quot;file.mp3&quot;</span><span class="p">)</span>
+<span class="c1"># Play music in loop</span>
+<span class="n">music</span><span class="o">.</span><span class="n">music_play</span><span class="p">(</span><span class="s2">&quot;file.mp3&quot;</span><span class="p">,</span> <span class="n">loop</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="c1"># Play music in 3 times</span>
+<span class="n">music</span><span class="o">.</span><span class="n">music_play</span><span class="p">(</span><span class="s2">&quot;file.mp3&quot;</span><span class="p">,</span> <span class="n">loop</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+<span class="c1"># Play music in starts from 2 second</span>
+<span class="n">music</span><span class="o">.</span><span class="n">music_play</span><span class="p">(</span><span class="s2">&quot;file.mp3&quot;</span><span class="p">,</span> <span class="n">start</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+<span class="c1"># Set music volume</span>
+<span class="n">music</span><span class="o">.</span><span class="n">music_set_volume</span><span class="p">(</span><span class="mi">50</span><span class="p">)</span>
+<span class="c1"># Stop music</span>
+<span class="n">music</span><span class="o">.</span><span class="n">music_stop</span><span class="p">()</span>
+<span class="c1"># Pause music</span>
+<span class="n">music</span><span class="o">.</span><span class="n">music_pause</span><span class="p">()</span>
+<span class="c1"># Resume music</span>
+<span class="n">music</span><span class="o">.</span><span class="n">music_resume</span><span class="p">()</span>
+</pre></div>
+</div>
+<p><strong>API</strong></p>
+<dl class="py class">
+<dt class="sig sig-object py" id="bella_hat.music.Music">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">bella_hat.music.</span></span><span class="sig-name descname"><span class="pre">Music</span></span><a class="headerlink" href="#bella_hat.music.Music" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="api_basic_class.html#bella_hat.basic._Basic_class" title="bella_hat.basic._Basic_class"><code class="xref py py-class docutils literal notranslate"><span class="pre">_Basic_class</span></code></a></p>
+<p>Play music, sound affect and note control</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="bella_hat.music.Music.NOTE_BASE_FREQ">
+<span class="sig-name descname"><span class="pre">NOTE_BASE_FREQ</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">440</span></em><a class="headerlink" href="#bella_hat.music.Music.NOTE_BASE_FREQ" title="Link to this definition">¶</a></dt>
+<dd><p>Base note frequency for calculation (A4)</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="bella_hat.music.Music.NOTE_BASE_INDEX">
+<span class="sig-name descname"><span class="pre">NOTE_BASE_INDEX</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">69</span></em><a class="headerlink" href="#bella_hat.music.Music.NOTE_BASE_INDEX" title="Link to this definition">¶</a></dt>
+<dd><p>Base note index for calculation (A4) MIDI compatible</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="bella_hat.music.Music.NOTES">
+<span class="sig-name descname"><span class="pre">NOTES</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">[None,</span> <span class="pre">None,</span> <span class="pre">None,</span> <span class="pre">None,</span> <span class="pre">None,</span> <span class="pre">None,</span> <span class="pre">None,</span> <span class="pre">None,</span> <span class="pre">None,</span> <span class="pre">None,</span> <span class="pre">None,</span> <span class="pre">None,</span> <span class="pre">None,</span> <span class="pre">None,</span> <span class="pre">None,</span> <span class="pre">None,</span> <span class="pre">None,</span> <span class="pre">None,</span> <span class="pre">None,</span> <span class="pre">None,</span> <span class="pre">None,</span> <span class="pre">'A0',</span> <span class="pre">'A#0',</span> <span class="pre">'B0',</span> <span class="pre">'C1',</span> <span class="pre">'C#1',</span> <span class="pre">'D1',</span> <span class="pre">'D#1',</span> <span class="pre">'E1',</span> <span class="pre">'F1',</span> <span class="pre">'F#1',</span> <span class="pre">'G1',</span> <span class="pre">'G#1',</span> <span class="pre">'A1',</span> <span class="pre">'A#1',</span> <span class="pre">'B1',</span> <span class="pre">'C2',</span> <span class="pre">'C#2',</span> <span class="pre">'D2',</span> <span class="pre">'D#2',</span> <span class="pre">'E2',</span> <span class="pre">'F2',</span> <span class="pre">'F#2',</span> <span class="pre">'G2',</span> <span class="pre">'G#2',</span> <span class="pre">'A2',</span> <span class="pre">'A#2',</span> <span class="pre">'B2',</span> <span class="pre">'C3',</span> <span class="pre">'C#3',</span> <span class="pre">'D3',</span> <span class="pre">'D#3',</span> <span class="pre">'E3',</span> <span class="pre">'F3',</span> <span class="pre">'F#3',</span> <span class="pre">'G3',</span> <span class="pre">'G#3',</span> <span class="pre">'A3',</span> <span class="pre">'A#3',</span> <span class="pre">'B3',</span> <span class="pre">'C4',</span> <span class="pre">'C#4',</span> <span class="pre">'D4',</span> <span class="pre">'D#4',</span> <span class="pre">'E4',</span> <span class="pre">'F4',</span> <span class="pre">'F#4',</span> <span class="pre">'G4',</span> <span class="pre">'G#4',</span> <span class="pre">'A4',</span> <span class="pre">'A#4',</span> <span class="pre">'B4',</span> <span class="pre">'C5',</span> <span class="pre">'C#5',</span> <span class="pre">'D5',</span> <span class="pre">'D#5',</span> <span class="pre">'E5',</span> <span class="pre">'F5',</span> <span class="pre">'F#5',</span> <span class="pre">'G5',</span> <span class="pre">'G#5',</span> <span class="pre">'A5',</span> <span class="pre">'A#5',</span> <span class="pre">'B5',</span> <span class="pre">'C6',</span> <span class="pre">'C#6',</span> <span class="pre">'D6',</span> <span class="pre">'D#6',</span> <span class="pre">'E6',</span> <span class="pre">'F6',</span> <span class="pre">'F#6',</span> <span class="pre">'G6',</span> <span class="pre">'G#6',</span> <span class="pre">'A6',</span> <span class="pre">'A#6',</span> <span class="pre">'B6',</span> <span class="pre">'C7',</span> <span class="pre">'C#7',</span> <span class="pre">'D7',</span> <span class="pre">'D#7',</span> <span class="pre">'E7',</span> <span class="pre">'F7',</span> <span class="pre">'F#7',</span> <span class="pre">'G7',</span> <span class="pre">'G#7',</span> <span class="pre">'A7',</span> <span class="pre">'A#7',</span> <span class="pre">'B7',</span> <span class="pre">'C8']</span></em><a class="headerlink" href="#bella_hat.music.Music.NOTES" title="Link to this definition">¶</a></dt>
+<dd><p>Notes name, MIDI compatible</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="bella_hat.music.Music.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#bella_hat.music.Music.__init__" title="Link to this definition">¶</a></dt>
+<dd><p>Initialize music</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="bella_hat.music.Music.time_signature">
+<span class="sig-name descname"><span class="pre">time_signature</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">top</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bottom</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#bella_hat.music.Music.time_signature" title="Link to this definition">¶</a></dt>
+<dd><p>Set/get time signature</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>top</strong> (<em>int</em>) – top number of time signature</p></li>
+<li><p><strong>bottom</strong> (<em>int</em>) – bottom number of time signature</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>time signature</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>tuple</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="bella_hat.music.Music.key_signature">
+<span class="sig-name descname"><span class="pre">key_signature</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">key</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#bella_hat.music.Music.key_signature" title="Link to this definition">¶</a></dt>
+<dd><p>Set/get key signature</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>key</strong> (<em>int/str</em>) – key signature use KEY_XX_MAJOR or String “#”, “##”, or “bbb”, “bbbb”</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>key signature</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="bella_hat.music.Music.tempo">
+<span class="sig-name descname"><span class="pre">tempo</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">tempo</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">note_value</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.25</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#bella_hat.music.Music.tempo" title="Link to this definition">¶</a></dt>
+<dd><p>Set/get tempo beat per minute(bpm)</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>tempo</strong> (<em>float</em>) – tempo</p></li>
+<li><p><strong>note_value</strong> – note value(1, 1/2, Music.HALF_NOTE, etc)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>tempo</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="bella_hat.music.Music.beat">
+<span class="sig-name descname"><span class="pre">beat</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">beat</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#bella_hat.music.Music.beat" title="Link to this definition">¶</a></dt>
+<dd><p>Calculate beat delay in seconds from tempo</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>beat</strong> (<em>float</em>) – beat index</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>beat delay</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="bella_hat.music.Music.note">
+<span class="sig-name descname"><span class="pre">note</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">note</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">natural</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#bella_hat.music.Music.note" title="Link to this definition">¶</a></dt>
+<dd><p>Get frequency of a note</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>note_name</strong> (<em>string</em>) – note name(See NOTES)</p></li>
+<li><p><strong>natural</strong> (<em>bool</em>) – if natural note</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>frequency of note</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="bella_hat.music.Music.sound_play">
+<span class="sig-name descname"><span class="pre">sound_play</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filename</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">volume</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#bella_hat.music.Music.sound_play" title="Link to this definition">¶</a></dt>
+<dd><p>Play sound effect file</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>filename</strong> (<em>str</em>) – sound effect file name</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="bella_hat.music.Music.sound_play_threading">
+<span class="sig-name descname"><span class="pre">sound_play_threading</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filename</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">volume</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#bella_hat.music.Music.sound_play_threading" title="Link to this definition">¶</a></dt>
+<dd><p>Play sound effect in thread(in the background)</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>filename</strong> (<em>str</em>) – sound effect file name</p></li>
+<li><p><strong>volume</strong> (<em>int</em>) – volume 0-100, leave empty will not change volume</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="bella_hat.music.Music.music_play">
+<span class="sig-name descname"><span class="pre">music_play</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filename</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">loops</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">start</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">volume</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#bella_hat.music.Music.music_play" title="Link to this definition">¶</a></dt>
+<dd><p>Play music file</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>filename</strong> (<em>str</em>) – sound file name</p></li>
+<li><p><strong>loops</strong> (<em>int</em>) – number of loops, 0:loop forever, 1:play once, 2:play twice, …</p></li>
+<li><p><strong>start</strong> (<em>float</em>) – start time in seconds</p></li>
+<li><p><strong>volume</strong> (<em>int</em>) – volume 0-100, leave empty will not change volume</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="bella_hat.music.Music.music_set_volume">
+<span class="sig-name descname"><span class="pre">music_set_volume</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#bella_hat.music.Music.music_set_volume" title="Link to this definition">¶</a></dt>
+<dd><p>Set music volume</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>value</strong> (<em>int</em>) – volume 0-100</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="bella_hat.music.Music.music_stop">
+<span class="sig-name descname"><span class="pre">music_stop</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#bella_hat.music.Music.music_stop" title="Link to this definition">¶</a></dt>
+<dd><p>Stop music</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="bella_hat.music.Music.music_pause">
+<span class="sig-name descname"><span class="pre">music_pause</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#bella_hat.music.Music.music_pause" title="Link to this definition">¶</a></dt>
+<dd><p>Pause music</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="bella_hat.music.Music.music_resume">
+<span class="sig-name descname"><span class="pre">music_resume</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#bella_hat.music.Music.music_resume" title="Link to this definition">¶</a></dt>
+<dd><p>Resume music</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="bella_hat.music.Music.music_unpause">
+<span class="sig-name descname"><span class="pre">music_unpause</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#bella_hat.music.Music.music_unpause" title="Link to this definition">¶</a></dt>
+<dd><p>Unpause music(resume music)</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="bella_hat.music.Music.sound_length">
+<span class="sig-name descname"><span class="pre">sound_length</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filename</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#bella_hat.music.Music.sound_length" title="Link to this definition">¶</a></dt>
+<dd><p>Get sound effect length in seconds</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>filename</strong> (<em>str</em>) – sound effect file name</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>length in seconds</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="bella_hat.music.Music.get_tone_data">
+<span class="sig-name descname"><span class="pre">get_tone_data</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">freq</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">duration</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#bella_hat.music.Music.get_tone_data" title="Link to this definition">¶</a></dt>
+<dd><p>Get tone data for playing</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>freq</strong> (<em>float</em>) – frequency</p></li>
+<li><p><strong>duration</strong> (<em>float</em>) – duration in seconds</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>tone data</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>list</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="bella_hat.music.Music.play_tone_for">
+<span class="sig-name descname"><span class="pre">play_tone_for</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">freq</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">duration</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#bella_hat.music.Music.play_tone_for" title="Link to this definition">¶</a></dt>
+<dd><p>Play tone for duration seconds</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>freq</strong> (<em>float</em>) – frequency, you can use NOTES to get frequency</p></li>
+<li><p><strong>duration</strong> (<em>float</em>) – duration in seconds</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="api_modules.html" class="btn btn-neutral float-left" title="module modules" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="api_utils.html" class="btn btn-neutral float-right" title="module utils" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, Sunfounder.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
