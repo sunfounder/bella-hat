@@ -12,8 +12,6 @@ Basic test
     python3 examples/basic_test.py
 
   .. image:: img/basic_test.png
-    :width: 800px
-
 
 
 Reset MCU 

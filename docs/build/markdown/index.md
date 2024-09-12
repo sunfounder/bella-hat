@@ -5,10 +5,7 @@ contain the root `toctree` directive. -->
 
 # Bella Hat documentation
 
-* [About this HAT]()
-* [Hardware Introduction](hardware_introduction.md)
-  * [Pinout](hardware_introduction.md#pinout)
-  * [Features](hardware_introduction.md#features)
+* [.. About this HAT]()
 * [Bella Hat Library](bella-hat_library.md)
   * [Install](installation.md)
   * [Examples](examples.md)
