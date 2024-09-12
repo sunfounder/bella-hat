@@ -56,9 +56,11 @@ left_str = f'\033[1;30m{"←"}\033[0m'
 right_str = f'\033[1;30m{"→"}\033[0m'
 power = 0
 dir = "stop" 
-eyes_brightness =  0
+eyes_state =  False
 
 def update_print():
+    global eyes_state
+
     batVolt = bella.get_battery_voltage()
     batPerc = bella.get_battery_percentage()
     batstrlen = int(batPerc / 10)
@@ -100,8 +102,9 @@ LSM6DSOX:     acc: X:{acc[0]:.2f},    Y: {acc[1]:.2f},    Z: {acc[2]:.2f} m/s^2
 Grayscale:    {grayscale}
 Fan:          {"on" if bella.fan_state else "off"}
 Btn:          {"pressed" if btn_state else "released"}
+Eyes:         {eyes_state}
 
-Move: [W,A,S,D]    STOP: [X]   Honk: [Q]   Fan: [E]
+Move: [W,A,S,D]    STOP: [X]   Honk: [Q]   Fan: [E]    Eyes: [R]
 
     '''
     print('\033[H\033[J')
@@ -125,21 +128,16 @@ def getKey():
     return key
 
 
-
 # main
 #----------------------------------------------------------------
 def main():
-    global dir, power, eyes_brightness
+    global dir, power, eyes_state
 
     st = 0
     while True:
         if time.time() - st > 1:
             update_print()
             st = time.time()
-            eyes_brightness += 2
-            if eyes_brightness > 100:
-                eyes_brightness = 0
-            bella.set_eyes_led(eyes_brightness, eyes_brightness)
 
         _key = getKey().lower()
 
@@ -147,32 +145,37 @@ def main():
             if _key in ('wasdx'):
                 if _key == 'w':
                     dir = 'forward'
-                    if power <= 0:
-                        power = 20
-                    else:
-                        power += 10
-                    if power > 100:
-                        power = 100
-                    bella.set_motors(power, power)
+                    # if power <= 0:
+                    #     power = 20
+                    # else:
+                    #     power += 10
+                    # if power > 100:
+                    #     power = 100
+                    # bella.set_motors(power, power)
+                    bella.motors.forward(100)
                 elif _key == 's':
                     dir = 'backward'
-                    if power >= 0:
-                        power = -20
-                    else:
-                        power -= 10
-                    if power < -100:
-                        power = -100
-                    bella.set_motors(power, power)
+                    # if power >= 0:
+                    #     power = -20
+                    # else:
+                    #     power -= 10
+                    # if power < -100:
+                    #     power = -100
+                    # bella.set_motors(power, power)
+                    bella.motors.backward(100)
                 elif _key == 'a':
                     dir = 'left'
-                    bella.set_motors(-power, power)
+                    # bella.set_motors(-power, power)
+                    bella.motors.turn_left(100)
                 elif _key == 'd':
                     dir = 'right'
-                    bella.set_motors(power, power)
+                    # bella.set_motors(power, power)
+                    bella.motors.turn_right(100)
                 elif _key == 'x':
                     dir = 'stop'
                     power = 0
-                    bella.set_motors(power, -power)
+                    # bella.set_motors(power, -power)
+                    bella.motors.stop()
                 update_print()
                 st = time.time()
             elif _key == 'q':
@@ -184,8 +187,17 @@ def main():
                     bella.fan_on()
                 update_print()
                 st = time.time()
+            elif _key == 'r':
+                if eyes_state:
+                    eyes_state = False
+                    bella.set_eyes_led(0, 0)
+                else:
+                    eyes_state = True
+                    bella.set_eyes_led(100, 100)
+                update_print()
+                st = time.time()
 
-        time.sleep(.01)
+        time.sleep(.02)
 
 if __name__ == "__main__":
     try:
