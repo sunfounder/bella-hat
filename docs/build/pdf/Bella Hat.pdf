@@ -73,22 +73,22 @@ endobj
 endobj
 13 0 obj
 <<
-/Border [ 0 0 0 ] /Contents () /Dest [ 62 0 R /XYZ 40.01575 297.4394 0 ] /Rect [ 80.01575 707.2394 117.3307 717.4394 ] /Subtype /Link /Type /Annot
+/Border [ 0 0 0 ] /Contents () /Dest [ 62 0 R /XYZ 40.01575 311.4394 0 ] /Rect [ 80.01575 707.2394 117.3307 717.4394 ] /Subtype /Link /Type /Annot
 >>
 endobj
 14 0 obj
 <<
-/Border [ 0 0 0 ] /Contents () /Dest [ 62 0 R /XYZ 40.01575 297.4394 0 ] /Rect [ 550.5338 707.8769 555.2598 718.0769 ] /Subtype /Link /Type /Annot
+/Border [ 0 0 0 ] /Contents () /Dest [ 62 0 R /XYZ 40.01575 311.4394 0 ] /Rect [ 550.5338 707.8769 555.2598 718.0769 ] /Subtype /Link /Type /Annot
 >>
 endobj
 15 0 obj
 <<
-/Border [ 0 0 0 ] /Contents () /Dest [ 62 0 R /XYZ 40.01575 264.6394 0 ] /Rect [ 100.0157 691.0394 136.8632 701.2394 ] /Subtype /Link /Type /Annot
+/Border [ 0 0 0 ] /Contents () /Dest [ 62 0 R /XYZ 40.01575 278.6394 0 ] /Rect [ 100.0157 691.0394 136.8632 701.2394 ] /Subtype /Link /Type /Annot
 >>
 endobj
 16 0 obj
 <<
-/Border [ 0 0 0 ] /Contents () /Dest [ 62 0 R /XYZ 40.01575 264.6394 0 ] /Rect [ 550.5338 691.6769 555.2598 701.8769 ] /Subtype /Link /Type /Annot
+/Border [ 0 0 0 ] /Contents () /Dest [ 62 0 R /XYZ 40.01575 278.6394 0 ] /Rect [ 550.5338 691.6769 555.2598 701.8769 ] /Subtype /Link /Type /Annot
 >>
 endobj
 17 0 obj
@@ -350,7 +350,7 @@ endobj
 endobj
 63 0 obj
 <<
-/Border [ 0 0 0 ] /Contents () /Dest [ 62 0 R /XYZ 40.01575 267.0394 0 ] /Rect [ 388.5057 636.6394 492.4357 648.6394 ] /Subtype /Link /Type /Annot
+/Border [ 0 0 0 ] /Contents () /Dest [ 62 0 R /XYZ 40.01575 281.0394 0 ] /Rect [ 388.5057 636.6394 492.4357 648.6394 ] /Subtype /Link /Type /Annot
 >>
 endobj
 64 0 obj
@@ -1471,7 +1471,7 @@ endobj
 endobj
 251 0 obj
 <<
-/Author () /CreationDate (D:20240912170539-08'00') /Creator (\(unspecified\)) /Keywords () /ModDate (D:20240912170539-08'00') /Producer (ReportLab PDF Library - www.reportlab.com) 
+/Author () /CreationDate (D:20240912170911-08'00') /Creator (\(unspecified\)) /Keywords () /ModDate (D:20240912170911-08'00') /Producer (ReportLab PDF Library - www.reportlab.com) 
   /Subject (\(unspecified\)) /Title () /Trapped /False
 >>
 endobj
@@ -1498,13 +1498,13 @@ endobj
 endobj
 256 0 obj
 <<
-/Count 2 /Dest [ 62 0 R /XYZ 40.01575 297.4394 0 ] /First 257 0 R /Last 258 0 R /Next 259 0 R /Parent 254 0 R 
+/Count 2 /Dest [ 62 0 R /XYZ 40.01575 311.4394 0 ] /First 257 0 R /Last 258 0 R /Next 259 0 R /Parent 254 0 R 
   /Prev 255 0 R /Title (Examples)
 >>
 endobj
 257 0 obj
 <<
-/Dest [ 62 0 R /XYZ 40.01575 264.6394 0 ] /Next 258 0 R /Parent 256 0 R /Title (Basic test)
+/Dest [ 62 0 R /XYZ 40.01575 278.6394 0 ] /Next 258 0 R /Parent 256 0 R /Title (Basic test)
 >>
 endobj
 258 0 obj
@@ -2065,7 +2065,7 @@ endstream
 endobj
 283 0 obj
 <<
-/Length 4991
+/Length 4996
 >>
 stream
 1 0 0 1 0 0 cm  BT /F1 12 Tf 14.4 TL ET
@@ -2112,33 +2112,33 @@ q
 1 0 0 1 40.01575 683.0394 cm
 Q
 q
-1 0 0 1 40.01575 518.6394 cm
+1 0 0 1 40.01575 532.6394 cm
 q
 0 0 0 rg
 BT /F1 10 Tf 12 TL ET
 q
-1 0 0 1 6 149.4 cm
+1 0 0 1 6 135.4 cm
 q
 0 0 0 rg
 BT 1 0 0 1 0 2 Tm /F4 10 Tf 12 TL 2 0 Td (1.) Tj T* -2 0 Td ET
 Q
 Q
 q
-1 0 0 1 23 149.4 cm
+1 0 0 1 23 135.4 cm
 q
 0 0 0 rg
 BT 1 0 0 1 0 2 Tm /F1 10 Tf 12 TL (Update your system.) Tj T* ET
 Q
 Q
 q
-1 0 0 1 23 131.4 cm
+1 0 0 1 23 117.4 cm
 q
 0 0 0 rg
 BT 1 0 0 1 0 2 Tm /F1 10 Tf 12 TL (Make sure you are connected to the Internet and update your system:) Tj T* ET
 Q
 Q
 q
-1 0 0 1 23 112.6 cm
+1 0 0 1 23 98.6 cm
 q
 q
 q
@@ -2152,39 +2152,41 @@ Q
 Q
 Q
 q
-1 0 0 1 23 92.6 cm
+1 0 0 1 23 78.6 cm
 Q
 q
 1 0 0 1 23 3 cm
 q
 .933333 .933333 .933333 rg
-n 0 89.6 492.2441 -89.6 re f*
+n 0 75.6 492.2441 -75.6 re f*
 0 0 0 rg
 BT /F1 10 Tf 12 TL ET
-BT 1 0 0 1 6 71.6 Tm  T* ET
+BT 1 0 0 1 6 57.6 Tm  T* ET
 q
-1 0 0 1 8 64.8 cm
+1 0 0 1 8 50.8 cm
 q
 0 0 0 rg
 BT 1 0 0 1 0 2.8 Tm /F2 14 Tf 16.8 TL (Note) Tj T* ET
 Q
 Q
 q
-1 0 0 1 8 40.8 cm
+1 0 0 1 8 26.8 cm
 q
 BT 1 0 0 1 0 2 Tm 12 TL /F1 10 Tf 0 0 0 rg (Python3 related packages must be installed if you are installing the ) Tj /F2 10 Tf (Lite) Tj /F1 10 Tf ( version OS.) Tj T* ET
 Q
 Q
 q
-1 0 0 1 8 34 cm
-q
-Q
-Q
-q
 1 0 0 1 8 8 cm
 q
+q
+q
+1 0 0 1 4.4 .4 cm
+q
 0 0 0 rg
-BT 1 0 0 1 0 2 Tm /F1 10 Tf 12 TL (sudo apt install git python3-pip python3-setuptools python3-smbus) Tj T* ET
+BT 1 0 0 1 0 2 Tm /F4 10 Tf 12 TL (sudo apt install git python3-pip python3-setuptools python3-smbus) Tj T* ET
+Q
+Q
+Q
 Q
 Q
 q
@@ -2192,10 +2194,10 @@ q
 1 j
 .8 .8 .8 RG
 .5 w
-n 0 89.6 m 492.2441 89.6 l S
+n 0 75.6 m 492.2441 75.6 l S
 n 0 0 m 492.2441 0 l S
-n 0 0 m 0 89.6 l S
-n 492.2441 0 m 492.2441 89.6 l S
+n 0 0 m 0 75.6 l S
+n 492.2441 0 m 492.2441 75.6 l S
 Q
 Q
 Q
@@ -2207,10 +2209,10 @@ Q
 Q
 Q
 q
-1 0 0 1 40.01575 512.6394 cm
+1 0 0 1 40.01575 526.6394 cm
 Q
 q
-1 0 0 1 40.01575 481.8394 cm
+1 0 0 1 40.01575 495.8394 cm
 q
 0 0 0 rg
 BT /F1 10 Tf 12 TL ET
@@ -2247,10 +2249,10 @@ Q
 Q
 Q
 q
-1 0 0 1 40.01575 475.8394 cm
+1 0 0 1 40.01575 489.8394 cm
 Q
 q
-1 0 0 1 40.01575 313.4394 cm
+1 0 0 1 40.01575 327.4394 cm
 q
 0 0 0 rg
 BT /F1 10 Tf 12 TL ET
@@ -2348,10 +2350,10 @@ Q
 Q
 Q
 q
-1 0 0 1 40.01575 313.4394 cm
+1 0 0 1 40.01575 327.4394 cm
 Q
 q
-1 0 0 1 40.01575 280.6394 cm
+1 0 0 1 40.01575 294.6394 cm
 q
 .8 .8 .8 RG
 .3 w
@@ -2363,7 +2365,7 @@ BT 1 0 0 1 0 2.8 Tm 16.8 TL /F2 14 Tf .12549 .262745 .360784 rg (Examples) Tj T*
 Q
 Q
 q
-1 0 0 1 40.01575 250.2394 cm
+1 0 0 1 40.01575 264.2394 cm
 q
 .8 .8 .8 RG
 .3 w
@@ -2375,10 +2377,10 @@ BT 1 0 0 1 0 2.4 Tm 14.4 TL /F2 12 Tf .12549 .262745 .360784 rg (Basic test) Tj 
 Q
 Q
 q
-1 0 0 1 40.01575 238.2394 cm
+1 0 0 1 40.01575 252.2394 cm
 Q
 q
-1 0 0 1 40.01575 207.4394 cm
+1 0 0 1 40.01575 221.4394 cm
 q
 0 0 0 rg
 BT /F1 10 Tf 12 TL ET
@@ -2410,7 +2412,7 @@ BT 1 0 0 1 0 2 Tm  T* ET
 q
 1 0 0 1 20 0 cm
 q
-331.4186 0 0 146.589 0 0 cm
+363.0707 0 0 160.589 0 0 cm
 /FormXob.52204b0df45829421de3f1d156ef2458 Do
 Q
 Q
@@ -12338,64 +12340,64 @@ xref
 0000060438 00000 n 
 0000066857 00000 n 
 0000066983 00000 n 
-0000072027 00000 n 
-0000086754 00000 n 
-0000094078 00000 n 
-0000102767 00000 n 
-0000113968 00000 n 
-0000125847 00000 n 
-0000136464 00000 n 
-0000146777 00000 n 
-0000157504 00000 n 
-0000166989 00000 n 
-0000177630 00000 n 
-0000188484 00000 n 
-0000201197 00000 n 
-0000210693 00000 n 
-0000222153 00000 n 
-0000233980 00000 n 
-0000244967 00000 n 
-0000255978 00000 n 
-0000259952 00000 n 
-0000260078 00000 n 
-0000271214 00000 n 
-0000282809 00000 n 
-0000284364 00000 n 
-0000284490 00000 n 
-0000285182 00000 n 
-0000285539 00000 n 
-0000285574 00000 n 
-0000285609 00000 n 
-0000285644 00000 n 
-0000285679 00000 n 
-0000285714 00000 n 
-0000285749 00000 n 
-0000285784 00000 n 
-0000285819 00000 n 
-0000285854 00000 n 
-0000285889 00000 n 
-0000285924 00000 n 
-0000285959 00000 n 
-0000285994 00000 n 
-0000286030 00000 n 
-0000286066 00000 n 
-0000286102 00000 n 
-0000286138 00000 n 
-0000286174 00000 n 
-0000286210 00000 n 
-0000286246 00000 n 
-0000286282 00000 n 
-0000286318 00000 n 
-0000286354 00000 n 
-0000286390 00000 n 
-0000286426 00000 n 
-0000286462 00000 n 
-0000286498 00000 n 
-0000286534 00000 n 
+0000072032 00000 n 
+0000086759 00000 n 
+0000094083 00000 n 
+0000102772 00000 n 
+0000113973 00000 n 
+0000125852 00000 n 
+0000136469 00000 n 
+0000146782 00000 n 
+0000157509 00000 n 
+0000166994 00000 n 
+0000177635 00000 n 
+0000188489 00000 n 
+0000201202 00000 n 
+0000210698 00000 n 
+0000222158 00000 n 
+0000233985 00000 n 
+0000244972 00000 n 
+0000255983 00000 n 
+0000259957 00000 n 
+0000260083 00000 n 
+0000271219 00000 n 
+0000282814 00000 n 
+0000284369 00000 n 
+0000284495 00000 n 
+0000285187 00000 n 
+0000285544 00000 n 
+0000285579 00000 n 
+0000285614 00000 n 
+0000285649 00000 n 
+0000285684 00000 n 
+0000285719 00000 n 
+0000285754 00000 n 
+0000285789 00000 n 
+0000285824 00000 n 
+0000285859 00000 n 
+0000285894 00000 n 
+0000285929 00000 n 
+0000285964 00000 n 
+0000285999 00000 n 
+0000286035 00000 n 
+0000286071 00000 n 
+0000286107 00000 n 
+0000286143 00000 n 
+0000286179 00000 n 
+0000286215 00000 n 
+0000286251 00000 n 
+0000286287 00000 n 
+0000286323 00000 n 
+0000286359 00000 n 
+0000286395 00000 n 
+0000286431 00000 n 
+0000286467 00000 n 
+0000286503 00000 n 
+0000286539 00000 n 
 trailer
 <<
 /ID 
-[<63f3e44d4a451bff821606ae9499becb><63f3e44d4a451bff821606ae9499becb>]
+[<ea0ce23b1c750841944df63708c66fa1><ea0ce23b1c750841944df63708c66fa1>]
 % ReportLab generated PDF document -- digest (http://www.reportlab.com)
 
 /Info 251 0 R
@@ -12403,5 +12405,5 @@ trailer
 /Size 338
 >>
 startxref
-286570
+286575
 %%EOF

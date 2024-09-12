@@ -10,9 +10,8 @@
    #### NOTE
    Python3 related packages must be installed if you are installing the **Lite** version OS.
    ```default
-   ```
-
    sudo apt install git python3-pip python3-setuptools python3-smbus
+   ```
 2. Download the source code.
    ```default
    git clone https://github.com/sunfounder/bella-hat.git

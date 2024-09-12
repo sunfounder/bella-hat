@@ -14,7 +14,7 @@ Install
        
        .. code-block::
        
-       sudo apt install git python3-pip python3-setuptools python3-smbus
+          sudo apt install git python3-pip python3-setuptools python3-smbus
 
 
 #. Download the source code.
