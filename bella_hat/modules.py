@@ -90,11 +90,11 @@ class Ultrasonic():
 class Grayscale_Module(object):
     """3 channel Grayscale Module"""
 
-    LEFT = 0
+    LEFT = 2
     """Left Channel"""
     MIDDLE = 1
     """Middle Channel"""
-    RIGHT = 2
+    RIGHT = 1
     """Right Channel"""
 
     REFERENCE_DEFAULT = [1000]*3
