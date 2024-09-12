@@ -9,7 +9,7 @@
 > python3 examples/basic_test.py
 > ```
 
-> ![image](img/basic_test.png)
+> ![image](../img/basic_test.png)
 
 ## Reset MCU
 

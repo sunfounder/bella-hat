@@ -11,9 +11,7 @@ Basic test
     cd bella-hat
     python3 examples/basic_test.py
 
-  .. image:: img/basic_test.png
-    :width: 800px
-
+  .. image:: ../img/basic_test.png
 
 
 Reset MCU 

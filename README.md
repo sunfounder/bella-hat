@@ -4,6 +4,8 @@ Bella Hat Python library for Raspberry Pi.
 
 ## Docs
 
+<https://github.com/sunfounder/bella-hat/blob/main/docs/build/markdown/index.md>
+
 ## Installation
 
 Install in python venv:
