@@ -34,6 +34,7 @@ except:
 # init bella 
 #----------------------------------------------------------------
 bella = Bella()
+bella.motors.reverse([True, False])
 
 
 # init music and sound effect files
