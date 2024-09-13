@@ -75,7 +75,7 @@ Clock frequency
 Initialize PWM
 
 * **Parameters:**
-  **channel** (*int/str*) – PWM channel number(0-13/P0-P13)
+  **channel** (*int/str*) – PWM channel number(0-19/P0-P19)
 
 #### freq(freq=None)
 
