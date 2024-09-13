@@ -27,7 +27,7 @@ class PWM(I2C):
         """
         Initialize PWM
 
-        :param channel: PWM channel number(0-13/P0-P13)
+        :param channel: PWM channel number(0-19/P0-P19)
         :type channel: int/str
         """
         if address is None:
