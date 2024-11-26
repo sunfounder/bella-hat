@@ -44,7 +44,7 @@ class Bella(_Basic_class):
         self.bat = ADC(self.BAT_VOLT_ADC_CHANNEL)
         self.ultrasonic = Ultrasonic(
                             trig=Pin(self.ULTRASONIC_TRING_PIN), 
-                            echo=Pin(self.ULTRASONIC_ECHO_PIN)
+                            echo=Pin(self.ULTRASONIC_ECHO_PIN, mode=Pin.IN, pull=Pin.PULL_DOWN)
                             )
         self.dht11 = DHT11(self.DTH11_PIN)
         self.grayscale = Grayscale_Module(

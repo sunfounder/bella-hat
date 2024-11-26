@@ -30,10 +30,8 @@ class Ultrasonic():
 
         self.timeout = timeout
 
-        trig.close()
-        echo.close()
-        self.trig = Pin(trig._pin_num)
-        self.echo = Pin(echo._pin_num, mode=Pin.IN, pull=Pin.PULL_DOWN)
+        self.trig = trig
+        self.echo = echo
 
     def _read(self):
         '''
@@ -55,11 +53,13 @@ class Ultrasonic():
         pulse_start = 0
         timeout_start = time.time()
 
-        while self.echo.gpio.value == 0:
+        # while self.echo.gpio.value == 0:
+        while self.echo.value() == 0:
             pulse_start = time.time()
             if pulse_start - timeout_start > self.timeout:
                 return -1
-        while self.echo.gpio.value == 1:
+        # while self.echo.gpio.value == 1:
+        while self.echo.value() == 1:
             pulse_end = time.time()
             if pulse_end - timeout_start > self.timeout:
                 return -1
