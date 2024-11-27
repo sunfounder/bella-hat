@@ -38,6 +38,9 @@ class Bella(_Basic_class):
     L_EYE_LED_PIN = 14
     R_EYE_LED_PIN = 15
 
+    CHARGE_STATUS_PIN = 27
+    CHARGE_STATUS_ACTIVE = HIGH
+
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
 
@@ -67,6 +70,7 @@ class Bella(_Basic_class):
         self.eye_r =  PWM(15)
         self.eye_l.freq(100)
         self.eye_r.freq(100)
+        self.charge_status = Pin(self.CHARGE_STATUS_PIN, mode=Pin.IN)
 
     def get_battery_voltage(self):
         ''''
@@ -180,6 +184,12 @@ class Bella(_Basic_class):
             return self.btn.value()
         else:
             return not self.btn.value()
+
+    def read_charge_status(self):
+        if self.CHARGE_STATUS_ACTIVE:
+            return self.charge_status.value()
+        else:
+            return not self.charge_status.value()
 
     def set_eyes_led(self, left_brightness, right_brightness):
         '''

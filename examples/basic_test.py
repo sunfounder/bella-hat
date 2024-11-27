@@ -103,6 +103,7 @@ Grayscale:    {grayscale}
 Fan:          {"on" if bella.fan_state else "off"}
 Btn:          {"pressed" if btn_state else "released"}
 Eyes:         {eyes_state}
+Is_Charging:  {"Yes" if bella.read_charge_status() else "No"}
 
 Move: [W,A,S,D]    STOP: [X]   Honk: [Q]   Fan: [E]    Eyes: [R]
 
