@@ -65,12 +65,12 @@ class Bella(_Basic_class):
         self.fan_state = False
         self.fan = Pin(self.FAN_PIN, mode=Pin.OUT)
         self.fan_off()
-        self.btn = Pin(self.BTN_PIN, mode=Pin.IN)
+        self.btn = Pin(self.BTN_PIN, mode=Pin.IN, pull=Pin.PULL_UP)
         self.eye_l =  PWM(14)
         self.eye_r =  PWM(15)
         self.eye_l.freq(100)
         self.eye_r.freq(100)
-        self.charge_status = Pin(self.CHARGE_STATUS_PIN, mode=Pin.IN)
+        self.charge_status = Pin(self.CHARGE_STATUS_PIN, mode=Pin.IN, pull=Pin.PULL_DOWN)
 
     def get_battery_voltage(self):
         ''''
