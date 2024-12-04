@@ -219,6 +219,6 @@ if __name__ == "__main__":
         main()
     finally:
         bella.motors.stop()
-        bella.set_eyes_led(0, 0)
+        ws2812.stop()
         if webcam_done:
             Vilib.camera_close()

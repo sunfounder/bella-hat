@@ -31,8 +31,9 @@ sudo raspi-config nonint do_spi 0
 ```
 
 > [!Warning]
+See: <https://github.com/jgarff/rpi_ws281x>\
 On an RPi 3 you have to change the GPU core frequency to 250 MHz, otherwise the SPI clock has the wrong frequency.\
-Do this by adding the following line to /boot/config.txt and reboot:
+Do this by adding the following line to /boot//firmware/config.txt and reboot:
 
 ```bash
 core_freq=250
@@ -40,7 +41,7 @@ core_freq=250
 
 > [!Warning]
 On an RPi 4 you must set a fixed frequency to avoid the idle CPU scaling changing the SPI frequency and breaking the ws281x timings:\
-Do this by adding the following lines to /boot/config.txt and reboot:
+Do this by adding the following lines to /boot/firmware/config.txt and reboot:
 
 ```bash
 core_freq_min=500
