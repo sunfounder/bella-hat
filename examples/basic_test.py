@@ -5,10 +5,14 @@ import select
 import os
 import sys
 
+script_dir = os.path.dirname(os.path.abspath(__file__))
+os.chdir(script_dir)
+
 from bella_hat.music import Music
 from bella_hat.bella import Bella
 from bella_hat.utils import run_command
 
+from ws2812 import WS2812
 # start the web camera  
 #----------------------------------------------------------------
 webcam_address = ""
@@ -36,13 +40,23 @@ except:
 bella = Bella()
 bella.motors.reverse([True, False])
 
+# init ws2812
+#----------------------------------------------------------------
+config = {
+    'rgb_led_count': 32,
+    'rgb_enable': True,
+    'rgb_color': '#ff0aff',
+    'rgb_brightness': 100,
+    'rgb_style': 'breathing',
+    'rgb_speed': 80,
+}
+
+ws2812 = WS2812(config)
+ws2812.start()
 
 # init music and sound effect files
 #----------------------------------------------------------------
 music = Music()
-
-script_dir = os.path.dirname(os.path.abspath(__file__))
-os.chdir(script_dir)
 
 def horn(): 
     _status, _result = run_command('sudo killall pulseaudio')
@@ -56,7 +70,7 @@ left_str = f'\033[1;30m{"←"}\033[0m'
 right_str = f'\033[1;30m{"→"}\033[0m'
 power = 0
 dir = "stop" 
-eyes_state =  False
+eyes_state =  True
 
 def update_print():
     global eyes_state
@@ -191,10 +205,10 @@ def main():
             elif _key == 'r':
                 if eyes_state:
                     eyes_state = False
-                    bella.set_eyes_led(0, 0)
+                    ws2812.stop()
                 else:
                     eyes_state = True
-                    bella.set_eyes_led(100, 100)
+                    ws2812.start()
                 update_print()
                 st = time.time()
 

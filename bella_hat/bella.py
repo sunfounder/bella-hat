@@ -35,9 +35,6 @@ class Bella(_Basic_class):
     BTN_PIN = 25
     BTN_ACTIVE = LOW
 
-    L_EYE_LED_PIN = 14
-    R_EYE_LED_PIN = 15
-
     CHARGE_STATUS_PIN = 27
     CHARGE_STATUS_ACTIVE = HIGH
 
@@ -66,10 +63,6 @@ class Bella(_Basic_class):
         self.fan = Pin(self.FAN_PIN, mode=Pin.OUT)
         self.fan_off()
         self.btn = Pin(self.BTN_PIN, mode=Pin.IN, pull=Pin.PULL_UP)
-        self.eye_l =  PWM(14)
-        self.eye_r =  PWM(15)
-        self.eye_l.freq(100)
-        self.eye_r.freq(100)
         self.charge_status = Pin(self.CHARGE_STATUS_PIN, mode=Pin.IN, pull=Pin.PULL_DOWN)
 
     def get_battery_voltage(self):
@@ -190,22 +183,3 @@ class Bella(_Basic_class):
             return self.charge_status.value()
         else:
             return not self.charge_status.value()
-
-    def set_eyes_led(self, left_brightness, right_brightness):
-        '''
-        Set the front board LEDs brightness.
-
-        left_brightness: int - brightness for left LEDs, 0 to 100
-        right_brightness: int - brightness for right LEDs, 0 to 100
-        '''
-        if left_brightness > 100:
-            left_brightness = 100
-        elif left_brightness < 0:
-            left_brightness = 0
-        if right_brightness > 100:
-            right_brightness = 100
-        elif right_brightness < 0:
-            right_brightness = 0
-        self.eye_l.pulse_width_percent(left_brightness)
-        self.eye_r.pulse_width_percent(right_brightness)
-
