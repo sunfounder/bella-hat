@@ -6,7 +6,6 @@ from .i2c import I2C
 import time
 from .basic import _Basic_class
 from typing import Union, List, Tuple, Optional
-from gpiozero import OutputDevice, InputDevice
 
 class Ultrasonic():
     SOUND_SPEED = 343.3 # ms
