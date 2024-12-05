@@ -52,38 +52,6 @@ Bases: [`_Basic_class`](api_basic_class.md#bella_hat.basic._Basic_class)
 
 Pin manipulation class
 
-#### OUT *= 1*
-
-Pin mode output
-
-#### IN *= 2*
-
-Pin mode input
-
-#### PULL_UP *= 17*
-
-Pin internal pull up
-
-#### PULL_DOWN *= 18*
-
-Pin internal pull down
-
-#### PULL_NONE *= None*
-
-Pin internal pull none
-
-#### IRQ_FALLING *= 33*
-
-Pin interrupt falling
-
-#### IRQ_RISING *= 34*
-
-Pin interrupt falling
-
-#### IRQ_RISING_FALLING *= 35*
-
-Pin interrupt both rising and falling
-
 #### \_\_init_\_(pin, mode=None, pull=None, \*args, \*\*kwargs)
 
 Initialize a pin

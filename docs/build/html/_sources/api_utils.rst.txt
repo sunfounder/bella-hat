@@ -1,5 +1,5 @@
 module ``utils``
 ==================================================
 
-.. automodule:: bella_hat.utils
-    :members:
+.. currentmodule:: bella_hat.utils
+

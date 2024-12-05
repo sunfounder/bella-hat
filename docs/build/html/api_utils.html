@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>module utils &mdash; Bella Hat 0.0.1 documentation</title>
+  <title>module utils &mdash; Bella Hat 0.0.5 documentation</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=80d5e7a1" />
       <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=19f00094" />
       <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
@@ -14,7 +14,7 @@
     <script src="_static/js/html5shiv.min.js"></script>
   <![endif]-->
   
-        <script src="_static/documentation_options.js?v=d45e8c67"></script>
+        <script src="_static/documentation_options.js?v=282f96c0"></script>
         <script src="_static/doctools.js?v=9a2dae69"></script>
         <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
         <script src="_static/clipboard.min.js?v=a7894cd8"></script>
@@ -46,8 +46,6 @@
 </div>
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
               <ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="index.html">About this HAT</a></li>
-<li class="toctree-l1"><a class="reference internal" href="hardware_introduction.html">Hardware Introduction</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="bella-hat_library.html">Bella Hat Library</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="installation.html">Install</a></li>
 <li class="toctree-l2"><a class="reference internal" href="examples.html">Examples</a></li>
@@ -60,16 +58,7 @@
 <li class="toctree-l3"><a class="reference internal" href="api_i2c.html">class <code class="docutils literal notranslate"><span class="pre">I2C</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="api_modules.html">module <code class="docutils literal notranslate"><span class="pre">modules</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="api_music.html">class <code class="docutils literal notranslate"><span class="pre">Music</span></code></a></li>
-<li class="toctree-l3 current"><a class="current reference internal" href="#">module <code class="docutils literal notranslate"><span class="pre">utils</span></code></a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#bella_hat.utils.set_volume"><code class="docutils literal notranslate"><span class="pre">set_volume()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="#bella_hat.utils.run_command"><code class="docutils literal notranslate"><span class="pre">run_command()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="#bella_hat.utils.is_installed"><code class="docutils literal notranslate"><span class="pre">is_installed()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="#bella_hat.utils.mapping"><code class="docutils literal notranslate"><span class="pre">mapping()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="#bella_hat.utils.get_ip"><code class="docutils literal notranslate"><span class="pre">get_ip()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="#bella_hat.utils.reset_mcu"><code class="docutils literal notranslate"><span class="pre">reset_mcu()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="#bella_hat.utils.get_battery_voltage"><code class="docutils literal notranslate"><span class="pre">get_battery_voltage()</span></code></a></li>
-</ul>
-</li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">module <code class="docutils literal notranslate"><span class="pre">utils</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="api_basic_class.html">class <code class="docutils literal notranslate"><span class="pre">_Basic_class</span></code></a></li>
 </ul>
 </li>
@@ -103,116 +92,8 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <section id="module-bella_hat.utils">
-<span id="module-utils"></span><h1>module <code class="docutils literal notranslate"><span class="pre">utils</span></code><a class="headerlink" href="#module-bella_hat.utils" title="Link to this heading">¶</a></h1>
-<dl class="py function">
-<dt class="sig sig-object py" id="bella_hat.utils.set_volume">
-<span class="sig-prename descclassname"><span class="pre">bella_hat.utils.</span></span><span class="sig-name descname"><span class="pre">set_volume</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#bella_hat.utils.set_volume" title="Link to this definition">¶</a></dt>
-<dd><p>Set volume</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>value</strong> (<em>int</em>) – volume(0~100)</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py function">
-<dt class="sig sig-object py" id="bella_hat.utils.run_command">
-<span class="sig-prename descclassname"><span class="pre">bella_hat.utils.</span></span><span class="sig-name descname"><span class="pre">run_command</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">cmd</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#bella_hat.utils.run_command" title="Link to this definition">¶</a></dt>
-<dd><p>Run command and return status and output</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>cmd</strong> (<em>str</em>) – command to run</p>
-</dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>status, output</p>
-</dd>
-<dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>tuple</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py function">
-<dt class="sig sig-object py" id="bella_hat.utils.is_installed">
-<span class="sig-prename descclassname"><span class="pre">bella_hat.utils.</span></span><span class="sig-name descname"><span class="pre">is_installed</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">cmd</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#bella_hat.utils.is_installed" title="Link to this definition">¶</a></dt>
-<dd><p>Check if command is installed</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>cmd</strong> (<em>str</em>) – command to check</p>
-</dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>True if installed</p>
-</dd>
-<dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>bool</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py function">
-<dt class="sig sig-object py" id="bella_hat.utils.mapping">
-<span class="sig-prename descclassname"><span class="pre">bella_hat.utils.</span></span><span class="sig-name descname"><span class="pre">mapping</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">in_min</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">in_max</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">out_min</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">out_max</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#bella_hat.utils.mapping" title="Link to this definition">¶</a></dt>
-<dd><p>Map value from one range to another range</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>x</strong> (<em>float/int</em>) – value to map</p></li>
-<li><p><strong>in_min</strong> (<em>float/int</em>) – input minimum</p></li>
-<li><p><strong>in_max</strong> (<em>float/int</em>) – input maximum</p></li>
-<li><p><strong>out_min</strong> (<em>float/int</em>) – output minimum</p></li>
-<li><p><strong>out_max</strong> (<em>float/int</em>) – output maximum</p></li>
-</ul>
-</dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>mapped value</p>
-</dd>
-<dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>float/int</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py function">
-<dt class="sig sig-object py" id="bella_hat.utils.get_ip">
-<span class="sig-prename descclassname"><span class="pre">bella_hat.utils.</span></span><span class="sig-name descname"><span class="pre">get_ip</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ifaces</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">['wlan0',</span> <span class="pre">'eth0']</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#bella_hat.utils.get_ip" title="Link to this definition">¶</a></dt>
-<dd><p>Get IP address</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>ifaces</strong> (<em>list</em>) – interfaces to check</p>
-</dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>IP address or False if not found</p>
-</dd>
-<dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>str/False</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py function">
-<dt class="sig sig-object py" id="bella_hat.utils.reset_mcu">
-<span class="sig-prename descclassname"><span class="pre">bella_hat.utils.</span></span><span class="sig-name descname"><span class="pre">reset_mcu</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#bella_hat.utils.reset_mcu" title="Link to this definition">¶</a></dt>
-<dd><p>Reset mcu on BL100 Hat.</p>
-<p>This is helpful if the mcu somehow stuck in a I2C data
-transfer loop, and Raspberry Pi getting IOError while
-Reading ADC, manipulating PWM, etc.</p>
-</dd></dl>
-
-<dl class="py function">
-<dt class="sig sig-object py" id="bella_hat.utils.get_battery_voltage">
-<span class="sig-prename descclassname"><span class="pre">bella_hat.utils.</span></span><span class="sig-name descname"><span class="pre">get_battery_voltage</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#bella_hat.utils.get_battery_voltage" title="Link to this definition">¶</a></dt>
-<dd><p>Get battery voltage</p>
-<dl class="field-list simple">
-<dt class="field-odd">Returns<span class="colon">:</span></dt>
-<dd class="field-odd"><p>battery voltage(V)</p>
-</dd>
-<dt class="field-even">Return type<span class="colon">:</span></dt>
-<dd class="field-even"><p>float</p>
-</dd>
-</dl>
-</dd></dl>
-
+  <section id="module-utils">
+<h1>module <code class="docutils literal notranslate"><span class="pre">utils</span></code><a class="headerlink" href="#module-utils" title="Link to this heading">¶</a></h1>
 </section>
 
 

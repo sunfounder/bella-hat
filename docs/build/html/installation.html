@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Install &mdash; Bella Hat 0.0.1 documentation</title>
+  <title>Install &mdash; Bella Hat 0.0.5 documentation</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=80d5e7a1" />
       <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=19f00094" />
       <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
@@ -14,7 +14,7 @@
     <script src="_static/js/html5shiv.min.js"></script>
   <![endif]-->
   
-        <script src="_static/documentation_options.js?v=d45e8c67"></script>
+        <script src="_static/documentation_options.js?v=282f96c0"></script>
         <script src="_static/doctools.js?v=9a2dae69"></script>
         <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
         <script src="_static/clipboard.min.js?v=a7894cd8"></script>
@@ -114,7 +114,34 @@
 </div>
 </div>
 </li>
+<li><p>Enable i2c and spi</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">sudo</span> <span class="n">raspi</span><span class="o">-</span><span class="n">config</span> <span class="n">nonint</span> <span class="n">do_i2c</span> <span class="mi">0</span>
+<span class="n">sudo</span> <span class="n">raspi</span><span class="o">-</span><span class="n">config</span> <span class="n">nonint</span> <span class="n">do_spi</span> <span class="mi">0</span>
+</pre></div>
+</div>
+</li>
 </ol>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<div class="line-block">
+<div class="line">See: &lt;<a class="reference external" href="https://github.com/jgarff/rpi_ws281x">https://github.com/jgarff/rpi_ws281x</a>&gt;</div>
+<div class="line">On an RPi 3 you have to change the GPU core frequency to 250 MHz, otherwise the SPI clock has the wrong frequency.</div>
+<div class="line">Do this by adding the following line to “/boot/firmware/config.txt” and reboot:</div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">core_freq</span><span class="o">=</span><span class="mi">250</span>
+</pre></div>
+</div>
+</div>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<div class="line-block">
+<div class="line">On an RPi 4 you must set a fixed frequency to avoid the idle CPU scaling changing the SPI frequency and breaking the ws281x timings:</div>
+<div class="line">Do this by adding the following lines to /boot/firmware/config.txt and reboot:</div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">core_freq_min</span><span class="o">=</span><span class="mi">500</span>
+</pre></div>
+</div>
+</div>
 </section>
 
 

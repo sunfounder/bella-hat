@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>class Pin &mdash; Bella Hat 0.0.1 documentation</title>
+  <title>class Pin &mdash; Bella Hat 0.0.5 documentation</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=80d5e7a1" />
       <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=19f00094" />
       <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
@@ -14,7 +14,7 @@
     <script src="_static/js/html5shiv.min.js"></script>
   <![endif]-->
   
-        <script src="_static/documentation_options.js?v=d45e8c67"></script>
+        <script src="_static/documentation_options.js?v=282f96c0"></script>
         <script src="_static/doctools.js?v=9a2dae69"></script>
         <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
         <script src="_static/clipboard.min.js?v=a7894cd8"></script>
@@ -46,17 +46,12 @@
 </div>
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
               <ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="index.html">About this HAT</a></li>
-<li class="toctree-l1"><a class="reference internal" href="hardware_introduction.html">Hardware Introduction</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="bella-hat_library.html">Bella Hat Library</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="installation.html">Install</a></li>
 <li class="toctree-l2"><a class="reference internal" href="examples.html">Examples</a></li>
 <li class="toctree-l2 current"><a class="reference internal" href="api.html">Reference</a><ul class="current">
 <li class="toctree-l3"><a class="reference internal" href="api_bella.html">class <code class="docutils literal notranslate"><span class="pre">Bella</span></code></a></li>
-<li class="toctree-l3 current"><a class="current reference internal" href="#">class <code class="docutils literal notranslate"><span class="pre">Pin</span></code></a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#bella_hat.pin.Pin"><code class="docutils literal notranslate"><span class="pre">Pin</span></code></a></li>
-</ul>
-</li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">class <code class="docutils literal notranslate"><span class="pre">Pin</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="api_adc.html">class <code class="docutils literal notranslate"><span class="pre">ADC</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="api_pwm.html">class <code class="docutils literal notranslate"><span class="pre">PWM</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="api_motor.html">module <code class="docutils literal notranslate"><span class="pre">motor</span></code></a></li>
@@ -139,226 +134,6 @@
 </pre></div>
 </div>
 <p><strong>API</strong></p>
-<dl class="py class">
-<dt class="sig sig-object py" id="bella_hat.pin.Pin">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">bella_hat.pin.</span></span><span class="sig-name descname"><span class="pre">Pin</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">pin</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mode</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pull</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#bella_hat.pin.Pin" title="Link to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="api_basic_class.html#bella_hat.basic._Basic_class" title="bella_hat.basic._Basic_class"><code class="xref py py-class docutils literal notranslate"><span class="pre">_Basic_class</span></code></a></p>
-<p>Pin manipulation class</p>
-<dl class="py attribute">
-<dt class="sig sig-object py" id="bella_hat.pin.Pin.OUT">
-<span class="sig-name descname"><span class="pre">OUT</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">1</span></em><a class="headerlink" href="#bella_hat.pin.Pin.OUT" title="Link to this definition">¶</a></dt>
-<dd><p>Pin mode output</p>
-</dd></dl>
-
-<dl class="py attribute">
-<dt class="sig sig-object py" id="bella_hat.pin.Pin.IN">
-<span class="sig-name descname"><span class="pre">IN</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">2</span></em><a class="headerlink" href="#bella_hat.pin.Pin.IN" title="Link to this definition">¶</a></dt>
-<dd><p>Pin mode input</p>
-</dd></dl>
-
-<dl class="py attribute">
-<dt class="sig sig-object py" id="bella_hat.pin.Pin.PULL_UP">
-<span class="sig-name descname"><span class="pre">PULL_UP</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">17</span></em><a class="headerlink" href="#bella_hat.pin.Pin.PULL_UP" title="Link to this definition">¶</a></dt>
-<dd><p>Pin internal pull up</p>
-</dd></dl>
-
-<dl class="py attribute">
-<dt class="sig sig-object py" id="bella_hat.pin.Pin.PULL_DOWN">
-<span class="sig-name descname"><span class="pre">PULL_DOWN</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">18</span></em><a class="headerlink" href="#bella_hat.pin.Pin.PULL_DOWN" title="Link to this definition">¶</a></dt>
-<dd><p>Pin internal pull down</p>
-</dd></dl>
-
-<dl class="py attribute">
-<dt class="sig sig-object py" id="bella_hat.pin.Pin.PULL_NONE">
-<span class="sig-name descname"><span class="pre">PULL_NONE</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#bella_hat.pin.Pin.PULL_NONE" title="Link to this definition">¶</a></dt>
-<dd><p>Pin internal pull none</p>
-</dd></dl>
-
-<dl class="py attribute">
-<dt class="sig sig-object py" id="bella_hat.pin.Pin.IRQ_FALLING">
-<span class="sig-name descname"><span class="pre">IRQ_FALLING</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">33</span></em><a class="headerlink" href="#bella_hat.pin.Pin.IRQ_FALLING" title="Link to this definition">¶</a></dt>
-<dd><p>Pin interrupt falling</p>
-</dd></dl>
-
-<dl class="py attribute">
-<dt class="sig sig-object py" id="bella_hat.pin.Pin.IRQ_RISING">
-<span class="sig-name descname"><span class="pre">IRQ_RISING</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">34</span></em><a class="headerlink" href="#bella_hat.pin.Pin.IRQ_RISING" title="Link to this definition">¶</a></dt>
-<dd><p>Pin interrupt falling</p>
-</dd></dl>
-
-<dl class="py attribute">
-<dt class="sig sig-object py" id="bella_hat.pin.Pin.IRQ_RISING_FALLING">
-<span class="sig-name descname"><span class="pre">IRQ_RISING_FALLING</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">35</span></em><a class="headerlink" href="#bella_hat.pin.Pin.IRQ_RISING_FALLING" title="Link to this definition">¶</a></dt>
-<dd><p>Pin interrupt both rising and falling</p>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="bella_hat.pin.Pin.__init__">
-<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">pin</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mode</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pull</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#bella_hat.pin.Pin.__init__" title="Link to this definition">¶</a></dt>
-<dd><p>Initialize a pin</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>pin</strong> (<em>int/str</em>) – pin number of Raspberry Pi</p></li>
-<li><p><strong>mode</strong> (<em>int</em>) – pin mode(IN/OUT)</p></li>
-<li><p><strong>pull</strong> (<em>int</em>) – pin pull up/down(PUD_UP/PUD_DOWN/PUD_NONE)</p></li>
-</ul>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="bella_hat.pin.Pin.setup">
-<span class="sig-name descname"><span class="pre">setup</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mode</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pull</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#bella_hat.pin.Pin.setup" title="Link to this definition">¶</a></dt>
-<dd><p>Setup the pin</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>mode</strong> (<em>int</em>) – pin mode(IN/OUT)</p></li>
-<li><p><strong>pull</strong> (<em>int</em>) – pin pull up/down(PUD_UP/PUD_DOWN/PUD_NONE)</p></li>
-</ul>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="bella_hat.pin.Pin.dict">
-<span class="sig-name descname"><span class="pre">dict</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">_dict</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#bella_hat.pin.Pin.dict" title="Link to this definition">¶</a></dt>
-<dd><p>Set/get the pin dictionary</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>_dict</strong> (<em>dict</em>) – pin dictionary, leave it empty to get the dictionary</p>
-</dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>pin dictionary</p>
-</dd>
-<dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>dict</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="bella_hat.pin.Pin.__call__">
-<span class="sig-name descname"><span class="pre">__call__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#bella_hat.pin.Pin.__call__" title="Link to this definition">¶</a></dt>
-<dd><p>Set/get the pin value</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>value</strong> (<em>int</em>) – pin value, leave it empty to get the value(0/1)</p>
-</dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>pin value(0/1)</p>
-</dd>
-<dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>int</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="bella_hat.pin.Pin.value">
-<span class="sig-name descname"><span class="pre">value</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#bella_hat.pin.Pin.value" title="Link to this definition">¶</a></dt>
-<dd><p>Set/get the pin value</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>value</strong> (<em>int</em>) – pin value, leave it empty to get the value(0/1)</p>
-</dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>pin value(0/1)</p>
-</dd>
-<dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>int</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="bella_hat.pin.Pin.on">
-<span class="sig-name descname"><span class="pre">on</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#bella_hat.pin.Pin.on" title="Link to this definition">¶</a></dt>
-<dd><p>Set pin on(high)</p>
-<dl class="field-list simple">
-<dt class="field-odd">Returns<span class="colon">:</span></dt>
-<dd class="field-odd"><p>pin value(1)</p>
-</dd>
-<dt class="field-even">Return type<span class="colon">:</span></dt>
-<dd class="field-even"><p>int</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="bella_hat.pin.Pin.off">
-<span class="sig-name descname"><span class="pre">off</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#bella_hat.pin.Pin.off" title="Link to this definition">¶</a></dt>
-<dd><p>Set pin off(low)</p>
-<dl class="field-list simple">
-<dt class="field-odd">Returns<span class="colon">:</span></dt>
-<dd class="field-odd"><p>pin value(0)</p>
-</dd>
-<dt class="field-even">Return type<span class="colon">:</span></dt>
-<dd class="field-even"><p>int</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="bella_hat.pin.Pin.high">
-<span class="sig-name descname"><span class="pre">high</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#bella_hat.pin.Pin.high" title="Link to this definition">¶</a></dt>
-<dd><p>Set pin high(1)</p>
-<dl class="field-list simple">
-<dt class="field-odd">Returns<span class="colon">:</span></dt>
-<dd class="field-odd"><p>pin value(1)</p>
-</dd>
-<dt class="field-even">Return type<span class="colon">:</span></dt>
-<dd class="field-even"><p>int</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="bella_hat.pin.Pin.low">
-<span class="sig-name descname"><span class="pre">low</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#bella_hat.pin.Pin.low" title="Link to this definition">¶</a></dt>
-<dd><p>Set pin low(0)</p>
-<dl class="field-list simple">
-<dt class="field-odd">Returns<span class="colon">:</span></dt>
-<dd class="field-odd"><p>pin value(0)</p>
-</dd>
-<dt class="field-even">Return type<span class="colon">:</span></dt>
-<dd class="field-even"><p>int</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="bella_hat.pin.Pin.irq">
-<span class="sig-name descname"><span class="pre">irq</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">handler</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">trigger</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bouncetime</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">200</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pull</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#bella_hat.pin.Pin.irq" title="Link to this definition">¶</a></dt>
-<dd><p>Set the pin interrupt</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>handler</strong> (<em>function</em>) – interrupt handler callback function</p></li>
-<li><p><strong>trigger</strong> (<em>int</em>) – interrupt trigger(RISING, FALLING, RISING_FALLING)</p></li>
-<li><p><strong>bouncetime</strong> (<em>int</em>) – interrupt bouncetime in miliseconds</p></li>
-</ul>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="bella_hat.pin.Pin.name">
-<span class="sig-name descname"><span class="pre">name</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#bella_hat.pin.Pin.name" title="Link to this definition">¶</a></dt>
-<dd><p>Get the pin name</p>
-<dl class="field-list simple">
-<dt class="field-odd">Returns<span class="colon">:</span></dt>
-<dd class="field-odd"><p>pin name</p>
-</dd>
-<dt class="field-even">Return type<span class="colon">:</span></dt>
-<dd class="field-even"><p>str</p>
-</dd>
-</dl>
-</dd></dl>
-
-</dd></dl>
-
 </section>
 
 

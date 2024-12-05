@@ -125,10 +125,3 @@ Close the fan on Bella HAT.
 #### read_btn()
 
 Read the state of btn on Bella HAT.
-
-#### set_eyes_led(left_brightness, right_brightness)
-
-Set the front board LEDs brightness.
-
-left_brightness: int - brightness for left LEDs, 0 to 100
-right_brightness: int - brightness for right LEDs, 0 to 100

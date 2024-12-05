@@ -12,13 +12,13 @@ import time
 
 sys.path.insert(0, os.path.abspath('../../'))
 
-autodoc_mock_imports = ["smbus2", "pyaudio", "numpy", "gpiozero"]
+autodoc_mock_imports = ["smbus2", "pyaudio", "numpy", "RPi"]
 autodoc_default_options = {'member-order': 'bysource', }
 
 project = 'Bella Hat'
 copyright = f'{time.localtime().tm_year}, Sunfounder'
 author = 'Sunfounder'
-release = '0.0.1'
+release = '0.0.5'
 
 # -- General configuration ---------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#general-configuration

@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>class Bella &mdash; Bella Hat 0.0.1 documentation</title>
+  <title>class Bella &mdash; Bella Hat 0.0.5 documentation</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=80d5e7a1" />
       <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=19f00094" />
       <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
@@ -14,7 +14,7 @@
     <script src="_static/js/html5shiv.min.js"></script>
   <![endif]-->
   
-        <script src="_static/documentation_options.js?v=d45e8c67"></script>
+        <script src="_static/documentation_options.js?v=282f96c0"></script>
         <script src="_static/doctools.js?v=9a2dae69"></script>
         <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
         <script src="_static/clipboard.min.js?v=a7894cd8"></script>
@@ -46,16 +46,11 @@
 </div>
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
               <ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="index.html">About this HAT</a></li>
-<li class="toctree-l1"><a class="reference internal" href="hardware_introduction.html">Hardware Introduction</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="bella-hat_library.html">Bella Hat Library</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="installation.html">Install</a></li>
 <li class="toctree-l2"><a class="reference internal" href="examples.html">Examples</a></li>
 <li class="toctree-l2 current"><a class="reference internal" href="api.html">Reference</a><ul class="current">
-<li class="toctree-l3 current"><a class="current reference internal" href="#">class <code class="docutils literal notranslate"><span class="pre">Bella</span></code></a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#bella_hat.bella.Bella"><code class="docutils literal notranslate"><span class="pre">Bella</span></code></a></li>
-</ul>
-</li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">class <code class="docutils literal notranslate"><span class="pre">Bella</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="api_pin.html">class <code class="docutils literal notranslate"><span class="pre">Pin</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="api_adc.html">class <code class="docutils literal notranslate"><span class="pre">ADC</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="api_pwm.html">class <code class="docutils literal notranslate"><span class="pre">PWM</span></code></a></li>
@@ -133,126 +128,6 @@ For a more detailed example, you can refer to the <a class="reference internal" 
 </pre></div>
 </div>
 <p><strong>API</strong></p>
-<dl class="py class">
-<dt class="sig sig-object py" id="bella_hat.bella.Bella">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">bella_hat.bella.</span></span><span class="sig-name descname"><span class="pre">Bella</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#bella_hat.bella.Bella" title="Link to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="api_basic_class.html#bella_hat.basic._Basic_class" title="bella_hat.basic._Basic_class"><code class="xref py py-class docutils literal notranslate"><span class="pre">_Basic_class</span></code></a></p>
-<dl class="py method">
-<dt class="sig sig-object py" id="bella_hat.bella.Bella.__init__">
-<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#bella_hat.bella.Bella.__init__" title="Link to this definition">¶</a></dt>
-<dd><p>Initialize the basic class</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>debug_level</strong> (<em>str/int</em>) – debug level, 0(critical), 1(error), 2(warning), 3(info) or 4(debug)</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="bella_hat.bella.Bella.get_battery_voltage">
-<span class="sig-name descname"><span class="pre">get_battery_voltage</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#bella_hat.bella.Bella.get_battery_voltage" title="Link to this definition">¶</a></dt>
-<dd><p>‘
-Get the battery voltage.</p>
-<p>return: float - Battery voltage in volts.</p>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="bella_hat.bella.Bella.get_battery_percentage">
-<span class="sig-name descname"><span class="pre">get_battery_percentage</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#bella_hat.bella.Bella.get_battery_percentage" title="Link to this definition">¶</a></dt>
-<dd><p>Get the battery percentage.</p>
-<p>return: float - Battery percentage.</p>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="bella_hat.bella.Bella.get_ultrasonic_distance">
-<span class="sig-name descname"><span class="pre">get_ultrasonic_distance</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#bella_hat.bella.Bella.get_ultrasonic_distance" title="Link to this definition">¶</a></dt>
-<dd><p>Get the distance from the ultrasonic sensor.</p>
-<dl class="simple">
-<dt>return: float - Distance in cm.</dt><dd><p>-1, timeout
--2, distance limit exceeded</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="bella_hat.bella.Bella.get_temperature">
-<span class="sig-name descname"><span class="pre">get_temperature</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#bella_hat.bella.Bella.get_temperature" title="Link to this definition">¶</a></dt>
-<dd><p>Get the temperature from the DHT11 sensor.</p>
-<p>return: float - Temperature in Celsius.</p>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="bella_hat.bella.Bella.get_humidity">
-<span class="sig-name descname"><span class="pre">get_humidity</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#bella_hat.bella.Bella.get_humidity" title="Link to this definition">¶</a></dt>
-<dd><p>Get the humidity from the DHT11 sensor.</p>
-<p>return: float - Humidity in percentage.</p>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="bella_hat.bella.Bella.get_grayscales">
-<span class="sig-name descname"><span class="pre">get_grayscales</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#bella_hat.bella.Bella.get_grayscales" title="Link to this definition">¶</a></dt>
-<dd><p>Get the grayscale sensor values.</p>
-<p>return: list - Grayscale sensor values.</p>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="bella_hat.bella.Bella.set_motors">
-<span class="sig-name descname"><span class="pre">set_motors</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">leftPercent</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rightPercent</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#bella_hat.bella.Bella.set_motors" title="Link to this definition">¶</a></dt>
-<dd><p>Set the motor percentage for left and right motors</p>
-<p>leftPercent: int - Motor percentage for left motor, -100 to 100
-rightPercent: int - Motor percentage for right motor, -100 to 100</p>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="bella_hat.bella.Bella.set_motors_reverse">
-<span class="sig-name descname"><span class="pre">set_motors_reverse</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">left_reverse</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">right_reverse</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#bella_hat.bella.Bella.set_motors_reverse" title="Link to this definition">¶</a></dt>
-<dd><p>Set the motors is reversed or not</p>
-<p>left_reverse: bool - set left motor is reversed or not
-right_reverse: bool - set  right motor is reversed or not</p>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="bella_hat.bella.Bella.get_acc">
-<span class="sig-name descname"><span class="pre">get_acc</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#bella_hat.bella.Bella.get_acc" title="Link to this definition">¶</a></dt>
-<dd><p>Get acceleration data of lsm6dsox sensor.</p>
-<p>return: list - [acc_x, acc_y, acc_z].</p>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="bella_hat.bella.Bella.get_gyro">
-<span class="sig-name descname"><span class="pre">get_gyro</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#bella_hat.bella.Bella.get_gyro" title="Link to this definition">¶</a></dt>
-<dd><p>Get gyro data of lsm6dsox sensor.</p>
-<p>return: list - [gyro_x, gyro_y, gyro_z].</p>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="bella_hat.bella.Bella.fan_on">
-<span class="sig-name descname"><span class="pre">fan_on</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#bella_hat.bella.Bella.fan_on" title="Link to this definition">¶</a></dt>
-<dd><p>Open the fan on Bella HAT.</p>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="bella_hat.bella.Bella.fan_off">
-<span class="sig-name descname"><span class="pre">fan_off</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#bella_hat.bella.Bella.fan_off" title="Link to this definition">¶</a></dt>
-<dd><p>Close the fan on Bella HAT.</p>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="bella_hat.bella.Bella.read_btn">
-<span class="sig-name descname"><span class="pre">read_btn</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#bella_hat.bella.Bella.read_btn" title="Link to this definition">¶</a></dt>
-<dd><p>Read the state of btn on Bella HAT.</p>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="bella_hat.bella.Bella.set_eyes_led">
-<span class="sig-name descname"><span class="pre">set_eyes_led</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">left_brightness</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">right_brightness</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#bella_hat.bella.Bella.set_eyes_led" title="Link to this definition">¶</a></dt>
-<dd><p>Set the front board LEDs brightness.</p>
-<p>left_brightness: int - brightness for left LEDs, 0 to 100
-right_brightness: int - brightness for right LEDs, 0 to 100</p>
-</dd></dl>
-
-</dd></dl>
-
 </section>
 
 
