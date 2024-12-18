@@ -38,6 +38,7 @@ USER_NAME = 'xo'
 TEST_MUSIC_FILE = f'/opt/{APP_NAME}/test_music.wav'
 TEST_RECORD_FILE = f'/opt/{APP_NAME}/test_record.wav'
 TEST_IMAGE_FILE = f'/opt/{APP_NAME}/test_image.jpg'
+FACTORY_MODE_AUDIO = f'/opt/{APP_NAME}/factory-mode.wav'
 TEST_IMAGE_WIDTH = 320
 TEST_IMAGE_HEIGHT = 240
 TEST_IMAGE_ROTATION = 180
@@ -92,6 +93,11 @@ def light_led(strip, color):
         strip.show()
         time.sleep(0.01)
 
+def play_music(file):
+    run_command(f"sudo pulseaudio --k")
+    run_command(f"sudo pulseaudio --start")
+    run_command(f"aplay {file}")
+
 class SerialTestDaemon():
 
     PORT = '/dev/ttyS0'  # Linux 下的串口名
@@ -107,6 +113,7 @@ class SerialTestDaemon():
     RIGHT_MOTOR_PWMB_CHANNEL = 17
 
     FAN_PIN = 16
+    BTN_PIN = 25
 
     def __init__(self):
         # 用于控制是否持续发送传感器数据
@@ -134,10 +141,6 @@ class SerialTestDaemon():
 
         if self.ser:
             self.send_lock = True
-            # self.ser.write(SERIAL_WRAP_START.encode(ENCODING))
-            # self.ser.write(tag.encode(ENCODING))
-            # self.ser.write(msg)
-            # self.ser.write(SERIAL_WRAP_END.encode(ENCODING))
             tmp = SERIAL_WRAP_START + tag + msg + SERIAL_WRAP_END
             self.ser.write(tmp.encode(ENCODING))
             self.ser.flush()
@@ -153,6 +156,15 @@ class SerialTestDaemon():
 
     def send_image(self, image_data):
         self.send(TAG_IMAGE, image_data)
+
+    def factory_mode(self):
+        from bella_hat.pin import Pin
+        btn = Pin(self.BTN_PIN, mode=Pin.IN, pull=Pin.PULL_UP)
+
+        if btn.value() == 0:
+            return True
+        else:
+            return False
 
     def handle_test_motor(self):
         self.send_log("测试电机")
@@ -222,9 +234,7 @@ class SerialTestDaemon():
     def handle_test_music(self):
         # 播放音乐
         self.send_log("播放音乐")
-        run_command(f"sudo pulseaudio --k")
-        run_command(f"sudo pulseaudio --start")
-        run_command(f"aplay {TEST_MUSIC_FILE}")
+        play_music(TEST_MUSIC_FILE)
 
     def handle_test_led(self):
         self.send_log("测试灯环")
@@ -344,19 +354,30 @@ class SerialTestDaemon():
             self.send_log("未知指令")
 
     def main(self):
+        if not self.factory_mode():
+            log.debug("未进入测试模式")
+            quit()
+        
+        play_music(FACTORY_MODE_AUDIO)
+        time.sleep(1)
+
         try:
             self.ser = serial.Serial(self.PORT, self.BAUDRATE, timeout=1)
 
+            self.handle_start_data_send()
             log.info(f"串口 {self.PORT} 已打开，波特率为 {self.BAUDRATE}")
 
             while True:
                 if self.ser.in_waiting == 0:
                     continue
-                data = self.ser.readline().decode(ENCODING).strip()
+                try:
+                    data = self.ser.readline().decode(ENCODING).strip()
+                except UnicodeDecodeError as e:
+                    log.warning(f"接收到非法数据: {e}")
                 log.debug(f"接收到指令: {data}")
                 self.process_command(data)
-                log.debug("完成指令处理， 清空缓冲区")
                 self.ser.reset_input_buffer()
+                time.sleep(1)
         except serial.SerialException as e:
             log.error(f"串口错误: {e}")
         except KeyboardInterrupt:

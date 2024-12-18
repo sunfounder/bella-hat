@@ -1,7 +1,7 @@
 #!/usr/bin/bash
 
 if [ "$1" == "start" ]; then
-    /usr/bin/python /opt/bella-serial-test-daemon/bella-serial-test-daemon.py debug &
+    /usr/bin/python /opt/bella-serial-test-daemon/bella-serial-test-daemon.py &
 elif [ "$1" == "stop" ]; then
     kill $(ps aux | grep bella-serial-test-daemon.py | awk '{print $2}')
 elif [ "$1" == "log" ]; then
