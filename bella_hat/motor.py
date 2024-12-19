@@ -78,6 +78,7 @@ class Motor():
         '''
         brake
         '''
+        self._speed = 0
         self.pwma.pulse_width_percent(100)
         self.pwmb.pulse_width_percent(100)
 
@@ -85,6 +86,7 @@ class Motor():
         '''
         stop
         '''
+        self._speed = 0
         self.pwma.pulse_width_percent(0)
         self.pwmb.pulse_width_percent(0)
 
