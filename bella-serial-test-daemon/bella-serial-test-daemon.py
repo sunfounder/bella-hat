@@ -16,12 +16,14 @@
 #
 # 数据开        开始发送传感器数据
 # 数据关        停止发送传感器数据
+# 老化          测试常开电机风扇，老化
 # 电机          测试电机，小车前进，速度慢慢变快再变慢，到后退，速度变快再变慢，到停止，随后左转，右转，停止
 # 风扇          测试风扇，风扇开2秒，风扇关2秒
 # 录播          录音3秒后，播放录音
 # 喇叭          播放音乐
 # 灯            测试灯环，红绿蓝白灯环，随后停止
-# 相机          测试相机连接情况
+# 相机          拍摄照片并传回base64格式图片
+# AP:XXXXXXX    设置AP名称为XXXXXXX
 
 import serial
 import threading
@@ -29,6 +31,9 @@ import time
 import logging
 import json
 from logging.handlers import RotatingFileHandler
+
+from bella_hat.bella import Bella
+from rpi_ws281x import PixelStrip, Color
 
 APP_NAME = 'bella-serial-test-daemon'
 # ENCODING = 'gbk'
@@ -39,6 +44,7 @@ TEST_MUSIC_FILE = f'/opt/{APP_NAME}/test_music.wav'
 TEST_RECORD_FILE = f'/opt/{APP_NAME}/test_record.wav'
 TEST_IMAGE_FILE = f'/opt/{APP_NAME}/test_image.jpg'
 FACTORY_MODE_AUDIO = f'/opt/{APP_NAME}/factory-mode.wav'
+APNAME_FILE = f'/opt/{APP_NAME}/apname.txt'
 TEST_IMAGE_WIDTH = 320
 TEST_IMAGE_HEIGHT = 240
 TEST_IMAGE_ROTATION = 180
@@ -82,10 +88,20 @@ def get_wifi_mac_address():
         return None
 
 def get_ap_name():
-    mac = get_wifi_mac_address()
-    mac = mac.replace(":", "")
-    mac = mac[:6]
-    return f"{AP_NAME_PREFIX}{mac}"
+    import os
+    # mac = get_wifi_mac_address()
+    # mac = mac.replace(":", "")
+    # mac = mac[:6]
+    # return f"{AP_NAME_PREFIX}{mac}"
+    if not os.path.exists(APNAME_FILE):
+        return f"None"
+    with open(APNAME_FILE, 'r') as f:
+        ap_name = f.read().strip()
+        return ap_name
+
+def set_ap_name(ap_name):
+    with open(APNAME_FILE, 'w') as f:
+        f.write(ap_name)
 
 def light_led(strip, color):
     for i in range(strip.numPixels()):
@@ -107,20 +123,17 @@ class SerialTestDaemon():
     ITER_0_100_0 = list(range(101))
     ITER_0_100_0 += list(range(100, 0, -1))
 
-    LEFT_MOTOR_PWMA_CHANNEL = 18
-    LEFT_MOTOR_PWMB_CHANNEL = 19
-    RIGHT_MOTOR_PWMA_CHANNEL = 16
-    RIGHT_MOTOR_PWMB_CHANNEL = 17
-
-    FAN_PIN = 16
-    BTN_PIN = 25
-
     def __init__(self):
         # 用于控制是否持续发送传感器数据
         self.ser= None
         self.sensor_datas = {}
         self.sensor_thread = None
         self.sensor_data_start = False
+        self.bella = Bella()
+        self.bella.motors.reverse([True, False])
+        self.strip = PixelStrip(32, 10, 1000000, 10, False, 50)
+        self.strip.begin()
+        
         log.setLevel(logging.DEBUG)
         formatter = logging.Formatter('%(asctime)s - %(levelname)s - %(message)s')
         file_handler = RotatingFileHandler(LOG_FILE, maxBytes=1000000, backupCount=5)
@@ -157,62 +170,43 @@ class SerialTestDaemon():
     def send_image(self, image_data):
         self.send(TAG_IMAGE, image_data)
 
-    def factory_mode(self):
-        from bella_hat.pin import Pin
-        btn = Pin(self.BTN_PIN, mode=Pin.IN, pull=Pin.PULL_UP)
-
-        if btn.value() == 0:
-            return True
-        else:
-            return False
-
     def handle_test_motor(self):
         self.send_log("测试电机")
-        from bella_hat.motor import Motors
-        motors = Motors(
-            self.LEFT_MOTOR_PWMA_CHANNEL,
-            self.LEFT_MOTOR_PWMB_CHANNEL, 
-            self.RIGHT_MOTOR_PWMA_CHANNEL,
-            self.RIGHT_MOTOR_PWMB_CHANNEL,
-        )
-        motors.reverse([True, False])
 
         delay_time = 0.01
         # 前进
         self.send_log("前进")
         for i in self.ITER_0_100_0:
-            motors.forward(i)
+            self.bella.motors.forward(i)
             time.sleep(delay_time)
         # 后退
         self.send_log("后退")
         for i in self.ITER_0_100_0:
-            motors.backward(i)
+            self.bella.motors.backward(i)
             time.sleep(delay_time)
         # 左转
         self.send_log("左转")
         for i in self.ITER_0_100_0:
-            motors.turn_left(i)
+            self.bella.motors.turn_left(i)
             time.sleep(delay_time)
         # 右转
         self.send_log("右转")
         for i in self.ITER_0_100_0:
-            motors.turn_right(i)
+            self.bella.motors.turn_right(i)
             time.sleep(delay_time)
         # 停止
         self.send_log("停止")
-        motors.stop()
+        self.bella.motors.stop()
 
     def handle_test_fan(self):
         self.send_log("测试风扇")
-        from bella_hat.pin import Pin
-        fan = Pin(self.FAN_PIN, mode=Pin.OUT)
         # 开启风扇
         self.send_log("开启风扇")
-        fan.on()
+        self.bella.fan.on()
         time.sleep(2)
         # 关闭风扇
         self.send_log("关闭风扇")
-        fan.off()
+        self.bella.fan.off()
 
     def handle_record_play(self):
         self.send_log("录音3秒后，播放录音")
@@ -238,27 +232,23 @@ class SerialTestDaemon():
 
     def handle_test_led(self):
         self.send_log("测试灯环")
-        from rpi_ws281x import PixelStrip, Color
 
-        strip = PixelStrip(32, 10, 1000000, 10, False, 50)
-        strip.begin()
-        
         delay_time = 0.5
         # 灯环测试
         self.send_log("红")
-        light_led(strip, Color(255, 0, 0))
+        light_led(self.strip, Color(255, 0, 0))
         time.sleep(delay_time)
         self.send_log("绿")
-        light_led(strip, Color(0, 255, 0))
+        light_led(self.strip, Color(0, 255, 0))
         time.sleep(delay_time)
         self.send_log("蓝")
-        light_led(strip, Color(0, 0, 255))
+        light_led(self.strip, Color(0, 0, 255))
         time.sleep(delay_time)
         self.send_log("白")
-        light_led(strip, Color(255, 255, 255))
+        light_led(self.strip, Color(255, 255, 255))
         time.sleep(delay_time)
         self.send_log("停止")
-        light_led(strip, Color(0, 0, 0))
+        light_led(self.strip, Color(0, 0, 0))
 
     def handle_test_camera(self):
         # 摄像头测试
@@ -285,10 +275,12 @@ class SerialTestDaemon():
 
             self.send_image(image_data)
 
+    def handle_test_life(self):
+        self.send_log("测试老化电机和风扇")
+        self.bella.motors.forward(100)
+        self.bella.fan.on()
+
     def update_sensor_data(self):
-        from bella_hat.bella import Bella
-        self.bella = Bella()
-        
         while self.sensor_data_start:
             data = {
                 "battery_voltage": self.bella.get_battery_voltage(),
@@ -305,19 +297,7 @@ class SerialTestDaemon():
                 "fan_state": self.bella.fan_state,
                 "wifi_ap_name": get_ap_name(),
             }
-            # charging_status = "充电中" if data["charging_state"] else "未充电"
-            # log = f"传感器数据：\n"
-            # log += f"  电池: {data['battery_voltage']} V | {data['battery_percentage']} % | {charging_status}\n"
-            # log += f"  超声波: {data['ultrasonic_distance']} cm\n"
-            # log += f"  温湿度：{data['temperature']}  ℃ | {data['humidity']} %\n"
-            # log += f"  灰度：{data['grayscale']}\n"
-            # log += f"  按钮：{'按下' if data['btn_state'] else '未按下'}\n"
-            # log += f"  加速度：{data['acc']}\n"
-            # log += f"  陀螺仪：{data['gyro']}\n"
-            # log += f"  电机：{data['motor_speed']}\n"
-            # log += f"  风扇：{'开' if data['fan_state'] else '关'}\n"
-            # log += f"  Wi-Fi 名称: {data['wifi_ap_name']}\n"
-            # self.send_log(log)
+
             self.send_data(json.dumps(data))
             time.sleep(1)
 
@@ -329,6 +309,11 @@ class SerialTestDaemon():
             self.sensor_thread.start()
         else:
             self.send_log("测试指令已开始")
+
+    def handle_set_ap_name(self, ap_name):
+        self.send_log(f"设置 AP 名称: {ap_name}")
+        set_ap_name(ap_name)
+        self.send_log("设置完成")
 
     def process_command(self, command):
         if command == "数据开":
@@ -350,14 +335,14 @@ class SerialTestDaemon():
             self.handle_test_led()
         elif command == "相机":
             self.handle_test_camera()
+        elif command == "老化":
+            self.handle_test_life()
+        elif command.startswith("AP"):
+            self.handle_set_ap_name(command.split(':')[1])
         else:
             self.send_log("未知指令")
 
     def main(self):
-        if not self.factory_mode():
-            log.debug("未进入测试模式")
-            quit()
-        
         play_music(FACTORY_MODE_AUDIO)
         time.sleep(1)
 
