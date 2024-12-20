@@ -202,11 +202,11 @@ class SerialTestDaemon():
         self.send_log("测试风扇")
         # 开启风扇
         self.send_log("开启风扇")
-        self.bella.fan.on()
+        self.bella.fan_on()
         time.sleep(2)
         # 关闭风扇
         self.send_log("关闭风扇")
-        self.bella.fan.off()
+        self.bella.fan_off()
 
     def handle_record_play(self):
         self.send_log("录音3秒后，播放录音")
@@ -278,7 +278,7 @@ class SerialTestDaemon():
     def handle_test_life(self):
         self.send_log("测试老化电机和风扇")
         self.bella.motors.forward(100)
-        self.bella.fan.on()
+        self.bella.fan_on()
 
     def update_sensor_data(self):
         while self.sensor_data_start:
