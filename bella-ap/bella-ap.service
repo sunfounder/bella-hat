@@ -1,0 +1,14 @@
+# https://www.freedesktop.org/software/systemd/man/systemd.service.html
+[Unit]
+Description=Bella AP Service
+After=network.target
+
+[Service]
+Type=simple
+ExecStart=/bin/bash /usr/local/bin/bella-ap start
+ExecStop=/bin/bash /usr/local/bin/bella-ap stop
+User=root
+Restart=always
+
+[Install]
+WantedBy=multi-user.target

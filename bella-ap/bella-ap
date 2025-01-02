@@ -1,0 +1,23 @@
+#!/bin/bash
+
+# Configuration File
+CONFIG_FILE="/etc/bella-ap.conf"
+
+# Read Configuration File
+source "$CONFIG_FILE"
+
+# check if argument is start or stop
+if [ "$1" = "start" ]; then
+    # Start Bella AP
+    echo "Starting Bella AP with SSID: $BELLA_SSID and Password: $BELLA_PASSWORD"
+    nmcli device wifi hotspot ssid $BELLA_SSID password $BELLA_PASSWORD
+elif [[ "$1" == "start" ]]; then
+    # Stop Bella AP
+    nmcli device disconnect wlan0
+    nmcli device up wlan0
+else
+    # Invalid argument
+    echo "Invalid argument. Usage: bella-ap start|stop"
+    exit 1
+fi
+
