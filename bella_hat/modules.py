@@ -7,6 +7,8 @@ import time
 from .basic import _Basic_class
 from typing import Union, List, Tuple, Optional
 
+import os
+
 class Ultrasonic():
     SOUND_SPEED = 343.3 # ms
 
@@ -98,6 +100,8 @@ class Grayscale_Module(object):
 
     REFERENCE_DEFAULT = [1000]*3
 
+    CONFIG_FILE = "/opt/grayscale_calibration.json"
+
     def __init__(self, pin0: ADC, pin1: ADC, pin2: ADC, reference: int = None):
         """
         Initialize Grayscale Module
@@ -116,6 +120,22 @@ class Grayscale_Module(object):
             if not isinstance(pin, ADC):
                 raise TypeError(f"pin{i} must be bella_hat.ADC")
         self._reference = self.REFERENCE_DEFAULT
+        self._slopes = [1, 1, 1]
+        self._offsets = [0, 0, 0]
+
+        if not os.path.exists(self.CONFIG_FILE):
+            with open(self.CONFIG_FILE, "w") as f:
+                f.write(f"{{\"slopes\": {self._slopes}, \"offsets\": {self._offsets}}}")
+        else:
+            with open(self.CONFIG_FILE, "r") as f:
+                data = f.read()
+                config = eval(data)
+                self._slopes = config["slopes"]
+                self._offsets = config["offsets"]
+
+        if reference is not None:
+            self.reference(reference)
+
 
     def reference(self, ref: list = None) -> list:
         """
@@ -148,7 +168,22 @@ class Grayscale_Module(object):
             datas = self.read()
         return [0 if data > self._reference[i] else 1 for i, data in enumerate(datas)]
 
-    def read(self, channel: int = None) -> list:
+    def read_channel(self, channel: int = None, raw: bool = False) -> int:
+        """
+        Read a channel
+
+        :param channel: channel to read, 0, 1, 2 or Grayscale_Module.LEFT, Grayscale_Module.CENTER, Grayscale_Module.RIGHT 
+        :type channel: int
+        :return: grayscale data
+        :rtype: int
+        """
+        value = self.pins[channel].read()
+        if not raw:
+            value = value * self._slopes[channel] + self._offsets[channel]
+            value = round(value)
+        return value
+
+    def read(self, channel: int = None, raw: bool = False) -> list:
         """
         read a channel or all datas
 
@@ -158,9 +193,20 @@ class Grayscale_Module(object):
         :rtype: list
         """
         if channel == None:
-            return [self.pins[i].read() for i in range(3)]
+            result = []
+            for i in range(3):
+                result.append(self.read_channel(i, raw=raw))
+            return result
         else:
-            return self.pins[channel].read()
+            return self.read_channel(channel)
+
+    def set_calibration(self, slopes: list, offsets: list) -> None:
+        if len(slopes)!= 3 or len(offsets)!= 3:
+            raise ValueError("slopes and offsets must be 1*3 list.")
+        self._slopes = slopes
+        self._offsets = offsets
+        with open(self.CONFIG_FILE, "w") as f:
+            f.write(f"{{\"slopes\": {self._slopes}, \"offsets\": {self._offsets}}}")
 
 class DHT11():
 

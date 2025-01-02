@@ -112,13 +112,13 @@ class Bella(_Basic_class):
         '''
         return self.dht11.humidity
 
-    def get_grayscales(self):
+    def get_grayscales(self, raw=False):
         '''
         Get the grayscale sensor values.
 
         return: list - Grayscale sensor values.
         '''
-        return self.grayscale.read()
+        return self.grayscale.read(raw=raw)
 
     def set_motors(self, leftPercent, rightPercent):
         '''
@@ -137,6 +137,15 @@ class Bella(_Basic_class):
         right_reverse: bool - set  right motor is reversed or not
         '''
         self.motors.speed([left_reverse, right_reverse])
+
+    def set_grayscale_calibration(self, slopes, offsets):
+        '''
+        Set the grayscale calibration values.
+
+        slopes: list - Grayscale sensor slopes.
+        offsets: list - Grayscale sensor offsets.
+        '''
+        self.grayscale.set_calibration(slopes, offsets)
 
     def get_acc(self):
         '''
