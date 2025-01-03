@@ -12,15 +12,18 @@ fi
 
 folder_name="bella-serial-test-daemon"
 
-# Check if serial console is disabled
+echo "Checking if serial console is enabled"
 result=$(raspi-config nonint get_serial_cons)
 if [ "$result" -eq 0 ]; then
     # Disable serial console
     raspi-config nonint do_serial_cons 1
     echo "Serial console is enabled. Disabling it now."
     need_reboot=true
+else
+    echo "Serial console is already disabled."
 fi
 
+echo "Checking if serial hardware is enabled"
 # Check if serial hardware is enabled
 result=$(raspi-config nonint get_serial_hw)
 if [ "$result" -eq 1 ]; then
@@ -28,6 +31,8 @@ if [ "$result" -eq 1 ]; then
     raspi-config nonint do_serial_hw 0
     echo "Serial hardware is disabled. Enabling it now."
     need_reboot=true
+else
+    echo "Serial hardware is already enabled."
 fi
 
 # Copy folder to /opt

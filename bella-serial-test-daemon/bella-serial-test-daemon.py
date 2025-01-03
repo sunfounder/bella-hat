@@ -41,10 +41,7 @@ from bella_hat.bella import Bella
 from rpi_ws281x import PixelStrip, Color
 
 APP_NAME = 'bella-serial-test-daemon'
-# ENCODING = 'gbk'
 ENCODING = 'utf-8'
-AP_NAME_PREFIX = 'bella-'
-USER_NAME = 'xo'
 TEST_MUSIC_FILE = f'/opt/{APP_NAME}/test_music.wav'
 TEST_RECORD_FILE = f'/opt/{APP_NAME}/test_record.wav'
 TEST_IMAGE_FILE = f'/opt/{APP_NAME}/test_image.jpg'
@@ -134,10 +131,6 @@ def get_wifi_mac_address():
 
 def get_ap():
     import os
-    # mac = get_wifi_mac_address()
-    # mac = mac.replace(":", "")
-    # mac = mac[:6]
-    # return f"{AP_NAME_PREFIX}{mac}"
     result = {}
     if not os.path.exists(AP_CONFIG_FILE):
         return f"None"
@@ -444,14 +437,22 @@ class SerialTestDaemon():
     def handle_set_ap(self, config):
         # WIFI:T:WPA;S:bella-876zyx;P:87654321;;
         # 取出 ssid 和 password
-        items = config.split(';')
         ap_ssid = ""
         ap_password = ""
+        if not config.startswith("WIFI:"):
+            self.send_log(f"设置 AP 失败: 配置格式错误。")
+            return
+        config = config.replace("WIFI:", "")
+        items = config.split(';')
         for item in items:
             if item.startswith("S:"):
                 ap_ssid = item.split(':')[1]
             elif item.startswith("P:"):
                 ap_password = item.split(':')[1]
+        if not ap_ssid or not ap_password or len(ap_ssid) > 32 or len(ap_password) > 64 \
+            or len(ap_ssid) < 1 or len(ap_password) < 8:
+            self.send_log(f"设置 AP 失败: 配置格式错误。")
+            return
         self.send_log(f"设置 AP 名称: {ap_ssid}  密码: {ap_password}")
         set_ap(ap_ssid, ap_password)
         set_hostname(ap_ssid)

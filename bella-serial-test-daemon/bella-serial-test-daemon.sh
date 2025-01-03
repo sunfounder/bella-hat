@@ -17,7 +17,7 @@ if [ "$1" == "start" ]; then
         exit 0
     fi
 elif [ "$1" == "stop" ]; then
-    kill $(ps aux | grep bella-serial-test-daemon.py | awk '{print $2}')
+    kill $(ps aux | grep bella-serial-test-daemon.py | awk '{print $2}') || true
 elif [ "$1" == "log" ]; then
     tail -f /var/log/bella-serial-test-daemon.log
 else
