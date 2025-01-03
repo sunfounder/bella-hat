@@ -3,18 +3,48 @@
 # Configuration File
 CONFIG_FILE="/etc/bella-ap.conf"
 
-# Read Configuration File
-source "$CONFIG_FILE"
-
 # check if argument is start or stop
 if [ "$1" = "start" ]; then
-    # Start Bella AP
-    echo "Starting Bella AP with SSID: $BELLA_SSID and Password: $BELLA_PASSWORD"
-    nmcli device wifi hotspot ssid $BELLA_SSID password $BELLA_PASSWORD
-elif [[ "$1" == "start" ]]; then
+
+    # Check if Configuration File exists
+    if [ -f "$CONFIG_FILE" ]; then
+
+        # Read Configuration File
+        source "$CONFIG_FILE"
+
+        # Check if Bella AP SSID and Password are set
+        if [ -z "$BELLA_SSID" ] || [ -z "$BELLA_PASSWORD" ]; then
+            echo "Bella AP SSID or Password not set in Configuration File: $CONFIG_FILE"
+            exit 0
+        fi
+
+        # Check if SSID and Password are too long
+        if [ ${#BELLA_SSID} -gt 32 ] || [ ${#BELLA_PASSWORD} -gt 64 ]; then
+            echo "SSID or Password is too long. Maximum length is 32 for SSID and 64 for Password."
+            exit 0
+        fi
+
+        # Check if SSID and Password are too short
+        if [ ${#BELLA_SSID} -lt 1 ] || [ ${#BELLA_PASSWORD} -lt 8 ]; then
+            echo "SSID or Password is too short. Minimum length is 1 for SSID and 8 for Password."
+            exit 0
+        fi
+
+        # Start Bella AP
+        echo "Starting Bella AP with SSID: $BELLA_SSID and Password: $BELLA_PASSWORD"
+        nmcli device wifi hotspot ssid $BELLA_SSID password $BELLA_PASSWORD
+
+    else
+        echo "Configuration File not found: $CONFIG_FILE"
+        exit 0
+    fi
+
+elif [[ "$1" == "stop" ]]; then
     # Stop Bella AP
-    nmcli device disconnect wlan0
-    nmcli device up wlan0
+    echo "Stopping Bella AP"
+    nmcli device disconnect wlan0 || true
+    nmcli device up wlan0 || true
+    
 else
     # Invalid argument
     echo "Invalid argument. Usage: bella-ap start|stop"
