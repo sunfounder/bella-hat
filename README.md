@@ -8,6 +8,8 @@ Bella Hat Python library for Raspberry Pi.
 
 ## Installation
 
+### Bella Hat Python library
+
 Install in python venv:
 
 ```bash
@@ -45,4 +47,22 @@ Do this by adding the following lines to /boot/firmware/config.txt and reboot:
 
 ```bash
 core_freq_min=500
+```
+
+### Serial Test daemon
+
+Install the serial test daemon:
+
+```bash
+cd bella-serial-test-daemon
+sudo bash install.sh
+```
+
+### Bella AP helper
+
+Install the Bella AP helper:
+
+```bash
+cd bella-ap
+sudo bash install.sh
 ```
