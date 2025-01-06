@@ -169,8 +169,8 @@ def get_disk_size():
     return result
 
 def play_music(file):
-    run_command(f"sudo pulseaudio --k")
-    run_command(f"sudo pulseaudio --start")
+    # run_command(f"sudo pulseaudio --k")
+    # run_command(f"sudo pulseaudio --start")
     run_command(f"aplay {file}")
 
 class FactoryTest():
@@ -209,6 +209,10 @@ class FactoryTest():
         self.grayscale_white = None
         self.grayscale_black = None
         self.life_test_started = False
+
+        # turn up volumn
+        run_command(f"amixer set 'Speaker' 100%")
+        run_command(f"amixer set 'Mic' 100%")
 
     def send(self, tag, msg):
         if self.send_lock:

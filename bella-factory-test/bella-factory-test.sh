@@ -15,14 +15,15 @@ if [ "$1" == "start" ]; then
     if [ "$factoryMode" == "lo" ]; then
         /usr/bin/python $APP_FOLDER/$APP_NAME.py &
     # Check if FIRST_BOOT_FLAG exists
-    elif [ -f FIRST_BOOT_FLAG ]; then
+    elif [ -f $FIRST_BOOT_FLAG ]; then
         echo "First boot, expand file system"
-        mv FIRST_BOOT_FLAG SECOND_BOOT_FLAG
+        mv $FIRST_BOOT_FLAG $SECOND_BOOT_FLAG
         raspi-config nonint do_expand_rootfs
+        reboot
     # Check if SECOND_BOOT_FLAG exists
-    elif [ -f SECOND_BOOT_FLAG ]; then
+    elif [ -f $SECOND_BOOT_FLAG ]; then
         echo "Second boot, enter factory mode"
-        rm SECOND_BOOT_FLAGbella-factory-test
+        rm $SECOND_BOOT_FLAG
         /usr/bin/python $APP_FOLDER/$APP_NAME.py &
     elif [ "$factoryMode" == "hi" ]; then
         echo "Button not pressed, exit factory mode"

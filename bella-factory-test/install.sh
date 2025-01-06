@@ -61,10 +61,6 @@ systemctl daemon-reload
 echo "Enabling service"
 systemctl enable $APP_NAME.service
 
-# Start service
-echo "Starting service"
-systemctl restart $APP_NAME.service
-
 # See if we need to reboot
 if [ "$need_reboot" = true ]; then
     while true; do
