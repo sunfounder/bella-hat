@@ -1,13 +1,13 @@
 # https://www.freedesktop.org/software/systemd/man/systemd.service.html
 [Unit]
-Description=Bella Serial test daemon
+Description=Bella Factory test
 # Need to start last to avoid gpio being occupied
 After=basic.target
 
 [Service]
 Type=forking
-ExecStart=/usr/local/bin/bella-serial-test-daemon start
-ExecStop=/usr/local/bin/bella-serial-test-daemon stop
+ExecStart=/usr/local/bin/bella-factory-test start
+ExecStop=/usr/local/bin/bella-factory-test stop
 
 [Install]
 WantedBy=basic.target

@@ -9,8 +9,8 @@
 # Port: /dev/ttyS0
 # Baudrate: 115200
 #
-# Run the following command in the terminal to start the serial listener:
-# python3 serial_command.py
+# Run the following command in the terminal to start factory test:
+# python3 bella-factory-test.py
 #
 # 测试命令通过串口发送。每次发送需要需要带新行
 #
@@ -40,12 +40,14 @@ from logging.handlers import RotatingFileHandler
 from bella_hat.bella import Bella
 from rpi_ws281x import PixelStrip, Color
 
-APP_NAME = 'bella-serial-test-daemon'
+APP_NAME = 'bella-factory-test'
 ENCODING = 'utf-8'
-TEST_MUSIC_FILE = f'/opt/{APP_NAME}/test_music.wav'
-TEST_RECORD_FILE = f'/opt/{APP_NAME}/test_record.wav'
-TEST_IMAGE_FILE = f'/opt/{APP_NAME}/test_image.jpg'
-FACTORY_MODE_AUDIO = f'/opt/{APP_NAME}/factory-mode.wav'
+TEST_FOLDER = f'/opt/{APP_NAME}'
+TEST_MUSIC_FILE = f'{TEST_FOLDER}/test_music.wav'
+TEST_RECORD_FILE = f'{TEST_FOLDER}/test_record.wav'
+TEST_IMAGE_FILE = f'{TEST_FOLDER}/test_image.jpg'
+FACTORY_MODE_AUDIO = f'{TEST_FOLDER}/factory-mode.wav'
+FIRST_BOOT_FLAG = f'{TEST_FOLDER}/firstboot'
 AP_CONFIG_FILE = f'/etc/bella-ap.conf'
 TEST_IMAGE_WIDTH = 320
 TEST_IMAGE_HEIGHT = 240
@@ -161,12 +163,17 @@ def light_led(strip, color):
         strip.show()
         time.sleep(0.01)
 
+def get_disk_size():
+    _, result = run_command("lsblk | grep mmcblk0 | awk '{print $4}'")
+    result = result.strip().split('\n')
+    return result
+
 def play_music(file):
     run_command(f"sudo pulseaudio --k")
     run_command(f"sudo pulseaudio --start")
     run_command(f"aplay {file}")
 
-class SerialTestDaemon():
+class FactoryTest():
 
     PORT = '/dev/ttyS0'  # Linux 下的串口名
     BAUDRATE = 115200
@@ -420,6 +427,7 @@ class SerialTestDaemon():
                 "motor_speed": self.bella.motors.speed(),
                 "fan_state": self.bella.fan_state,
                 "ap_config": get_ap(),
+                "disk_size": get_disk_size(),
             }
 
             self.send_data(json.dumps(data))
@@ -520,5 +528,5 @@ class SerialTestDaemon():
 
 
 if __name__ == "__main__":
-    app = SerialTestDaemon()
+    app = FactoryTest()
     app.main()

@@ -1,4 +1,4 @@
-# Bella Serial Test Daemon
+# Bella Factory Test Daemon
 
 A daemon for factory testing of Bella. It connects the software with serial communication.
 

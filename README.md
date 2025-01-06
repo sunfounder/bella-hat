@@ -62,12 +62,12 @@ Do this by adding the following lines to /boot/firmware/config.txt and reboot:
 core_freq_min=500
 ```
 
-### Serial Test daemon
+### Factory Test
 
-Install the serial test daemon:
+Install the factory test:
 
 ```bash
-cd bella-serial-test-daemon
+cd bella-factory-test
 sudo bash install.sh
 cd ..
 ```
@@ -206,16 +206,10 @@ tmpfs           380M     0  380M   0% /run/user/1000
 
 Now do the [installation](#installation) above, reboot to take effect.
 
-Add resize on init back: Edit `/boot/firmware/cmdline.txt` add this to the end of the line with a space in between:
-
-```bash
-init=/usr/lib/raspi-config/init_resize.sh
-```
+### Export the image
 
 > [!Warning]
 > Now you can't reboot the Raspberry Pi, or it will resize the partition again. And you will need to do above all ovver again. If you need to reboot, remove the `init` parameter from the `cmdline.txt` file. and add it back before exporting the image.
-
-### Export the image
 
 Power off and eject the microSD card and put it into another computer to export the image.
 
@@ -223,10 +217,9 @@ use Win32DiskImager on Windows.
 
 1. Choose a image name like `bella-v0.0.1.img`.
 2. Choose the microSD card device path, like [G:/].
-3. Choose MD5 on Hash.
-4. Check Read Only Allocated Partitions.
-5. Click Read.
-6. Wait for the image to be created.
+3. Check Read Only Allocated Partitions.
+4. Click Read.
+5. Wait for the image to be created.
 
 Now you can use this image to flash a new SD card and see if it works.
 

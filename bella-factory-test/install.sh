@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# This script is to install a test daemon for bella.
+# This script is to install factory test for bella.
 
 need_reboot=false
 
@@ -10,7 +10,8 @@ if [ "$(id -u)" -ne 0 ]; then
     exit 1
 fi
 
-folder_name="bella-serial-test-daemon"
+folder_name="bella-factory-test"
+APP_NAME="bella-factory-test"
 
 echo "Checking if serial console is enabled"
 result=$(raspi-config nonint get_serial_cons)
@@ -44,25 +45,25 @@ cp -r "../$folder_name" "/opt/$folder_name"
 
 # Copy executable to /usr/local/bin
 echo "Copying executable to /usr/local/bin"
-cp "bella-serial-test-daemon.sh" "/usr/local/bin/bella-serial-test-daemon"
+cp "$APP_NAME.sh" "/usr/local/bin/$APP_NAME"
 
 # Set executable permission
-chmod +x "/usr/local/bin/bella-serial-test-daemon"
+chmod +x "/usr/local/bin/$APP_NAME"
 
 # Copy service to /etc/systemd/system
 echo "Copying service to /etc/systemd/system"
-cp "bella-serial-test-daemon.service" "/etc/systemd/system/bella-serial-test-daemon.service"
+cp "$APP_NAME.service" "/etc/systemd/system/$APP_NAME.service"
 
 # Reload systemd
 systemctl daemon-reload
 
 # Enable service
 echo "Enabling service"
-systemctl enable bella-serial-test-daemon.service
+systemctl enable $APP_NAME.service
 
 # Start service
 echo "Starting service"
-systemctl restart bella-serial-test-daemon.service
+systemctl restart $APP_NAME.service
 
 # See if we need to reboot
 if [ "$need_reboot" = true ]; then

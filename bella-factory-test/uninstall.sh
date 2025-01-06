@@ -1,17 +1,19 @@
 #!/bin/bash
 
-echo "Uninstalling Bella Hat Serial Test Daemon..."
+APP_NAME="bella-factory-test"
+
+echo "Uninstalling Bella Hat Factory Test..."
 echo "Removing service..."
-systemctl stop bella-serial-test-daemon.service
-systemctl disable bella-serial-test-daemon.service
-rm /etc/systemd/system/bella-serial-test-daemon.service
+systemctl stop $APP_NAME.service
+systemctl disable $APP_NAME.service
+rm /etc/systemd/system/$APP_NAME.service
 
 echo "Removing executable..."
-rm /usr/local/bin/bella-serial-test-daemon
+rm /usr/local/bin/$APP_NAME
 
 echo "Removing files..."
-rm -rf /var/log/bella-serial-test-daemon.log
-rm -rf /opt/bella-serial-test-daemon
+rm -rf /var/log/$APP_NAME.log
+rm -rf /opt/$APP_NAME
 
 read -p "Do you want to change Serial back to system default? (Disable Serial port, and enable Serial console) (y/n) " result
 if [ "$result" = "y" ]; then
