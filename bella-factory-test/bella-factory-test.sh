@@ -1,8 +1,8 @@
 #!/usr/bin/bash
 
 APP_FOLDER=/opt/bella-factory-test
-FIRST_BOOT_FLAG=$APP_FOLDER/firstboot
-SECOND_BOOT_FLAG=$APP_FOLDER/secondboot
+FIRST_BOOT_FLAG=/boot/bella-firstboot
+SECOND_BOOT_FLAG=/boot/bella-secondboot
 APP_NAME=bella-factory-test
 
 BUTTON_PIN=25
