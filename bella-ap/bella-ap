@@ -32,6 +32,7 @@ if [ "$1" = "start" ]; then
 
         # Start Bella AP
         echo "Starting Bella AP with SSID: $BELLA_SSID and Password: $BELLA_PASSWORD"
+        nmcli radio wifi on
         nmcli device wifi hotspot ssid $BELLA_SSID password $BELLA_PASSWORD
 
     else
@@ -44,7 +45,6 @@ elif [[ "$1" == "stop" ]]; then
     echo "Stopping Bella AP"
     nmcli device disconnect wlan0 || true
     nmcli device up wlan0 || true
-    
 else
     # Invalid argument
     echo "Invalid argument. Usage: bella-ap start|stop"
