@@ -206,6 +206,12 @@ tmpfs           380M     0  380M   0% /run/user/1000
 
 Now do the [installation](#installation) above, reboot to take effect.
 
+Create a first boot flag file:
+
+```bash
+sudo touch /boot/bella-firstboot
+```
+
 ### Export the image
 
 > [!Warning]
