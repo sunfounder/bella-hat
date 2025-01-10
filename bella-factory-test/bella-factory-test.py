@@ -155,7 +155,16 @@ def set_ap(ssid, password):
     run_command(f"sudo systemctl restart bella-ap")
 
 def set_hostname(hostname):
+    _, old_hostname = run_command("hostname")
+    old_hostname = old_hostname.strip()
+    if old_hostname == hostname:
+        return
     run_command(f"sudo hostnamectl set-hostname {hostname}")
+    with open('/etc/hosts', 'r') as f:
+        content = f.read()
+    content = content.replace(old_hostname, hostname)
+    with open('/etc/hosts', 'w') as f:
+        f.write(content)
 
 def light_led(strip, color):
     for i in range(strip.numPixels()):
