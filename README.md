@@ -209,7 +209,7 @@ Now do the [installation](#installation) above, reboot to take effect.
 Create a first boot flag file:
 
 ```bash
-sudo touch /boot/bella-firstboot
+sudo touch /boot/firmware/bella-firstboot
 ```
 
 ### Export the image
