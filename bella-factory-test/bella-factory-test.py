@@ -7,7 +7,7 @@
 # Reboot the Raspberry Pi
 #
 # Port: /dev/ttyS0
-# Baudrate: 115200
+# Baudrate: 460800
 #
 # Run the following command in the terminal to start factory test:
 # python3 bella-factory-test.py
@@ -49,10 +49,14 @@ TEST_IMAGE_FILE = f'{TEST_FOLDER}/test_image.jpg'
 FACTORY_MODE_AUDIO = f'{TEST_FOLDER}/factory-mode.wav'
 FIRST_BOOT_FLAG = f'{TEST_FOLDER}/firstboot'
 AP_CONFIG_FILE = f'/etc/bella-ap.conf'
-TEST_IMAGE_WIDTH = 320
-TEST_IMAGE_HEIGHT = 240
+TEST_IMAGE_WIDTH = 800
+TEST_IMAGE_HEIGHT = 600
 TEST_IMAGE_ROTATION = 180
 LOG_FILE = f'/var/log/{APP_NAME}.log'
+
+PORT = '/dev/ttyS0'  # Linux 下的串口名
+BAUDRATE = 460800
+
 
 TAG_LOG = "[LOG]"
 TAG_DATA = "[DAT]"
@@ -183,9 +187,6 @@ def play_music(file):
     run_command(f"aplay {file}")
 
 class FactoryTest():
-
-    PORT = '/dev/ttyS0'  # Linux 下的串口名
-    BAUDRATE = 115200
 
     # 0-100-0 iters
     ITER_0_100_0 = list(range(101))
@@ -515,10 +516,10 @@ class FactoryTest():
         time.sleep(1)
 
         try:
-            self.ser = serial.Serial(self.PORT, self.BAUDRATE, timeout=1)
+            self.ser = serial.Serial(PORT, BAUDRATE, timeout=1)
 
             self.handle_start_data_send()
-            log.info(f"串口 {self.PORT} 已打开，波特率为 {self.BAUDRATE}")
+            log.info(f"串口 {PORT} 已打开，波特率为 {BAUDRATE}")
 
             while True:
                 if self.ser.in_waiting == 0:
