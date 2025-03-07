@@ -47,16 +47,24 @@ TEST_MUSIC_FILE = f'{TEST_FOLDER}/test_music.wav'
 TEST_RECORD_FILE = f'{TEST_FOLDER}/test_record.wav'
 TEST_IMAGE_FILE = f'{TEST_FOLDER}/test_image.jpg'
 FACTORY_MODE_AUDIO = f'{TEST_FOLDER}/factory-mode.wav'
+ERROR_AUDIO = f'{TEST_FOLDER}/run_error.wav'
+RUN_END_AUDIO = f'{TEST_FOLDER}/run_end.wav'
+CAM_INIT_ERROR_AUDIO = f'{TEST_FOLDER}/cam_init_error.wav'
 FIRST_BOOT_FLAG = f'{TEST_FOLDER}/firstboot'
 AP_CONFIG_FILE = f'/etc/bella-ap.conf'
 TEST_IMAGE_WIDTH = 800
 TEST_IMAGE_HEIGHT = 600
-TEST_IMAGE_ROTATION = 180
+TEST_IMAGE_HLIP = False
+TEST_IMAGE_VLIP = True
+
 LOG_FILE = f'/var/log/{APP_NAME}.log'
 
 PORT = '/dev/ttyS0'  # Linux 下的串口名
 BAUDRATE = 460800
+# BAUDRATE = 115200
 
+capture_config = None
+picam2 = None
 
 TAG_LOG = "[LOG]"
 TAG_DATA = "[DAT]"
@@ -229,12 +237,15 @@ class FactoryTest():
             return
         log.debug("发送数据: %s %s" % (tag, msg))
 
-        if self.ser:
-            self.send_lock = True
-            tmp = SERIAL_WRAP_START + tag + msg + SERIAL_WRAP_END
-            self.ser.write(tmp.encode(ENCODING))
-            self.ser.flush()
-            self.send_lock = False
+        try:
+            if self.ser:
+                self.send_lock = True
+                tmp = SERIAL_WRAP_START + tag + msg + SERIAL_WRAP_END
+                self.ser.write(tmp.encode(ENCODING))
+                self.ser.flush()
+                self.send_lock = False
+        except Exception as e:
+            log.error(f"串口出错 {e}")
 
     def send_data(self, data):
         self.send(TAG_DATA, data)
@@ -327,31 +338,29 @@ class FactoryTest():
         self.send_log("停止")
         light_led(self.strip, Color(0, 0, 0))
 
+
     def handle_test_camera(self):
         # 摄像头测试
-        # self.send_log("测试相机连接")
-        # status, result = run_command("libcamera-raw")
-        # self.send_log(result)
-        # if status == 0:
-        #     self.send_log("相机正常")
-        # else:
-        #     self.send_log("相机异常")
         self.send_log("测试相机")
         self.send_log("拍照")
-        status, result = run_command(f"rpicam-jpeg -n --width {TEST_IMAGE_WIDTH} --height {TEST_IMAGE_HEIGHT} --rotation {TEST_IMAGE_ROTATION} -o {TEST_IMAGE_FILE}", 10)
-        if status != 0:
-            self.send_log(f"拍照失败: {result}")
-        else:
-            self.send_log("发送图片")
-            with open(TEST_IMAGE_FILE, 'rb') as file:
-                image_data = file.read()
 
-            import base64
-            image_data = base64.b64encode(image_data).decode(ENCODING)
+        try:
+            picam2.switch_mode_and_capture_file(capture_config, TEST_IMAGE_FILE)
+        except Exception as e:
+            log.error(f"拍照失败: {str(e)}")
+            self.send_log(f"拍照失败: {str(e)}")
+            return
 
-            self.send_image(image_data)
-            self.send_log("完成")
-            os.remove(TEST_IMAGE_FILE)
+        self.send_log("发送图片")
+        with open(TEST_IMAGE_FILE, 'rb') as file:
+            image_data = file.read()
+
+        import base64
+        image_data = base64.b64encode(image_data).decode(ENCODING)
+
+        self.send_image(image_data)
+        self.send_log("完成")
+        os.remove(TEST_IMAGE_FILE)
 
     def handle_test_life(self):
         if self.life_test_started:
@@ -366,26 +375,57 @@ class FactoryTest():
             self.life_test_started = True
 
     def get_grayscale_avg(self, times=10):
-        grayscale_datas = []
+        g0_datas = []
+        g1_datas = []
+        g2_datas = []
+
         for _ in range(10):
-            grayscale_data = self.bella.get_grayscales(raw=True)
-            grayscale_datas.append(grayscale_data)
+            g0, g1, g2 = self.bella.get_grayscales(raw=True)
+            g0_datas.append(g0)
+            g1_datas.append(g1)
+            g2_datas.append(g2)
             time.sleep(0.1)
+    
         avg_grayscale_data = [0, 0, 0]
-        for grayscale_data in grayscale_datas:
-            avg_grayscale_data[0] += grayscale_data[0]
-            avg_grayscale_data[1] += grayscale_data[1]
-            avg_grayscale_data[2] += grayscale_data[2]
-        avg_grayscale_data[0] /= len(grayscale_datas)
-        avg_grayscale_data[1] /= len(grayscale_datas)
-        avg_grayscale_data[2] /= len(grayscale_datas)
+
+        # 计算平均灰度值
+        # g0_sum = 0
+        # g1_sum = 0
+        # g2_sum = 0
+ 
+        # for i in range(10):
+        #     g0_sum += g0_datas[i]
+        #     g1_sum += g1_datas[i]
+        #     g2_sum += g2_datas[i]
+
+        # avg_grayscale_data[0] = g0_sum / 10
+        # avg_grayscale_data[1] = g1_sum / 10
+        # avg_grayscale_data[2] = g2_sum / 10
+
+        # return avg_grayscale_data
+
+
+        # 计算灰度中位数
+        g0_datas.sort()
+        g1_datas.sort()
+        g2_datas.sort()
+
+        avg_grayscale_data[0] = (g0_datas[4] + g0_datas[5]) / 2
+        avg_grayscale_data[1] = (g1_datas[4] + g1_datas[5]) / 2
+        avg_grayscale_data[2] = (g2_datas[4] + g2_datas[5]) / 2
+
         return avg_grayscale_data
 
+
     def handle_grayscale_calibrate_white(self):
-        self.send_log("灰度校准白色")
-        self.grayscale_white = self.get_grayscale_avg()
-        self.send_log(f"白色灰度值: {self.grayscale_white}")
-        self.handle_grayscale_calibrate()
+        try:
+            self.send_log("灰度校准白色")
+            self.grayscale_white = self.get_grayscale_avg()
+            self.send_log(f"白色灰度值: {self.grayscale_white}")
+            self.handle_grayscale_calibrate()
+        except Exception as e:
+            self.send_log(f"灰度校准白色失败: {str(e)}")
+            self.send_log("请重新校准")
 
     def handle_grayscale_calibrate_black(self):
         self.send_log("灰度校准黑色")
@@ -512,8 +552,27 @@ class FactoryTest():
             self.send_log(f"未知指令: {command}")
 
     def main(self):
+        global picam2, capture_config
+
         play_music(FACTORY_MODE_AUDIO)
         time.sleep(1)
+        ## 
+        try:
+            from picamera2 import Picamera2
+            from libcamera import Transform
+            picam2 = Picamera2()
+            capture_config = picam2.create_still_configuration(
+                main={
+                    "size": (TEST_IMAGE_WIDTH, TEST_IMAGE_HEIGHT),
+                },
+                buffer_count=2,
+                transform=Transform(hflip=TEST_IMAGE_HLIP, vflip=TEST_IMAGE_VLIP)
+            )
+            picam2.start()
+        except Exception as e:
+            log.error(f"初始化相机失败: {e}")
+            play_music(CAM_INIT_ERROR_AUDIO)
+            time.sleep(1)
 
         try:
             self.ser = serial.Serial(PORT, BAUDRATE, timeout=1)
@@ -522,20 +581,40 @@ class FactoryTest():
             log.info(f"串口 {PORT} 已打开，波特率为 {BAUDRATE}")
 
             while True:
+                
                 if self.ser.in_waiting == 0:
                     continue
+
                 try:
                     data = self.ser.readline().decode(ENCODING).strip()
+                    log.debug(f"接收到指令: {data}")
+
                 except UnicodeDecodeError as e:
                     log.warning(f"接收到非法数据: {e}")
-                log.debug(f"接收到指令: {data}")
-                self.process_command(data)
-                self.ser.reset_input_buffer()
+                    self.send_log(f"接收到非法数据: {e}")
+                    data = ""
+                except Exception as e:
+                    log.error(f"接收到非法数据: {e}")
+                    self.send_log(f"接收到非法数据: {e}")
+                    data = ""
+
+                try:
+                    self.process_command(data)
+                    self.ser.reset_input_buffer()
+                except Exception as e:
+                    log.error(f"处理指令时发生错误: {e}")
+                    self.send_log(f"接收到非法数据: {e}")
+                
+                
                 time.sleep(1)
         except serial.SerialException as e:
             log.error(f"串口错误: {e}")
+            play_music(ERROR_AUDIO)
+            time.sleep(2)
         except KeyboardInterrupt:
             log.info("程序已终止")
+            play_music(RUN_END_AUDIO)
+            time.sleep(1)
         finally:
             if self.ser:
                 self.ser.close()
