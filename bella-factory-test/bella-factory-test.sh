@@ -2,7 +2,7 @@
 
 APP_FOLDER=/opt/bella-factory-test
 FIRST_BOOT_FLAG=/boot/firmware/bella-firstboot
-SECOND_BOOT_FLAG=/boot/firmware/bella-secondboot
+AUTO_FACTORY_MODE=/boot/firmware/bella-auto-factory-mode
 APP_NAME=bella-factory-test
 
 BUTTON_PIN=25
@@ -17,13 +17,13 @@ if [ "$1" == "start" ]; then
     # Check if FIRST_BOOT_FLAG exists
     elif [ -f $FIRST_BOOT_FLAG ]; then
         echo "First boot, expand file system"
-        mv $FIRST_BOOT_FLAG $SECOND_BOOT_FLAG
+        mv $FIRST_BOOT_FLAG $AUTO_FACTORY_MODE
         raspi-config nonint do_expand_rootfs
         reboot
-    # Check if SECOND_BOOT_FLAG exists
-    elif [ -f $SECOND_BOOT_FLAG ]; then
+    # Check if AUTO_FACTORY_MODE exists
+    elif [ -f $AUTO_FACTORY_MODE ]; then
         echo "Second boot, enter factory mode"
-        rm $SECOND_BOOT_FLAG
+        # rm $AUTO_FACTORY_MODE
         /usr/bin/python $APP_FOLDER/$APP_NAME.py &
     elif [ "$factoryMode" == "hi" ]; then
         echo "Button not pressed, exit factory mode"
