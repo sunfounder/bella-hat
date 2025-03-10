@@ -26,6 +26,7 @@
 # AP:WIFIXXX    设置AP为WIFI:T:WPA;S:bella-876zyx;P:87654321;;
 # 灰度白        校准灰度白色
 # 灰度黑        校准灰度黑色
+# 自动工厂模式  1:开启自动工厂模式，0:关闭自动工厂模式
 
 import serial
 import threading
@@ -46,12 +47,15 @@ TEST_FOLDER = f'/opt/{APP_NAME}'
 TEST_MUSIC_FILE = f'{TEST_FOLDER}/test_music.wav'
 TEST_RECORD_FILE = f'{TEST_FOLDER}/test_record.wav'
 TEST_IMAGE_FILE = f'{TEST_FOLDER}/test_image.jpg'
-FACTORY_MODE_AUDIO = f'{TEST_FOLDER}/factory-mode.wav'
+FACTORY_MODE_AUDIO = f'{TEST_FOLDER}/factory-mode2.wav'
 ERROR_AUDIO = f'{TEST_FOLDER}/run_error.wav'
 RUN_END_AUDIO = f'{TEST_FOLDER}/run_end.wav'
 CAM_INIT_ERROR_AUDIO = f'{TEST_FOLDER}/cam_init_error.wav'
+ENABLIED_AUTO_FACTORY_MODE = f'{TEST_FOLDER}/enable_auto_factory_mode.wav'
+DISABLED_AUTO_FACTORY_MODE = f'{TEST_FOLDER}/disable_auto_factory_mode.wav'
 FIRST_BOOT_FLAG = f'{TEST_FOLDER}/firstboot'
 AP_CONFIG_FILE = f'/etc/bella-ap.conf'
+AUTO_FACTORY_MODE='/boot/firmware/bella-auto-factory-mode'
 TEST_IMAGE_WIDTH = 800
 TEST_IMAGE_HEIGHT = 600
 TEST_IMAGE_HLIP = False
@@ -199,7 +203,8 @@ class FactoryTest():
     # 0-100-0 iters
     ITER_0_100_0 = list(range(101))
     ITER_0_100_0 += list(range(100, 0, -1))
-
+    auto_factory_mode = False
+    
     def __init__(self):
         # 用于控制是否持续发送传感器数据
         self.ser= None
@@ -221,6 +226,8 @@ class FactoryTest():
         console_handler.setLevel(logging.DEBUG)
         log.addHandler(file_handler)
         log.addHandler(console_handler)
+
+        self.auto_factory_mode = os.path.exists(AUTO_FACTORY_MODE)
 
         self.send_lock = False
 
@@ -465,6 +472,26 @@ class FactoryTest():
         self.bella.set_grayscale_calibration(slopes, offsets)
         self.send_log(f"灰度校准完成: {slopes}, {offsets}")
 
+    def handle_auto_factory_mode(self, data):
+        print(data, type(data))
+        if data == "1":
+            if self.auto_factory_mode:
+                pass
+            else:
+                os.mkdir(AUTO_FACTORY_MODE)
+                self.auto_factory_mode = True
+            self.send_log("自动工厂模式已开启")
+            play_music(ENABLIED_AUTO_FACTORY_MODE)
+            time.sleep(1)
+        elif data == "0":
+            os.removedirs(AUTO_FACTORY_MODE)
+            self.auto_factory_mode = False
+            self.send_log("自动工厂模式已关闭")
+            play_music(DISABLED_AUTO_FACTORY_MODE)
+            time.sleep(1)
+        else:
+            self.send_log("请输入1或0")
+
     def update_sensor_data(self):
         while self.sensor_data_start:
             data = {
@@ -482,7 +509,8 @@ class FactoryTest():
                 "fan_state": self.bella.fan_state,
                 "ap_config": get_ap(),
                 "disk_size": get_disk_size(),
-            }
+                "auto_factory_mode":self.auto_factory_mode
+                }
 
             self.send_data(json.dumps(data))
             time.sleep(1)
@@ -548,6 +576,8 @@ class FactoryTest():
             self.handle_grayscale_calibrate_white()
         elif command.startswith("灰度黑"):
             self.handle_grayscale_calibrate_black()
+        elif command.startswith("自动工厂模式"):
+            self.handle_auto_factory_mode(command.split('自动工厂模式:')[1])
         else:
             self.send_log(f"未知指令: {command}")
 
@@ -614,7 +644,7 @@ class FactoryTest():
         except KeyboardInterrupt:
             log.info("程序已终止")
             play_music(RUN_END_AUDIO)
-            time.sleep(1)
+            time.sleep(2)
         finally:
             if self.ser:
                 self.ser.close()
