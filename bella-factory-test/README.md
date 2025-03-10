@@ -2,6 +2,15 @@
 
 A daemon for factory testing of Bella. It connects the software with serial communication.
 
+## Install
+
+```bash
+sudo apt install python3-picamera2 --no-install-recommends
+# sudo apt install python3-picamera2
+
+sudo bash install.sh
+```
+
 ## Usage
 
 1. Turn off the robot if it is on.
