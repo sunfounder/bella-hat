@@ -22,7 +22,7 @@ if [ "$1" == "start" ]; then
         reboot
     # Check if AUTO_FACTORY_MODE exists
     elif [ -f $AUTO_FACTORY_MODE ]; then
-        echo "Second boot, enter factory mode"
+        echo "Auto factory mode, enter factory mode"
         # rm $AUTO_FACTORY_MODE
         /usr/bin/python $APP_FOLDER/$APP_NAME.py &
     elif [ "$factoryMode" == "hi" ]; then

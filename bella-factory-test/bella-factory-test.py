@@ -53,6 +53,7 @@ RUN_END_AUDIO = f'{TEST_FOLDER}/run_end.wav'
 CAM_INIT_ERROR_AUDIO = f'{TEST_FOLDER}/cam_init_error.wav'
 ENABLIED_AUTO_FACTORY_MODE = f'{TEST_FOLDER}/enable_auto_factory_mode.wav'
 DISABLED_AUTO_FACTORY_MODE = f'{TEST_FOLDER}/disable_auto_factory_mode.wav'
+EXIT_AUDIO = f'{TEST_FOLDER}/exit.wav'
 FIRST_BOOT_FLAG = f'{TEST_FOLDER}/firstboot'
 AP_CONFIG_FILE = f'/etc/bella-ap.conf'
 AUTO_FACTORY_MODE='/boot/firmware/bella-auto-factory-mode'
@@ -66,6 +67,9 @@ LOG_FILE = f'/var/log/{APP_NAME}.log'
 PORT = '/dev/ttyS0'  # Linux 下的串口名
 BAUDRATE = 460800
 # BAUDRATE = 115200
+
+SERIAL_EVENT_INTERVAL = 1
+KEY_EVENT_INTERVAL = 0.05
 
 capture_config = None
 picam2 = None
@@ -234,6 +238,8 @@ class FactoryTest():
         self.grayscale_white = None
         self.grayscale_black = None
         self.life_test_started = False
+
+        self.key_press_time_count = 0
 
         # turn up volumn
         run_command(f"amixer set 'Speaker' 100%")
@@ -478,14 +484,17 @@ class FactoryTest():
             if self.auto_factory_mode:
                 pass
             else:
-                os.mkdir(AUTO_FACTORY_MODE)
+                with open(AUTO_FACTORY_MODE, "w") as f:
+                    pass
                 self.auto_factory_mode = True
+            log.info("自动工厂模式已开启")
             self.send_log("自动工厂模式已开启")
             play_music(ENABLIED_AUTO_FACTORY_MODE)
             time.sleep(1)
         elif data == "0":
-            os.removedirs(AUTO_FACTORY_MODE)
+            os.remove(AUTO_FACTORY_MODE)
             self.auto_factory_mode = False
+            log.info("自动工厂模式已关闭")
             self.send_log("自动工厂模式已关闭")
             play_music(DISABLED_AUTO_FACTORY_MODE)
             time.sleep(1)
@@ -581,6 +590,32 @@ class FactoryTest():
         else:
             self.send_log(f"未知指令: {command}")
 
+
+    def key_event_handler(self):
+        
+        if self.bella.read_btn():
+            self.key_press_time_count += KEY_EVENT_INTERVAL
+        else:
+            self.key_press_time_count = 0
+
+        ## 长按5s 取消自动工厂模式，并且退出
+        if self.key_press_time_count >= 5:
+            self.key_press_time_count = 0
+            #
+            if os.path.exists(AUTO_FACTORY_MODE):
+                self.auto_factory_mode = False
+                os.remove(AUTO_FACTORY_MODE)
+                log.info("取消自动工厂模式")
+            # play_music(DISABLED_AUTO_FACTORY_MODE)
+            #
+            log.info("退出程序")
+            play_music(EXIT_AUDIO)
+            time.sleep(2)
+            if self.ser:
+                self.ser.close()
+            exit()
+            
+
     def main(self):
         global picam2, capture_config
 
@@ -604,6 +639,10 @@ class FactoryTest():
             play_music(CAM_INIT_ERROR_AUDIO)
             time.sleep(1)
 
+
+        serial_st = time.time()
+        key_st = time.time()
+
         try:
             self.ser = serial.Serial(PORT, BAUDRATE, timeout=1)
 
@@ -611,32 +650,37 @@ class FactoryTest():
             log.info(f"串口 {PORT} 已打开，波特率为 {BAUDRATE}")
 
             while True:
-                
-                if self.ser.in_waiting == 0:
-                    continue
 
-                try:
-                    data = self.ser.readline().decode(ENCODING).strip()
-                    log.debug(f"接收到指令: {data}")
+                ## 处理按键事件
+                if time.time() - key_st > KEY_EVENT_INTERVAL:
+                    key_st = time.time()
+                    self.key_event_handler()
 
-                except UnicodeDecodeError as e:
-                    log.warning(f"接收到非法数据: {e}")
-                    self.send_log(f"接收到非法数据: {e}")
-                    data = ""
-                except Exception as e:
-                    log.error(f"接收到非法数据: {e}")
-                    self.send_log(f"接收到非法数据: {e}")
-                    data = ""
+                ## 处理串口数据
+                if self.ser.in_waiting > 0 and time.time() - serial_st > SERIAL_EVENT_INTERVAL:
+                    serial_st = time.time()
+                    try:
+                        data = self.ser.readline().decode(ENCODING).strip()
+                        log.debug(f"接收到指令: {data}")
 
-                try:
-                    self.process_command(data)
-                    self.ser.reset_input_buffer()
-                except Exception as e:
-                    log.error(f"处理指令时发生错误: {e}")
-                    self.send_log(f"接收到非法数据: {e}")
+                    except UnicodeDecodeError as e:
+                        log.warning(f"接收到非法数据: {e}")
+                        self.send_log(f"接收到非法数据: {e}")
+                        data = ""
+                    except Exception as e:
+                        log.error(f"接收到非法数据: {e}")
+                        self.send_log(f"接收到非法数据: {e}")
+                        data = ""
+
+                    try:
+                        self.process_command(data)
+                        self.ser.reset_input_buffer()
+                    except Exception as e:
+                        log.error(f"处理指令时发生错误: {e}")
+                        self.send_log(f"处理指令时发生错误: {e}")
                 
-                
-                time.sleep(1)
+                ## loop 间隔
+                time.sleep(0.01)
         except serial.SerialException as e:
             log.error(f"串口错误: {e}")
             play_music(ERROR_AUDIO)
