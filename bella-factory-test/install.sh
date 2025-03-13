@@ -13,6 +13,12 @@ fi
 folder_name="bella-factory-test"
 APP_NAME="bella-factory-test"
 
+## Install dependencies
+echo "Installing picamera2"
+apt-get install -y python3-picamera2 --no-install-recommends
+
+## 
+
 echo "Checking if serial console is enabled"
 result=$(raspi-config nonint get_serial_cons)
 if [ "$result" -eq 0 ]; then

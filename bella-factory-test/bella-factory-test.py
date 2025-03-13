@@ -12,21 +12,23 @@
 # Run the following command in the terminal to start factory test:
 # python3 bella-factory-test.py
 #
-# 测试命令通过串口发送。每次发送需要需要带新行
+# The test commands are sent through the serial port. 
+# Each sending needs to end with "\n".
 #
-# 数据开        开始发送传感器数据
-# 数据关        停止发送传感器数据
-# 老化          测试常开电机风扇，老化
-# 电机          测试电机，小车前进，速度慢慢变快再变慢，到后退，速度变快再变慢，到停止，随后左转，右转，停止
-# 风扇          测试风扇，风扇开2秒，风扇关2秒
-# 录播          录音3秒后，播放录音
-# 喇叭          播放音乐
-# 灯            测试灯环，红绿蓝白灯环，随后停止
-# 相机          拍摄照片并传回base64格式图片
-# AP:WIFIXXX    设置AP为WIFI:T:WPA;S:bella-876zyx;P:87654321;;
-# 灰度白        校准灰度白色
-# 灰度黑        校准灰度黑色
-# 自动工厂模式  1:开启自动工厂模式，0:关闭自动工厂模式
+# data_on                   start sending sensor data
+# data_off                  stop sending sensor data
+# aging                     test motor fan, aging
+# motor                     test motor, car forward, speed slowly increase and decrease, then backward, speed slowly increase and decrease, then stop, then turn left, turn right, stop
+# fan                       test fan, fan on 2 seconds, fan off 2 seconds
+# record_play               record 3 seconds, play record
+# play                      play music
+# rgb_led                   test rgb_led, red, green, blue, white, then stop
+# camera                    take a photo and return base64 format image
+# ap:WIFIXXX                set AP to WIFI:T:WPA;S:bella-876zyx;P:87654321;;
+# white                     calibrate grayscale module white
+# black                     calibrate  grayscale module black
+# auto_factory_mode:x       1:enable auto factory mode, 0:disable auto factory mode
+# sn:x                      set serial number(batch number) to x; 
 
 import serial
 import threading
@@ -57,6 +59,7 @@ EXIT_AUDIO = f'{TEST_FOLDER}/exit.wav'
 FIRST_BOOT_FLAG = f'{TEST_FOLDER}/firstboot'
 AP_CONFIG_FILE = f'/etc/bella-ap.conf'
 AUTO_FACTORY_MODE='/boot/firmware/bella-auto-factory-mode'
+SERIAL_NUMBER_FILE = f'/opt/bella/sn'  
 TEST_IMAGE_WIDTH = 800
 TEST_IMAGE_HEIGHT = 600
 TEST_IMAGE_HLIP = False
@@ -64,7 +67,7 @@ TEST_IMAGE_VLIP = True
 
 LOG_FILE = f'/var/log/{APP_NAME}.log'
 
-PORT = '/dev/ttyS0'  # Linux 下的串口名
+PORT = '/dev/ttyS0'  # Linux Serial Port
 BAUDRATE = 460800
 # BAUDRATE = 115200
 
@@ -122,24 +125,6 @@ def run_command(cmd="", timeout=None):
     log.debug("运行命令: 结果: %s" % temp_output)
     return (status if status is not None else -1), temp_output
 
-# def run_command(cmd=""):
-#     import subprocess
-#     import os
-
-#     # 创建一个环境变量副本
-#     env = os.environ.copy()
-#     # 设置 TERM 为 dumb，来去除颜色输出
-#     env['TERM'] = 'dumb'
-
-#     log.debug("运行命令: %s" % cmd)
-#     p = subprocess.Popen(
-#         cmd, shell=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT, env=env)
-#     result = p.stdout.read().decode('utf-8')
-#     status = p.poll()
-#     log.debug("运行命令: 状态: %s" % status)
-#     log.debug("运行命令: 结果: %s" % result)
-#     return status, result
-
 # Get the Wi-Fi MAC address
 def get_wifi_mac_address():
     import subprocess
@@ -186,6 +171,24 @@ def set_hostname(hostname):
     with open('/etc/hosts', 'w') as f:
         f.write(content)
 
+def get_serial_number():
+    import os
+    if not os.path.exists(SERIAL_NUMBER_FILE):
+        return f"None"
+    with open(SERIAL_NUMBER_FILE, 'r') as f:
+        serial_number = f.read().strip()
+        if not serial_number:
+            return f"None"
+        else:
+            return serial_number
+
+def set_serial_number(serial_number):
+    import os
+    if not os.path.exists(SERIAL_NUMBER_FILE):
+        os.makedirs(os.path.dirname(SERIAL_NUMBER_FILE), exist_ok=True)
+    with open(SERIAL_NUMBER_FILE, 'w') as f:
+        f.write(serial_number)
+
 def light_led(strip, color):
     for i in range(strip.numPixels()):
         strip.setPixelColor(i, color)
@@ -210,7 +213,7 @@ class FactoryTest():
     auto_factory_mode = False
     
     def __init__(self):
-        # 用于控制是否持续发送传感器数据
+        # Whether to continuously send sensor data
         self.ser= None
         self.sensor_datas = {}
         self.sensor_thread = None
@@ -429,7 +432,6 @@ class FactoryTest():
 
         return avg_grayscale_data
 
-
     def handle_grayscale_calibrate_white(self):
         try:
             self.send_log("灰度校准白色")
@@ -501,6 +503,11 @@ class FactoryTest():
         else:
             self.send_log("请输入1或0")
 
+    def handle_serial_number(self, data):
+        set_serial_number(data)
+        self.send_log(f"序列号已设置为: {data}")
+        log.info(f"序列号已设置为: {data}")
+
     def update_sensor_data(self):
         while self.sensor_data_start:
             data = {
@@ -518,7 +525,8 @@ class FactoryTest():
                 "fan_state": self.bella.fan_state,
                 "ap_config": get_ap(),
                 "disk_size": get_disk_size(),
-                "auto_factory_mode":self.auto_factory_mode
+                "auto_factory_mode":self.auto_factory_mode,
+                "sn": get_serial_number(),
                 }
 
             self.send_data(json.dumps(data))
@@ -558,37 +566,41 @@ class FactoryTest():
         self.send_log("设置完成")
 
     def process_command(self, command):
-        if command == "数据开":
+        # commands = commands.split(';')
+        # for command in commands:
+        if command == "data_on":
             self.handle_start_data_send()
-        elif command == "数据关":
+        elif command == "data_off":
             self.send_log("停止发送数据")
             self.sensor_data_start = False
             self.sensor_thread.join()
             self.sensor_thread = None
-        elif command == "电机":
+        elif command == "motor":
             self.handle_test_motor()
-        elif command == "风扇":
+        elif command == "fan":
             self.handle_test_fan()
-        elif command == "录播":
+        elif command == "record_play":
             self.handle_record_play()
-        elif command == "喇叭":
+        elif command == "play":
             self.handle_test_music()
-        elif command == "灯":
+        elif command == "rgb_led":
             self.handle_test_led()
-        elif command == "相机":
+        elif command == "camera":
             self.handle_test_camera()
-        elif command == "老化":
+        elif command == "aging":
             self.handle_test_life()
-        elif command.startswith("AP"):
-            self.handle_set_ap(command.split('AP:')[1])
-        elif command.startswith("灰度白"):
+        elif command.startswith("ap"):
+            self.handle_set_ap(command.split('ap:')[1])
+        elif command.startswith("white"):
             self.handle_grayscale_calibrate_white()
-        elif command.startswith("灰度黑"):
+        elif command.startswith("black"):
             self.handle_grayscale_calibrate_black()
-        elif command.startswith("自动工厂模式"):
-            self.handle_auto_factory_mode(command.split('自动工厂模式:')[1])
+        elif command.startswith("auto_factory_mode"):
+            self.handle_auto_factory_mode(command.split('auto_factory_mode:')[1])
+        elif command.startswith("sn"):
+            self.handle_serial_number(command.split('sn:')[1])
         else:
-            self.send_log(f"未知指令: {command}")
+            self.send_log(f"unknown command: {command}")
 
 
     def key_event_handler(self):
