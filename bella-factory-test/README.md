@@ -9,6 +9,9 @@ sudo apt install python3-picamera2 --no-install-recommends
 # sudo apt install python3-picamera2
 
 sudo bash install.sh
+
+# add auto web test mode flag
+sudo touch /boot/firmware/bella-auto-web-test-mode
 ```
 
 ## Usage
