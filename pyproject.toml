@@ -29,6 +29,11 @@ dependencies = [
   'Adafruit-Blinka',
   'adafruit-circuitpython-lsm6ds',
   'adafruit-circuitpython-neopixel-spi',
+  'uvicorn',
+  'fastapi', 
+  'python-multipart', 
+  'websockets', 
+  'jinja2',
 ]
 
 #'pyaudio',
