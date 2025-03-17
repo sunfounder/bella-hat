@@ -49,10 +49,11 @@ try:
     Vilib.display(local=False, web=True)
 
     wlan0, eth0 = utils.getIP()
-    if wlan0:
-        webcam_address += f"http://{wlan0}:9000/mjpg\n"
+
     if eth0:
         webcam_address += f"http://{eth0}:9000/mjpg\n"
+    elif wlan0:
+        webcam_address += f"http://{wlan0}:9000/mjpg\n"
 
     webcam_done = True
 except ImportError:
