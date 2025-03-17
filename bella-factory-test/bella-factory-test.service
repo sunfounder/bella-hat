@@ -2,12 +2,16 @@
 [Unit]
 Description=Bella Factory test
 # Need to start last to avoid gpio being occupied
-After=basic.target
+# After=basic.target
+After=multi-user.target
 
 [Service]
 Type=forking
 ExecStart=/usr/local/bin/bella-factory-test start
 ExecStop=/usr/local/bin/bella-factory-test stop
+TimeoutStartSec=infinity
 
 [Install]
-WantedBy=basic.target
+# WantedBy=basic.target
+WantedBy=multi-user.target
+
