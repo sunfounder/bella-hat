@@ -7,6 +7,7 @@ APP_NAME=bella-factory-test
 WEB_TEST_APP_FOLDER=/home/pi/bella/examples
 WEB_TEST_APP=app
 AUTO_WEB_TEST_MODE=/boot/firmware/bella-auto-web-test-mode
+AUTO_WEB_TEST_MODE_AUDIO=/opt/bella-factory-test/test_webpage.wav
 
 BUTTON_PIN=25
 
@@ -32,6 +33,7 @@ if [ "$1" == "start" ]; then
     elif [ -f $AUTO_WEB_TEST_MODE ]; then
         echo "Auto web test mode, enter web test mode"
         cd $WEB_TEST_APP_FOLDER
+        aplay $AUTO_WEB_TEST_MODE_AUDIO
         uvicorn app:$WEB_TEST_APP --host 0.0.0.0 --reload &
     else
         echo "Not in test mode, exit."
