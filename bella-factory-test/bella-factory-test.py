@@ -83,6 +83,11 @@ TAG_IMAGE = "[IMG]"
 SERIAL_WRAP_START = "{[(==>"
 SERIAL_WRAP_END = "<==]}"
 
+
+ap_config = None
+sn = None
+
+
 log = logging.getLogger(APP_NAME)
 
 def run_command(cmd="", timeout=None):
@@ -138,7 +143,6 @@ def get_wifi_mac_address():
 
 def get_ap():
     import os
-    result = {}
     if not os.path.exists(AP_CONFIG_FILE):
         return f"None"
     with open(AP_CONFIG_FILE, 'r') as f:
@@ -157,6 +161,13 @@ def set_ap(ssid, password):
     contect = f"BELLA_SSID={ssid}\nBELLA_PASSWORD={password}\n"
     with open(AP_CONFIG_FILE, 'w') as f:
         f.write(contect)
+        f.flush()
+        os.fsync(f.fileno())
+
+    # read config again
+    global ap_config
+    ap_config = get_ap()
+    #
     run_command(f"sudo systemctl restart bella-ap")
 
 def set_hostname(hostname):
@@ -170,8 +181,10 @@ def set_hostname(hostname):
     content = content.replace(old_hostname, hostname)
     with open('/etc/hosts', 'w') as f:
         f.write(content)
+        f.flush()
+        os.fsync(f.fileno())
 
-def get_serial_number():
+def get_sn():
     import os
     if not os.path.exists(SERIAL_NUMBER_FILE):
         return f"None"
@@ -188,6 +201,11 @@ def set_serial_number(serial_number):
         os.makedirs(os.path.dirname(SERIAL_NUMBER_FILE), exist_ok=True)
     with open(SERIAL_NUMBER_FILE, 'w') as f:
         f.write(serial_number)
+        f.flush()
+        os.fsync(f.fileno())
+    # read sn again
+    global sn
+    sn = get_sn()
 
 def light_led(strip, color):
     for i in range(strip.numPixels()):
@@ -523,10 +541,10 @@ class FactoryTest():
                 "gyro": self.bella.get_gyro(),
                 "motor_speed": self.bella.motors.speed(),
                 "fan_state": self.bella.fan_state,
-                "ap_config": get_ap(),
+                "ap_config": ap_config,
                 "disk_size": get_disk_size(),
                 "auto_factory_mode":self.auto_factory_mode,
-                "sn": get_serial_number(),
+                "sn": sn,
                 }
 
             self.send_data(json.dumps(data))
@@ -629,7 +647,7 @@ class FactoryTest():
             
 
     def main(self):
-        global picam2, capture_config
+        global picam2, capture_config, ap_config, sn 
 
         play_music(FACTORY_MODE_AUDIO)
         time.sleep(1)
@@ -651,6 +669,11 @@ class FactoryTest():
             play_music(CAM_INIT_ERROR_AUDIO)
             time.sleep(1)
 
+
+
+        ## read config
+        ap_config = get_ap()
+        sn = get_sn()
 
         serial_st = time.time()
         key_st = time.time()
