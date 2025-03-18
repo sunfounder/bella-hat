@@ -126,6 +126,7 @@ class Grayscale_Module(object):
         if not os.path.exists(self.CONFIG_FILE):
             with open(self.CONFIG_FILE, "w") as f:
                 f.write(f"{{\"slopes\": {self._slopes}, \"offsets\": {self._offsets}}}")
+            os.chmod(self.CONFIG_FILE, 0o774)
         else:
             with open(self.CONFIG_FILE, "r") as f:
                 data = f.read()
