@@ -126,6 +126,8 @@ class Grayscale_Module(object):
         if not os.path.exists(self.CONFIG_FILE):
             with open(self.CONFIG_FILE, "w") as f:
                 f.write(f"{{\"slopes\": {self._slopes}, \"offsets\": {self._offsets}}}")
+                f.flush()
+                os.fsync(f.fileno())
             os.chmod(self.CONFIG_FILE, 0o774)
         else:
             with open(self.CONFIG_FILE, "r") as f:
@@ -208,7 +210,9 @@ class Grayscale_Module(object):
         self._offsets = offsets
         with open(self.CONFIG_FILE, "w") as f:
             f.write(f"{{\"slopes\": {self._slopes}, \"offsets\": {self._offsets}}}")
-
+            f.flush()
+            os.fsync(f.fileno())
+            
 class DHT11():
 
     def __init__(self, pin):

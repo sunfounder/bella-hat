@@ -395,6 +395,7 @@ class FactoryTest():
         self.send_image(image_data)
         self.send_log("完成")
         os.remove(TEST_IMAGE_FILE)
+        os.sync()
 
     def handle_test_life(self):
         if self.life_test_started:
@@ -505,7 +506,8 @@ class FactoryTest():
                 pass
             else:
                 with open(AUTO_FACTORY_MODE, "w") as f:
-                    pass
+                    f.flush()
+                    os.fsync(f.fileno())
                 self.auto_factory_mode = True
             log.info("自动工厂模式已开启")
             self.send_log("自动工厂模式已开启")
@@ -513,6 +515,7 @@ class FactoryTest():
             time.sleep(1)
         elif data == "0":
             os.remove(AUTO_FACTORY_MODE)
+            os.sync() 
             self.auto_factory_mode = False
             log.info("自动工厂模式已关闭")
             self.send_log("自动工厂模式已关闭")
@@ -635,6 +638,7 @@ class FactoryTest():
             if os.path.exists(AUTO_FACTORY_MODE):
                 self.auto_factory_mode = False
                 os.remove(AUTO_FACTORY_MODE)
+                os.sync()
                 log.info("取消自动工厂模式")
             # play_music(DISABLED_AUTO_FACTORY_MODE)
             #
