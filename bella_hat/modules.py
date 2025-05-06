@@ -100,7 +100,7 @@ class Grayscale_Module(object):
 
     REFERENCE_DEFAULT = [1000]*3
 
-    CONFIG_FILE = "/opt/grayscale_calibration.json"
+    CONFIG_FILE = "/tmp/grayscale_calibration.json"
 
     def __init__(self, pin0: ADC, pin1: ADC, pin2: ADC, reference: int = None):
         """

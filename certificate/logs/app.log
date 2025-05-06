@@ -1,0 +1,43 @@
+vilib 0.3.16 launching ...
+picamera2 0.3.26
+
+Web display on:
+      http://192.168.86.45:9000/mjpg
+
+Starting web streaming ...
+ * Serving Flask app 'vilib.vilib'
+ * Debug mode: off
+INFO:     Started server process [3972]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+INFO:     Uvicorn running on http://0.0.0.0:8000 (Press CTRL+C to quit)
+INFO:     192.168.86.23:55522 - "GET / HTTP/1.1" 200 OK
+INFO:     192.168.86.23:55524 - "GET /static/css/fontawesome.min.css HTTP/1.1" 304 Not Modified
+INFO:     192.168.86.23:55522 - "GET /static/style.css HTTP/1.1" 304 Not Modified
+INFO:     192.168.86.23:55525 - "GET /static/js/chart.min.js HTTP/1.1" 304 Not Modified
+INFO:     192.168.86.23:55525 - "GET /static/webfonts/fa-solid-900.woff2 HTTP/1.1" 304 Not Modified
+INFO:     ('192.168.86.23', 55526) - "WebSocket /ws" [accepted]
+INFO:     connection open
+INFO:     connection closed
+INFO:     ('192.168.86.20', 62816) - "WebSocket /ws" [accepted]
+INFO:     connection open
+INFO:     192.168.86.20:62819 - "GET / HTTP/1.1" 200 OK
+INFO:     connection closed
+INFO:     192.168.86.20:62819 - "GET /static/css/fontawesome.min.css HTTP/1.1" 304 Not Modified
+INFO:     192.168.86.20:62820 - "GET /static/js/chart.min.js HTTP/1.1" 304 Not Modified
+INFO:     192.168.86.20:62822 - "GET /static/style.css HTTP/1.1" 304 Not Modified
+INFO:     ('192.168.86.20', 62819) - "WebSocket /ws" [accepted]
+INFO:     connection open
+INFO:     192.168.86.20:62820 - "GET /static/webfonts/fa-solid-900.woff2 HTTP/1.1" 304 Not Modified
+INFO:     192.168.86.20:62822 - "GET /static/webfonts/fa-regular-400.woff2 HTTP/1.1" 404 Not Found
+INFO:     192.168.86.20:62820 - "GET /static/webfonts/fa-regular-400.ttf HTTP/1.1" 404 Not Found
+INFO:     connection closed
+INFO:     ('192.168.86.20', 63236) - "WebSocket /ws" [accepted]
+INFO:     connection open
+INFO:     connection closed
+INFO:     ('192.168.86.20', 63249) - "WebSocket /ws" [accepted]
+INFO:     connection open
+INFO:     connection closed
+INFO:     ('192.168.86.20', 63257) - "WebSocket /ws" [accepted]
+INFO:     connection open
+INFO:     connection closed
