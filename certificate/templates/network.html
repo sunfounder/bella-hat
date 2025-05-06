@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bella Network Test Interface</title>
+    <link rel="stylesheet" href="/static/css/fontawesome.min.css">
+    <link rel="stylesheet" href="/static/style.css">
+    
+    <style>
+        .test-section {
+            background-color: #2c3e50;
+            border-radius: 10px;
+            padding: 15px;
+            margin-top: 20px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        
+        .test-title {
+            color: #ecf0f1;
+            font-size: 20px;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+        
+        .test-description {
+            color: #bdc3c7;
+            margin-bottom: 20px;
+            text-align: center;
+            line-height: 1.5;
+        }
+        
+        .input-group {
+            margin-bottom: 15px;
+        }
+        
+        .input-group label {
+            display: block;
+            margin-bottom: 5px;
+            color: #ecf0f1;
+        }
+        
+        .input-group input[type="text"] {
+            width: 100%;
+            padding: 10px;
+            border-radius: 5px;
+            border: 1px solid #34495e;
+            background-color: #34495e;
+            color: #ecf0f1;
+            font-size: 16px;
+        }
+        
+        .test-buttons {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 20px;
+            justify-content: center;
+        }
+        
+        .test-button {
+            background-color: #3498db;
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            text-align: center;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s;
+        }
+        
+        .test-button:hover {
+            background-color: #2980b9;
+        }
+        
+        .test-button.all {
+            background-color: #e74c3c;
+        }
+        
+        .test-button.all:hover {
+            background-color: #c0392b;
+        }
+        
+        .test-output {
+            margin-top: 20px;
+            background-color: #34495e;
+            border-radius: 5px;
+            padding: 15px;
+            color: #ecf0f1;
+            white-space: pre-wrap;
+            font-family: monospace;
+            height: 300px;
+            overflow-y: auto;
+        }
+        
+        .nav-link {
+            display: inline-block;
+            margin-top: 20px;
+            color: #3498db;
+            text-decoration: none;
+            font-size: 16px;
+        }
+        
+        .nav-link:hover {
+            text-decoration: underline;
+        }
+        
+        #loader {
+            text-align: center;
+            margin-top: 15px;
+            display: none;
+        }
+        
+        .spinner {
+            border: 4px solid rgba(236, 240, 241, 0.3);
+            border-radius: 50%;
+            border-top: 4px solid #3498db;
+            width: 30px;
+            height: 30px;
+            -webkit-animation: spin 1s linear infinite;
+            animation: spin 1s linear infinite;
+            margin: 0 auto;
+        }
+        
+        @-webkit-keyframes spin {
+            0% { -webkit-transform: rotate(0deg); }
+            100% { -webkit-transform: rotate(360deg); }
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        .output-tabs {
+            display: flex;
+            margin-top: 20px;
+            border-bottom: 1px solid #34495e;
+        }
+        
+        .output-tab {
+            background-color: #2c3e50;
+            color: #ecf0f1;
+            border: none;
+            padding: 10px 15px;
+            margin-right: 5px;
+            border-radius: 5px 5px 0 0;
+            cursor: pointer;
+            font-size: 14px;
+            transition: background-color 0.3s;
+        }
+        
+        .output-tab:hover {
+            background-color: #34495e;
+        }
+        
+        .output-tab.active {
+            background-color: #3498db;
+        }
+        
+        .tab-content {
+            display: none;
+        }
+        
+        .tab-content.active {
+            display: block;
+        }
+        
+        .file-header {
+            background-color: #34495e;
+            color: #ecf0f1;
+            padding: 10px;
+            margin-top: 10px;
+            border-radius: 5px 5px 0 0;
+            font-weight: bold;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .file-content {
+            background-color: #34495e;
+            color: #ecf0f1;
+            padding: 15px;
+            margin-bottom: 20px;
+            border-radius: 0 0 5px 5px;
+            white-space: pre-wrap;
+            font-family: monospace;
+            max-height: 300px;
+            overflow-y: auto;
+        }
+        
+        .file-category {
+            margin-bottom: 30px;
+        }
+        
+        .file-category-title {
+            color: #ecf0f1;
+            font-size: 18px;
+            margin-bottom: 10px;
+            border-bottom: 1px solid #3498db;
+            padding-bottom: 5px;
+        }
+        
+        .command-output {
+            margin-top: 5px;
+            font-family: monospace;
+            white-space: pre-wrap;
+            background-color: #2c3e50;
+            padding: 10px;
+            border-radius: 5px;
+            color: #2ecc71;
+            max-height: 200px;
+            overflow-y: auto;
+        }
+        
+        .download-link {
+            color: #3498db;
+            text-decoration: none;
+            margin-left: 10px;
+            font-size: 14px;
+        }
+        
+        .download-link:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Bella Network Tests</h1>
+        </header>
+        
+        <div class="test-section">
+            <h2 class="test-title">Network Certification Tests</h2>
+            <p class="test-description">
+                Run various network tests to verify the proper functioning of Wi-Fi, Bluetooth, 
+                and other wireless interfaces for certification purposes.
+            </p>
+            
+            <form id="test-form" action="/run-network-test" method="post">
+                <div class="input-group">
+                    <label for="iperf-server">iPerf Server IP Address:</label>
+                    <input type="text" id="iperf-server" name="iperf_server" 
+                           placeholder="e.g., 192.168.1.100" required>
+                </div>
+                
+                <div class="input-group">
+                    <label for="bt-mac">Bluetooth Target MAC Address (Optional):</label>
+                    <input type="text" id="bt-mac" name="bt_mac" 
+                           placeholder="e.g., 9C:76:0E:7C:56:79">
+                </div>
+                
+                <div class="test-buttons">
+                    <button type="button" class="test-button" onclick="runTest('ble')">BLE Test</button>
+                    <button type="button" class="test-button" onclick="runTest('bt')">Bluetooth Classic Test</button>
+                    <button type="button" class="test-button" onclick="runTest('wifi')">Wi-Fi 2.4GHz Test</button>
+                    <button type="button" class="test-button" onclick="runTest('wifi5')">Wi-Fi 5GHz Test</button>
+                    <button type="button" class="test-button" onclick="runTest('fcc')">FCC/RSS/EMC Tests</button>
+                    <button type="button" class="test-button all" onclick="runTest('all')">Run All Tests</button>
+                </div>
+                
+                <div id="loader">
+                    <div class="spinner"></div>
+                    <p>Running test(s)... This may take a few minutes.</p>
+                </div>
+            </form>
+        </div>
+        
+        <div class="test-section">
+            <h2 class="test-title">Test Results</h2>
+            
+            <div class="output-tabs">
+                <button id="console-tab" class="output-tab active" onclick="showTab('console')">Console Output</button>
+                <button id="files-tab" class="output-tab" onclick="showTab('files')">Output Files</button>
+            </div>
+            
+            <div id="console-content" class="tab-content active">
+                <div id="test-output" class="test-output">
+                    Test results will appear here...
+                </div>
+            </div>
+            
+            <div id="files-content" class="tab-content">
+                <div id="file-list">
+                    <p>File output will appear here after tests are run...</p>
+                </div>
+            </div>
+        </div>
+        
+        <a href="/" class="nav-link">← Back to Control Panel</a>
+    </div>
+    
+    <script>
+        function showTab(tabName) {
+            // Hide all tabs
+            document.querySelectorAll('.tab-content').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            
+            // Remove active class from all tab buttons
+            document.querySelectorAll('.output-tab').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            
+            // Show selected tab and activate button
+            document.getElementById(tabName + '-content').classList.add('active');
+            document.getElementById(tabName + '-tab').classList.add('active');
+        }
+        
+        function runTest(testType) {
+            const form = document.getElementById('test-form');
+            const outputDiv = document.getElementById('test-output');
+            const fileListDiv = document.getElementById('file-list');
+            const loader = document.getElementById('loader');
+            const iperfServer = document.getElementById('iperf-server').value;
+            const btMac = document.getElementById('bt-mac').value;
+            
+            // Validate iperf server IP for tests that need it
+            if (testType !== 'ble' && testType !== 'bt') {
+                if (!iperfServer) {
+                    alert('Please enter an iPerf Server IP address');
+                    return;
+                }
+            }
+            
+            // Validate BT MAC address if running Bluetooth Classic test
+            if (testType === 'bt' && !btMac) {
+                alert('Please enter a Bluetooth MAC address for the Bluetooth Classic test');
+                return;
+            }
+            
+            // Show loader
+            loader.style.display = 'block';
+            
+            // Clear previous output
+            outputDiv.textContent = "Starting test(s)...\n";
+            fileListDiv.innerHTML = '<p>Running tests...</p>';
+            
+            // Create form data
+            const formData = new FormData();
+            formData.append('test_type', testType);
+            formData.append('iperf_server', iperfServer);
+            formData.append('bt_mac', btMac);
+            
+            // Send request
+            fetch('/run-network-test', {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => response.json())
+            .then(data => {
+                // Hide loader
+                loader.style.display = 'none';
+                
+                // Show console output
+                outputDiv.textContent = data.output;
+                
+                // Show files content if available
+                if (data.files && Object.keys(data.files).length > 0) {
+                    // Categorize files by test type
+                    const categories = {
+                        'BLE Test': [],
+                        'Bluetooth Classic Test': [],
+                        'Wi-Fi 2.4GHz Test': [],
+                        'Wi-Fi 5GHz Test': [],
+                        'FCC/RSS/EMC Tests': [],
+                        'Other': []
+                    };
+                    
+                    Object.entries(data.files).forEach(([fileName, content]) => {
+                        if (fileName.includes('ble_')) {
+                            categories['BLE Test'].push({fileName, content});
+                        } else if (fileName.includes('bt_classic_')) {
+                            categories['Bluetooth Classic Test'].push({fileName, content});
+                        } else if (fileName.includes('wifi_') && !fileName.includes('5ghz')) {
+                            categories['Wi-Fi 2.4GHz Test'].push({fileName, content});
+                        } else if (fileName.includes('wifi_5ghz_')) {
+                            categories['Wi-Fi 5GHz Test'].push({fileName, content});
+                        } else if (fileName.includes('fcc_') || fileName.includes('sim_comm_')) {
+                            categories['FCC/RSS/EMC Tests'].push({fileName, content});
+                        } else {
+                            categories['Other'].push({fileName, content});
+                        }
+                    });
+                    
+                    let filesHtml = '';
+                    
+                    // Generate HTML for each category
+                    Object.entries(categories).forEach(([category, files]) => {
+                        if (files.length > 0) {
+                            filesHtml += `<div class="file-category">
+                                <h3 class="file-category-title">${category}</h3>`;
+                            
+                            files.forEach(({fileName, content}) => {
+                                // Separate out command outputs vs results
+                                const isCommandOutput = fileName.includes('commands_output');
+                                
+                                filesHtml += `
+                                    <div class="output-file">
+                                        <div class="file-header">
+                                            <span>${fileName}</span>
+                                        </div>
+                                        <div class="file-content">${content}</div>
+                                    </div>
+                                `;
+                            });
+                            
+                            filesHtml += `</div>`;
+                        }
+                    });
+                    
+                    fileListDiv.innerHTML = filesHtml || '<p>No output files were generated or found.</p>';
+                } else {
+                    fileListDiv.innerHTML = '<p>No output files were generated or found.</p>';
+                }
+                
+                // Auto-scroll to bottom
+                outputDiv.scrollTop = outputDiv.scrollHeight;
+            })
+            .catch(error => {
+                // Hide loader
+                loader.style.display = 'none';
+                
+                // Show error
+                outputDiv.textContent += `\nError: ${error.message || 'Unknown error occurred'}`;
+                fileListDiv.innerHTML = '<p>Error retrieving output files.</p>';
+            });
+        }
+    </script>
+</body>
+</html> 

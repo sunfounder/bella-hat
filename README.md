@@ -229,3 +229,60 @@ use Win32DiskImager on Windows.
 
 Now you can use this image to flash a new SD card and see if it works.
 
+# How to create an image for certificate testing
+
+## Install packages
+
+1. Download vilib on the home folder
+
+```bash
+cd ~
+git clone -b picamera2 https://github.com/sunfounder/vilib.git --depth 1
+```
+
+2. Run install.sh once
+
+```bash
+~/bella-hat/certificate/install.sh
+```
+
+## Create /etc/rc.local 
+
+1. Add /etc/rc.local
+
+```bash
+sudo vi /etc/rc.local
+```
+
+2. Add the following to *rc.local*
+
+```bash
+#!/bin/bash 
+
+sudo su - bella -c "/home/bella-hat/certificate/start_bella 2>&1" 
+
+exit 0 
+```
+
+3. Make it executable
+
+```bash
+sudo chmod +x /etc/rc.local
+```
+
+## Allow su to run without password
+
+1. Run the following
+
+```bash
+sudo visudo
+```
+
+2. Add the following under "Userprivilege specification"
+```bash
+pi	ALL=(ALL:ALL)	NOPASSWD:	/bin/su
+```
+
+## Test
+
+Reboot Bella and connect it with your web browswer (http://BELLA_IP:8000)

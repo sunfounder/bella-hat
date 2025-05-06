@@ -43,6 +43,17 @@
             min-width: 300px;
         }
         
+        .nav-link {
+            color: #3498db;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        .nav-link:hover {
+            color: #2980b9;
+            text-decoration: underline;
+        }
+        
         @media (max-width: 768px) {
             .chart-column {
                 flex: 100%;
@@ -641,7 +652,7 @@
     </div>
     
     <div class="footer">
-        <p>Bella Control Interface | <span id="current-time"></span></p>
+        <p>Bella Control Interface | <a href="/test" class="nav-link">Network Tests</a> | <span id="current-time"></span></p>
         <script>
             /* Update current time */
             function updateTime() {

@@ -5,6 +5,10 @@ from fastapi.templating import Jinja2Templates
 import time
 import os
 import asyncio
+import subprocess
+import sys
+from io import StringIO
+import importlib.util
 
 # Assuming bella_hat, ws2812, vilib, and utils are accessible
 from bella_hat.music import Music
@@ -176,6 +180,100 @@ async def process_action(action: str):
 async def read_root(request: Request):
     data = await update_data()
     return templates.TemplateResponse("index.html", {"request": request, **data})
+
+@app.get("/network", response_class=HTMLResponse)
+async def network_test_page(request: Request):
+    """Render the network test page"""
+    return templates.TemplateResponse("network.html", {"request": request})
+
+@app.post("/run-network-test")
+async def run_network_test(
+    test_type: str = Form(...),
+    iperf_server: str = Form(None),
+    bt_mac: str = Form(None)
+):
+    """Run network tests based on the requested type"""
+    # Create a buffer to capture stdout
+    output_buffer = StringIO()
+    original_stdout = sys.stdout
+    output_files = []
+    
+    try:
+        # Redirect stdout to our buffer
+        sys.stdout = output_buffer
+        
+        # Import the test_network module
+        spec = importlib.util.spec_from_file_location("test_network", "test_network.py")
+        test_network = importlib.util.module_from_spec(spec)
+        spec.loader.exec_module(test_network)
+        
+        # Run the requested test
+        if test_type == 'ble':
+            output_files = test_network.ble_test()
+        elif test_type == 'bt':
+            if bt_mac:
+                output_files = test_network.bt_classic_test(bt_mac)
+            else:
+                print("Error: Bluetooth MAC address is required for BT Classic test")
+        elif test_type == 'wifi':
+            if iperf_server:
+                output_files = test_network.wifi_test(iperf_server=iperf_server)
+            else:
+                print("Error: iPerf server IP address is required for Wi-Fi test")
+        elif test_type == 'wifi5':
+            if iperf_server:
+                output_files = test_network.wifi_5ghz_test(iperf_server=iperf_server)
+            else:
+                print("Error: iPerf server IP address is required for Wi-Fi 5GHz test")
+        elif test_type == 'fcc':
+            if iperf_server:
+                output_files = test_network.fcc_rss_emc_tests(iperf_server=iperf_server)
+            else:
+                print("Error: iPerf server IP address is required for FCC tests")
+        elif test_type == 'all':
+            if not iperf_server:
+                print("Error: iPerf server IP address is required for full test suite")
+            else:
+                # Use bt_mac if provided, otherwise use default
+                bt_address = bt_mac if bt_mac else "9C:76:0E:7C:56:79"
+                print(f"Running all tests with iPerf server: {iperf_server} and BT MAC: {bt_address}")
+                
+                # Run all tests and collect output files
+                all_files = []
+                
+                all_files.extend(test_network.ble_test())
+                all_files.extend(test_network.bt_classic_test(bt_address))
+                all_files.extend(test_network.wifi_test(iperf_server=iperf_server))
+                all_files.extend(test_network.wifi_5ghz_test(iperf_server=iperf_server))
+                all_files.extend(test_network.fcc_rss_emc_tests(iperf_server=iperf_server))
+                
+                output_files = all_files
+                print("All tests completed!")
+        else:
+            print(f"Unknown test type: {test_type}")
+        
+        # Get the captured output
+        output = output_buffer.getvalue()
+        
+        # Read the content of output files
+        file_contents = {}
+        for file_path in output_files:
+            if file_path is not None:  # Skip None values if any
+                file_name = os.path.basename(file_path)
+                file_contents[file_name] = test_network.read_output_file(file_path)
+        
+    except Exception as e:
+        output = f"Error running test: {str(e)}"
+        file_contents = {}
+    finally:
+        # Restore stdout
+        sys.stdout = original_stdout
+    
+    # Return JSON response with the test output and file contents
+    return JSONResponse(content={
+        "output": output,
+        "files": file_contents
+    })
 
 @app.post("/control")
 async def control(action: str = Form(...)):
