@@ -40,7 +40,11 @@ config = {
 ws2812 = WS2812(config)
 ws2812.start()
 
-music = Music()
+try:
+    music = Music()
+except Exception as e:
+    print(f"Error initializing music: {e}")
+    music = None
 
 # Webcam setup
 webcam_address = ""
@@ -60,7 +64,7 @@ try:
         webcam_address += f"http://{wlan0}:9000/mjpg\n"
 
     webcam_done = True
-except ImportError:
+except:
     webcam_address = ""
     webcam_done = False
 
@@ -71,9 +75,34 @@ eyes_state = True
 fan_state = False
 connected_clients = set()  # Track connected WebSocket clients
 
+
 def horn():
-    _status, _result = run_command('sudo killall pulseaudio')
-    music.sound_play_threading('./car-double-horn.wav')
+    if music is not None:
+        _status, _result = run_command('sudo killall pulseaudio')
+        music.sound_play_threading('./car-double-horn.wav')
+
+music_play = False
+
+def music_cycle():
+    # length = music.sound_length("./slow-trail-Ahjay_Stelino.mp3")
+    while music_play:
+        if not music.pygame.mixer.music.get_busy():
+            music.music_play("./slow-trail-Ahjay_Stelino.mp3")
+        time.sleep(.5)
+
+    music.music_stop()
+
+def horn():
+        import threading
+        global music_play
+        if music_play == False:
+            music_play = True
+            music_thread = threading.Thread(target=music_cycle)
+            music_thread.daemon = True
+            music_thread.start()
+        else:
+            music_play = False
+
 
 async def update_data():
     global direction, eyes_state, fan_state
