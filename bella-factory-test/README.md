@@ -21,9 +21,16 @@ sudo touch /boot/firmware/bella-auto-web-test-mode
 3. Until you hear 'Factory Mode', release the rear button.
 4. Now you can connect a USB cable to the robot and run the test software, or command it with a serial tool.
 
+Or you can run the test software directly:
+```bash
+python3 bella-factory-test.py
+```
+
 ## Serial Communication
 
-Commands are in Chinese characters.
+- Baud rate: 460800
+
+The test commands are sent through the serial port. Each sending needs to end with "\n".
 
 ### Commands
 - `data_on`: # Enable sensor data streaming
@@ -34,9 +41,9 @@ Commands are in Chinese characters.
 - `play`: Play music to test the speaker.
 - `rgb_led`: Test the light ring, red, green, blue and white light rings, and stop.
 - `camera`: Take a photo and return the base64 format image.
-- `ap:<WIFI_CONFIG> `: Set the AP with Wi-Fi QR code format `WIFI:T:WPA;S:bella-876zyx;P:87654321;;`
+- `ap:<WIFI_CONFIG>`: Set the AP with Wi-Fi QR code format `WIFI:T:WPA;S:bella-876zyx;P:87654321;;`
 - `white`: Calibrate the grayscale white.
 - `black`: Calibrate the grayscale black.
 - `aging`: turn on/off the motors and fan, and test the robot's aging.
 - `auto_factory_mode`: Enable boot into factory mode.
-- `sn:<SERIAL_NUMBER> `: Set the serial number.
+- `sn:<SERIAL_NUMBER>`: Set the serial number.

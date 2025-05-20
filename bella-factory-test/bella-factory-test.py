@@ -15,20 +15,20 @@
 # The test commands are sent through the serial port. 
 # Each sending needs to end with "\n".
 #
-# data_on                   start sending sensor data
-# data_off                  stop sending sensor data
-# aging                     test motor fan, aging
-# motor                     test motor, car forward, speed slowly increase and decrease, then backward, speed slowly increase and decrease, then stop, then turn left, turn right, stop
-# fan                       test fan, fan on 2 seconds, fan off 2 seconds
-# record_play               record 3 seconds, play record
-# play                      play music
-# rgb_led                   test rgb_led, red, green, blue, white, then stop
-# camera                    take a photo and return base64 format image
-# ap:WIFIXXX                set AP to WIFI:T:WPA;S:bella-876zyx;P:87654321;;
-# white                     calibrate grayscale module white
-# black                     calibrate  grayscale module black
-# auto_factory_mode:x       1:enable auto factory mode, 0:disable auto factory mode
-# sn:x                      set serial number(batch number) to x; 
+# data_on                    start sending sensor data
+# data_off                   stop sending sensor data
+# aging                      test motor fan, aging
+# motor                      test motor, car forward, speed slowly increase and decrease, then backward, speed slowly increase and decrease, then stop, then turn left, turn right, stop
+# fan                        test fan, fan on 2 seconds, fan off 2 seconds
+# record_play                record 3 seconds, play record
+# play                       play music
+# rgb_led                    test rgb_led, red, green, blue, white, then stop
+# camera                     take a photo and return base64 format image
+# ap:<WIFI_CONFIG>           set AP to WIFI:T:WPA;S:bella-876zyx;P:87654321;;
+# white                      calibrate grayscale module white
+# black                      calibrate  grayscale module black
+# auto_factory_mode:<STATE>  1:enable auto factory mode, 0:disable auto factory mode
+# sn:<SERIAL_NUMBER>         set serial number(batch number) to x; 
 
 import serial
 import threading
