@@ -19,21 +19,24 @@ sudo touch /boot/firmware/bella-auto-web-test-mode
 1. Turn off the robot if it is on.
 2. Hold the rear button, and turn on the robot.
 3. Until you hear 'Factory Mode', release the rear button.
-4. Now you can connect a USB cable to the robot and run the test software.
+4. Now you can connect a USB cable to the robot and run the test software, or command it with a serial tool.
 
 ## Serial Communication
 
 Commands are in Chinese characters.
 
 ### Commands
-
-- `电机`: Test the motors, robot will move forward, backward, left, right and stop.
-- `风扇`: Test the fan, fan will turn on for 2 seconds, and turn off for 2 seconds.
-- `录播`: Record a voice for 3 seconds, and play the voice.
-- `喇叭`: Play music to test the speaker.
-- `灯`: Test the light ring, red, green, blue and white light rings, and stop.
-- `相机`: Take a photo and return the base64 format image.
-- `AP:WIFIXXX`: Set the AP with format `WIFI:T:WPA;S:bella-876zyx;P:87654321;;`
-- `灰度白`: Calibrate the grayscale white.
-- `灰度黑`: Calibrate the grayscale black.
-- `老化`: turn on/off the motors and fan, and test the robot's aging.
+- `data_on`: # Enable sensor data streaming
+- `data_off`: # Disable sensor data streaming
+- `motor`: Test the motors, robot will move forward, backward, left, right and stop.
+- `fan`: Test the fan, fan will turn on for 2 seconds, and turn off for 2 seconds.
+- `record_play`: Record a voice for 3 seconds, and play the voice.
+- `play`: Play music to test the speaker.
+- `rgb_led`: Test the light ring, red, green, blue and white light rings, and stop.
+- `camera`: Take a photo and return the base64 format image.
+- `ap:<WIFI_CONFIG> `: Set the AP with Wi-Fi QR code format `WIFI:T:WPA;S:bella-876zyx;P:87654321;;`
+- `white`: Calibrate the grayscale white.
+- `black`: Calibrate the grayscale black.
+- `aging`: turn on/off the motors and fan, and test the robot's aging.
+- `auto_factory_mode`: Enable boot into factory mode.
+- `sn:<SERIAL_NUMBER> `: Set the serial number.
