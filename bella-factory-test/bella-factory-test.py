@@ -638,7 +638,7 @@ class FactoryTest():
             if os.path.exists(AUTO_FACTORY_MODE):
                 self.auto_factory_mode = False
                 os.remove(AUTO_FACTORY_MODE)
-                os.sync()
+                os.fsync()
                 log.info("取消自动工厂模式")
             # play_music(DISABLED_AUTO_FACTORY_MODE)
             #
